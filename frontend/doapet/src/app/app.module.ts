@@ -4,9 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { PreLoginComponent } from './views/pre-login/pre-login.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PreLoginComponent,
   ],
   imports: [
     BrowserModule,
