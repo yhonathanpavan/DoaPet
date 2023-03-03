@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/assistances")
@@ -32,7 +33,7 @@ public class AssistanceController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody AssistanceRequest assistanceRequest){
+    public ResponseEntity<Void> create(@Valid @RequestBody AssistanceRequest assistanceRequest){
         return ResponseEntity.created(assistanceService.create(assistanceRequest)).build();
     }
 
