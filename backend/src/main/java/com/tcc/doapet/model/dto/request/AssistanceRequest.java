@@ -33,5 +33,5 @@ public class AssistanceRequest {
     private PriorityLevelStatus priorityLevelStatus;
 
     @JsonProperty("active")
-    private boolean active;
+    private Boolean active;
 }
