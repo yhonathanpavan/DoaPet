@@ -1,0 +1,17 @@
+.input-top {
+  display: flex;
+  flex-direction: column
+}
+
+label {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.48);
+
+  margin-bottom: 5px;
+}
+
+input {
+  border: solid 3px #D5D5D5;
+  border-radius: 8px;
+}
