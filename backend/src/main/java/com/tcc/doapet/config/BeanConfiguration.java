@@ -12,8 +12,8 @@ public class BeanConfiguration {
     public ModelMapper modelMapper(){
         var modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STRICT)
-                .setSkipNullEnabled(true);
+            .setMatchingStrategy(MatchingStrategies.STRICT)
+            .setSkipNullEnabled(true);
 
         return modelMapper;
     }

@@ -1,6 +1,27 @@
+server:
+  servlet:
+    context-path: "/doapet/v1"
+
 spring:
   output:
     ansi:
       enabled: always
   application:
     name: "DoaPet-API"
+  datasource:
+    username: admin
+    url: jdbc:h2:mem:doapet
+    driverClassName: org.h2.Driver
+    password: ''
+  h2:
+    console:
+      enabled: 'true'
+      path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: 'true'
+    hibernate:
+      ddl-auto: update
+  jackson:
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_ENUMS: 'true'
