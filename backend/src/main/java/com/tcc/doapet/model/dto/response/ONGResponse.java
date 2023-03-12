@@ -14,6 +14,7 @@ public class ONGResponse {
 
     @JsonProperty("id")
     private Long id;
+
     @JsonProperty("name")
     private String name;
 

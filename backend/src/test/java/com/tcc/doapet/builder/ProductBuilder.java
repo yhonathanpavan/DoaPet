@@ -14,18 +14,18 @@ public class ProductBuilder {
 
     private static final Long ID = 1L;
 
-    private static String NAME = "Pá";
+    private static final String NAME = "Pá";
 
-    private static String UNIT = "unitário";
+    private static final String UNIT = "unitário";
 
-    private static Double WEIGHT = 2.5;
+    private static final Double WEIGHT = 2.5;
 
-    private static PriorityLevelStatus PRIORITY_LEVEL_STATUS = PriorityLevelStatus.MEDIUM;
+    private static final PriorityLevelStatus PRIORITY_LEVEL_STATUS = PriorityLevelStatus.MEDIUM;
 
 
-    private static ProductCategory PRODUCT_CATEGORY = ProductCategory.TOOL;
+    private static final ProductCategory PRODUCT_CATEGORY = ProductCategory.TOOL;
 
-    private static Boolean ACTIVE = Boolean.TRUE;
+    private static final Boolean ACTIVE = Boolean.TRUE;
 
     public static Product getProduct(){
         return Product.builder()

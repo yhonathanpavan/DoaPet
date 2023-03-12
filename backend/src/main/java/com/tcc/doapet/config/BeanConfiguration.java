@@ -10,11 +10,11 @@ public class BeanConfiguration {
 
     @Bean
     public ModelMapper modelMapper(){
-        var modelMapper = new ModelMapper();
-        modelMapper.getConfiguration()
-            .setMatchingStrategy(MatchingStrategies.STRICT)
-            .setSkipNullEnabled(true);
+            var modelMapper = new ModelMapper();
+            modelMapper.getConfiguration()
+                    .setMatchingStrategy(MatchingStrategies.STRICT)
+                    .setSkipNullEnabled(true);
 
-        return modelMapper;
+            return modelMapper;
     }
 }
