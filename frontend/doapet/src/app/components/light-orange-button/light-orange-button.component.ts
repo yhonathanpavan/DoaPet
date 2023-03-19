@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-light-orange-button',
@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LightOrangeButtonComponent implements OnInit {
 
-  btnIcon: string = '../../../assets/icons/icon-dog.svg';
-  btnText: string = 'teste';
-  btnWidth: string = '150px';
-  btnHeight: string = '50px';
-  btnFont: string = '18px';
+  @Input() btnIcon: string = '';
+  @Input() btnText: string = '';
+  @Input() btnWidth: string = '';
+  @Input() btnHeight: string = '';
+  @Input() btnFont: string = '';
 
-  buttonLightStyle = {'width': this.btnWidth, 'height': this.btnHeight, 'font-size': this.btnFont}
+  @Input() buttonLightStyle = {'width': this.btnWidth, 'height': this.btnHeight, 'font-size': this.btnFont}
 
   constructor() { }
 

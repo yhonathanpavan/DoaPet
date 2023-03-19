@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-input-top',
@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputTopComponent implements OnInit {
 
-  inputLabel: string = '';
-  inputType: string = '';
-  inputWidth: string = '';
-  inputHeight: string = '';
-  inputFont: string = ''
+  @Input() inputLabel: string = '';
+  @Input() inputType: string = '';
+  @Input() inputWidth: string = '';
+  @Input() inputHeight: string = '';
+  @Input() inputFont: string = ''
 
 
-  inputStyle = {'width': this.inputWidth, 'height': this.inputHeight, 'fontSize': this.inputFont}
+  @Input() inputStyle = {'width': this.inputWidth, 'height': this.inputHeight, 'fontSize': this.inputFont}
 
   constructor() { }
 

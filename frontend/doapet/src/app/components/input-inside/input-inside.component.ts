@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-input-inside',
@@ -7,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputInsideComponent implements OnInit {
 
-  inputPlaceholder: string = 'teste'
-  inputType: string = 'text';
-  inputWidth: string = '150px';
-  inputHeight: string = '50px';
-  inputFont: string = '16px'
+  @Input() inputPlaceholder: string = ''
+  @Input() inputType: string = '';
+  @Input() inputStep: string = '';
+  @Input() inputWidth: string = '';
+  @Input() inputHeight: string = '';
+  @Input() inputFont: string = ''
+  @Input() inputMargin: string = '';
 
-
-  inputStyle = {'width': this.inputWidth, 'height': this.inputHeight, 'fontSize': this.inputFont}
+  @Input() inputStyle = {'width': this.inputWidth, 'height': this.inputHeight, 'fontSize': this.inputFont, 'margin': this.inputMargin}
 
   constructor() { }
 
