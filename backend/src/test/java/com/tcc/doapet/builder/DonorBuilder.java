@@ -13,7 +13,6 @@ import java.util.Arrays;
 
 public class DonorBuilder {
 
-
     public static Donor getDonor() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());

@@ -46,13 +46,13 @@ public class ONGController {
     @Transactional
     @PatchMapping("/{id}")
     public ResponseEntity<ONGResponse> updateById(@PathVariable Long id,
-                                                         @RequestBody ONGRequest ongRequest){
+                                                  @RequestBody ONGRequest ongRequest){
         return ResponseEntity.ok(ongService.updateById(id, ongRequest));
     }
 
     @PostMapping("/{id}/orders")
     public ResponseEntity<OrderResponse> saveOrder(@PathVariable Long id,
-                                                   @RequestBody OrderRequest orderRequest){
+                                                   @Valid @RequestBody OrderRequest orderRequest){
         return ResponseEntity.created(orderService.save(id, orderRequest)).build();
     }
 
