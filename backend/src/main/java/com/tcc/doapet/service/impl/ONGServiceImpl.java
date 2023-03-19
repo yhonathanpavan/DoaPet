@@ -8,7 +8,6 @@ import com.tcc.doapet.service.ONGService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,7 +26,7 @@ public class ONGServiceImpl implements ONGService {
     @Override
     public Page<ONGResponse> getAll(Pageable pageable) {
         var ongEntity = ongRepository.findAll(pageable);
-        return new PageImpl<>(ongEntity.stream().map(e -> modelMapper.map(e, ONGResponse.class)).toList());
+        return ongEntity.map(e -> modelMapper.map(e, ONGResponse.class));
     }
 
     @Override

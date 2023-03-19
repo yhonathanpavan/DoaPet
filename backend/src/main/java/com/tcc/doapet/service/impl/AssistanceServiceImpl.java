@@ -27,7 +27,7 @@ public class AssistanceServiceImpl implements AssistanceService {
     @Override
     public Page<AssistanceResponse> getAll(Pageable pageable) {
         var assistanceEntity = assistanceRepository.findAll(pageable);
-        return new PageImpl<>(assistanceEntity.stream().map(e -> modelMapper.map(e, AssistanceResponse.class)).toList());
+        return assistanceEntity.map(e -> modelMapper.map(e, AssistanceResponse.class));
     }
 
     @Override

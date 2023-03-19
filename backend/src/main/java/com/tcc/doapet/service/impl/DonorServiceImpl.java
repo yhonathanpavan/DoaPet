@@ -27,7 +27,7 @@ public class DonorServiceImpl implements DonorService {
     @Override
     public Page<DonorResponse> getAll(Pageable pageable) {
         var donorEntity = donorRepository.findAll(pageable);
-        return new PageImpl<>(donorEntity.stream().map(e -> modelMapper.map(e, DonorResponse.class)).toList());
+        return donorEntity.map(e -> modelMapper.map(e, DonorResponse.class));
     }
 
     @Override
