@@ -1,6 +1,5 @@
 package com.tcc.doapet.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tcc.doapet.service.AssistanceService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import static com.tcc.doapet.builder.AssistanceBuilder.*;
+import static com.tcc.doapet.factory.AssistanceFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +28,7 @@ class AssistanceControllerTest {
     private AssistanceService assistanceService;
 
     @Test
-    void getAll() throws JsonProcessingException {
+    void getAll(){
         when(assistanceService.getAll(any(Pageable.class))).thenReturn(getPageableAssistanceResponse());
 
         Pageable pageable = PageRequest.of(0, 10);
@@ -43,10 +42,10 @@ class AssistanceControllerTest {
     }
 
     @Test
-    void getById() throws JsonProcessingException {
+    void getById(){
         when(assistanceService.getById(anyLong())).thenReturn(getAssistanceResponse());
 
-        var assistanceActualResponse = assistanceController.create(1L);
+        var assistanceActualResponse = assistanceController.getById(1L);
 
 
         assertNotNull(assistanceActualResponse.getBody());
@@ -56,7 +55,7 @@ class AssistanceControllerTest {
     }
 
     @Test
-    void create() throws JsonProcessingException {
+    void create(){
         var uri = ServletUriComponentsBuilder.fromPath("/doapet/v1/assistances/{id}").build(1L);
         when(assistanceService.create(any())).thenReturn(uri);
 
@@ -68,7 +67,7 @@ class AssistanceControllerTest {
     }
 
     @Test
-    void updateById() throws JsonProcessingException {
+    void updateById(){
         when(assistanceService.updateById(anyLong(), any())).thenReturn(getAssistanceResponse());
 
         var assistanceActualResponse = assistanceController.updateById(1L, getAssistanceRequest());

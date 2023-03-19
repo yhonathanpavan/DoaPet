@@ -17,10 +17,9 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.Arrays;
 import java.util.Optional;
 
-import static com.tcc.doapet.builder.AssistanceBuilder.*;
+import static com.tcc.doapet.factory.AssistanceFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -40,13 +39,13 @@ class AssistanceServiceImplTest {
 
     @Test
     void getAll() throws JsonProcessingException {
-        when(assistanceRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(Arrays.stream(getAssistanceArray()).toList()));
+        when(assistanceRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(getAssistanceArray()));
 
         var actualAssistanceResponse = assistanceService.getAll(PageRequest.of(0, 10));
 
         assertNotNull(actualAssistanceResponse.getContent());
         assertEquals(2, actualAssistanceResponse.getContent().size());
-        assertEquals(getAssistanceArray()[0].getName(), actualAssistanceResponse.getContent().get(0).getName());
+        assertEquals(getAssistanceArray().get(0).getName(), actualAssistanceResponse.getContent().get(0).getName());
     }
 
     @Test

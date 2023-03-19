@@ -1,6 +1,5 @@
 package com.tcc.doapet.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tcc.doapet.service.DonorService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import static com.tcc.doapet.builder.DonorBuilder.*;
+import static com.tcc.doapet.factory.DonorFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +28,7 @@ class DonorControllerTest {
     private DonorService donorService;
 
     @Test
-    void getAll() throws JsonProcessingException {
+    void getAll(){
         when(donorService.getAll(any(Pageable.class))).thenReturn(getPageableDonorResponse());
 
         Pageable pageable = PageRequest.of(0, 10);
@@ -43,10 +42,10 @@ class DonorControllerTest {
     }
 
     @Test
-    void getById() throws JsonProcessingException {
+    void getById(){
         when(donorService.getById(anyLong())).thenReturn(getDonorResponse());
 
-        var donorActualResponse = donorController.create(1L);
+        var donorActualResponse = donorController.getById(1L);
 
 
         assertNotNull(donorActualResponse.getBody());
@@ -56,7 +55,7 @@ class DonorControllerTest {
     }
 
     @Test
-    void create() throws JsonProcessingException {
+    void create(){
         var uri = ServletUriComponentsBuilder.fromPath("/doapet/v1/Donors/{id}").build(1L);
         when(donorService.create(any())).thenReturn(uri);
 
@@ -68,7 +67,7 @@ class DonorControllerTest {
     }
 
     @Test
-    void updateById() throws JsonProcessingException {
+    void updateById(){
         when(donorService.updateById(anyLong(), any())).thenReturn(getDonorResponse());
 
         var donorActualResponse = donorController.updateById(1L, getDonorRequest());

@@ -1,6 +1,6 @@
 package com.tcc.doapet.service.impl;
 
-import com.tcc.doapet.builder.ProductBuilder;
+import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.repository.ProductRepository;
@@ -44,9 +44,9 @@ class ProductServiceImplTest {
     void save_WhenSendProductRequest_ExpectedURI() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        when(productRepository.save(any())).thenReturn(ProductBuilder.getProduct());
+        when(productRepository.save(any())).thenReturn(ProductFactory.getProduct());
 
-        var response = productService.save(ProductBuilder.getProductRequest());
+        var response = productService.save(ProductFactory.getProductRequest());
 
         assertNotNull(response);
         assertEquals(URI.class, response.getClass());
@@ -55,7 +55,7 @@ class ProductServiceImplTest {
 
     @Test
     void findAll_WhenSendPageable_ExpectedPageProductResponse() {
-        when(productRepository.findAll((Pageable) any())).thenReturn(ProductBuilder.getProductPageable());
+        when(productRepository.findAll((Pageable) any())).thenReturn(ProductFactory.getProductPageable());
 
         Pageable page = PageRequest.of(0,10);
         var response = productService.findAll(page);
@@ -63,43 +63,43 @@ class ProductServiceImplTest {
         assertNotNull(response.getContent());
         assertEquals(PageImpl.class, response.getClass());
         assertEquals(1, response.getContent().size());
-        assertEquals(ProductBuilder.getProduct().getName(), response.getContent().get(0).getName());
+        assertEquals(ProductFactory.getProduct().getName(), response.getContent().get(0).getName());
     }
 
     @Test
     void findOne_WhenSendProductId_ExpectedProductResponse() {
-        when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductBuilder.getProduct()));
+        when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
 
         var response = productService.findOne(ID);
 
         assertNotNull(response);
         assertEquals(ProductResponse.class, response.getClass());
-        assertEquals(ProductBuilder.getProduct().getName(), response.getName());
+        assertEquals(ProductFactory.getProduct().getName(), response.getName());
         assertEquals(Boolean.TRUE, response.getActive());
     }
 
     @Test
     void update_WhenSendProductRequestAndProductId_ExpectedProductResponse() {
-        when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductBuilder.getProduct()));
-        when(productRepository.save(any())).thenReturn(ProductBuilder.getProduct());
+        when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
+        when(productRepository.save(any())).thenReturn(ProductFactory.getProduct());
 
-        var response = productService.update(ID, ProductBuilder.getProductRequest());
+        var response = productService.update(ID, ProductFactory.getProductRequest());
 
         assertNotNull(response);
         assertEquals(ProductResponse.class, response.getClass());
-        assertEquals(ProductBuilder.getProduct().getName(), response.getName());
+        assertEquals(ProductFactory.getProduct().getName(), response.getName());
         assertEquals(Boolean.TRUE, response.getActive());
     }
 
     @Test
     void findProductById_WhenSendProductId_ExpectedProduct() {
-        when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductBuilder.getProduct()));
+        when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
 
         var response = productService.findProductById(ID);
 
         assertNotNull(response);
         assertEquals(Product.class, response.getClass());
-        assertEquals(ProductBuilder.getProduct().getName(), response.getName());
+        assertEquals(ProductFactory.getProduct().getName(), response.getName());
         assertEquals(Boolean.TRUE, response.getActive());
     }
 }

@@ -1,6 +1,5 @@
 package com.tcc.doapet.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tcc.doapet.repository.ONGRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,10 +16,9 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.Arrays;
 import java.util.Optional;
 
-import static com.tcc.doapet.builder.ONGBuilder.*;
+import static com.tcc.doapet.factory.ONGFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -39,18 +37,18 @@ class ONGServiceImplTest {
     private ModelMapper modelMapper;
 
     @Test
-    void getAll() throws JsonProcessingException {
-        when(ongRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(Arrays.stream(getONGArray()).toList()));
+    void getAll(){
+        when(ongRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(getONGArray()));
 
         var actualONGResponse = ongService.getAll(PageRequest.of(0, 10));
 
         assertNotNull(actualONGResponse.getContent());
         assertEquals(2, actualONGResponse.getContent().size());
-        assertEquals(getONGArray()[0].getName(), actualONGResponse.getContent().get(0).getName());
+        assertEquals(getONGArray().get(0).getName(), actualONGResponse.getContent().get(0).getName());
     }
 
     @Test
-    void getById() throws JsonProcessingException{
+    void getById(){
         when(ongRepository.findById(anyLong())).thenReturn(Optional.of(getONG()));
 
         var actualONGResponse = ongService.getById(1L);
@@ -64,7 +62,7 @@ class ONGServiceImplTest {
     }
 
     @Test
-    void create() throws JsonProcessingException{
+    void create(){
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
@@ -77,7 +75,7 @@ class ONGServiceImplTest {
     }
 
     @Test
-    void updateById() throws JsonProcessingException {
+    void updateById(){
         when(ongRepository.findById(anyLong())).thenReturn(Optional.of(getONG()));
         when(ongRepository.save(any())).thenReturn(getONG());
 

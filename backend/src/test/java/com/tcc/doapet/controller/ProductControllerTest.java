@@ -1,7 +1,7 @@
 package com.tcc.doapet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tcc.doapet.builder.ProductBuilder;
+import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
@@ -15,9 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc()
@@ -32,12 +29,12 @@ class ProductControllerTest {
 
     @BeforeEach
     void setUp(){
-        productRepository.save(ProductBuilder.getProduct());
+        productRepository.save(ProductFactory.getProduct());
     }
 
     @Test
     public void save_WhenSendProductRequest_ExpectedResponseEntityProductResponse() throws Exception {
-        String productRequest = objectMapper.writeValueAsString(ProductBuilder.getProductRequest());
+        String productRequest = objectMapper.writeValueAsString(ProductFactory.getProductRequest());
 
         mockMvc.perform(MockMvcRequestBuilders.post("/products")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -64,7 +61,7 @@ class ProductControllerTest {
 
     @Test
     void update_WhenSendProductRequest_ExpectedResponseEntityProductResponse() throws Exception {
-        String productRequest = objectMapper.writeValueAsString(ProductBuilder.getProductRequest());
+        String productRequest = objectMapper.writeValueAsString(ProductFactory.getProductRequest());
         mockMvc.perform(MockMvcRequestBuilders.patch("/products/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(productRequest))

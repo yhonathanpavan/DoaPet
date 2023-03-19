@@ -17,10 +17,9 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.Arrays;
 import java.util.Optional;
 
-import static com.tcc.doapet.builder.DonorBuilder.*;
+import static com.tcc.doapet.factory.DonorFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -39,14 +38,14 @@ class DonorServiceImplTest {
     private ModelMapper modelMapper;
 
     @Test
-    void getAll() throws JsonProcessingException {
-        when(donorRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(Arrays.stream(getDonorArray()).toList()));
+    void getAll(){
+        when(donorRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(getDonorArray()));
 
         var actualDonorResponse = donorService.getAll(PageRequest.of(0, 10));
 
         assertNotNull(actualDonorResponse.getContent());
         assertEquals(2, actualDonorResponse.getContent().size());
-        assertEquals(getDonorArray()[0].getName(), actualDonorResponse.getContent().get(0).getName());
+        assertEquals(getDonorArray().get(0).getName(), actualDonorResponse.getContent().get(0).getName());
     }
 
     @Test
@@ -77,7 +76,7 @@ class DonorServiceImplTest {
     }
 
     @Test
-    void updateById() throws JsonProcessingException {
+    void updateById(){
         when(donorRepository.findById(anyLong())).thenReturn(Optional.of(getDonor()));
         when(donorRepository.save(any())).thenReturn(getDonor());
 
