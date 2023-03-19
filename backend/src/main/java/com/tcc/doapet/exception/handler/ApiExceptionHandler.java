@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,12 @@ public class ApiExceptionHandler {
     public ResponseEntity<Object> notFoundExceptionHandler(NotFoundException ex){
         var responseCreated = createResponse("NOT_FOUND", "The requested resource is not found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseCreated);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Object> notBadRequestExceptionHandler(BadRequestException ex){
+        var responseCreated = createResponse("BAD_REQUEST", "The request contains invalid data");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseCreated);
     }
 
 
