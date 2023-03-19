@@ -1,4 +1,4 @@
-package com.tcc.doapet.builder;
+package com.tcc.doapet.factory;
 
 import com.tcc.doapet.model.dto.request.ProductRequest;
 import com.tcc.doapet.model.dto.response.ProductResponse;
@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageImpl;
 
 import java.util.List;
 
-public class ProductBuilder {
+public class ProductFactory {
 
     private static final Long ID = 1L;
 
@@ -61,10 +61,10 @@ public class ProductBuilder {
     }
 
     public static Page<Product> getProductPageable(){
-        return new PageImpl<>(List.of(ProductBuilder.getProduct()));
+        return new PageImpl<>(List.of(ProductFactory.getProduct()));
     }
 
     public static Page<ProductResponse> getProductResponsePageable(){
-        return new PageImpl<>(List.of(ProductBuilder.getProductResponse()));
+        return new PageImpl<>(List.of(ProductFactory.getProductResponse()));
     }
 }
