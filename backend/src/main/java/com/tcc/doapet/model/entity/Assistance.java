@@ -3,10 +3,7 @@ package com.tcc.doapet.model.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.doapet.model.enums.AssistanceCategory;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Assistance {
 
     @Id

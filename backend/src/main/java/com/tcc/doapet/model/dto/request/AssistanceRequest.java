@@ -3,10 +3,7 @@ package com.tcc.doapet.model.dto.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.doapet.model.enums.AssistanceCategory;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,10 +12,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AssistanceRequest {
-
-    @JsonProperty("id")
-    private Long id;
 
     @NotBlank
     @JsonProperty("name")

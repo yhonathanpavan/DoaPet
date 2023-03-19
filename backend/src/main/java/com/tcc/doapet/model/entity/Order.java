@@ -47,11 +47,11 @@ public class Order {
 
     private Integer quantity;
 
-    @JsonProperty("start_date_service")
-    private LocalDateTime startDateService;
+    @JsonProperty("start_date_assistance")
+    private LocalDateTime startDateAssistance;
 
-    @JsonProperty("completion_date_service")
-    private LocalDateTime completionDateService;
+    @JsonProperty("completion_date_assistance")
+    private LocalDateTime completionDateAssistance;
 
     @PrePersist
     private void prePersistFunction(){

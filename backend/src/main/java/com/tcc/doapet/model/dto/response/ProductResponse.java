@@ -8,14 +8,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class ProductResponse {
+
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("name")
     private String name;
