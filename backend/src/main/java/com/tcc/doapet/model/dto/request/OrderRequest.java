@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -27,9 +28,11 @@ public class OrderRequest {
     @JsonProperty("order_status")
     private OrderStatus orderStatus;
 
+    @FutureOrPresent
     @JsonProperty("start_date_service")
     private LocalDateTime startDateService;
 
+    @FutureOrPresent
     @JsonProperty("completion_date_service")
     private LocalDateTime completionDateService;
 }

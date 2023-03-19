@@ -11,6 +11,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/products")
@@ -19,7 +21,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductResponse> save(@RequestBody ProductRequest productRequest){
+    public ResponseEntity<ProductResponse> save(@Valid @RequestBody ProductRequest productRequest){
         return ResponseEntity.created(productService.save(productRequest)).build();
     }
 
