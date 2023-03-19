@@ -27,7 +27,7 @@ public class AssistanceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AssistanceResponse> create(@PathVariable Long id){
+    public ResponseEntity<AssistanceResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(assistanceService.getById(id));
     }
 

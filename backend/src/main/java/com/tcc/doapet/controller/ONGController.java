@@ -50,16 +50,16 @@ public class ONGController {
         return ResponseEntity.ok(ongService.updateById(id, ongRequest));
     }
 
-    @PostMapping("/{id}/orders")
-    public ResponseEntity<OrderResponse> saveOrder(@PathVariable Long id,
+    @PostMapping("/{ongId}/orders")
+    public ResponseEntity<OrderResponse> saveOrder(@PathVariable Long ongId,
                                                    @RequestBody OrderRequest orderRequest){
-        return ResponseEntity.created(orderService.save(id, orderRequest)).build();
+        return ResponseEntity.created(orderService.save(ongId, orderRequest)).build();
     }
 
-    @GetMapping("/{id}/orders")
-    public ResponseEntity<Page<OrderResponse>> findAllOrders(@PathVariable Long id,
+    @GetMapping("/{ongId}/orders")
+    public ResponseEntity<Page<OrderResponse>> findAllOrders(@PathVariable Long ongId,
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        return ResponseEntity.ok(orderService.findAll(id, pageable));
+        return ResponseEntity.ok(orderService.findAll(ongId, pageable));
     }
 
     @GetMapping("/{ongId}/orders/{orderId}")

@@ -27,7 +27,7 @@ public class DonorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DonorResponse> create(@PathVariable Long id){
+    public ResponseEntity<DonorResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(donorService.getById(id));
     }
 
