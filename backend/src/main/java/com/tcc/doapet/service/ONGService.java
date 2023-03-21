@@ -17,4 +17,5 @@ public interface ONGService {
 
     ONGResponse updateById(Long id, ONGRequest ongRequest);
 
+    ONGResponse updateStatus(Long id);
 }

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import static com.tcc.doapet.factory.DonorFactory.getDonorResponse;
 import static com.tcc.doapet.factory.ONGFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -76,5 +77,15 @@ class ONGControllerTest {
         assertEquals(HttpStatus.OK, ongActualResponse.getStatusCode());
         assertNotNull(ongActualResponse.getBody());
         assertEquals(ongActualResponse.getBody().getId(), getONGResponse().getId());
+    }
+
+    @Test
+    void updateStatus_WhenSendONGId_ExpectedResponseEntityONGResponse() {
+        when(ongService.updateStatus(anyLong())).thenReturn(getONGResponse());
+
+        var ongActualResponse = ongController.updateStatus(1L);
+
+        assertEquals(HttpStatus.OK, ongActualResponse.getStatusCode());
+        assertNotNull(ongActualResponse.getBody());
     }
 }

@@ -1,5 +1,10 @@
 package com.tcc.doapet.service.impl;
 
+import com.tcc.doapet.factory.ProductFactory;
+import com.tcc.doapet.model.dto.response.ONGResponse;
+import com.tcc.doapet.model.dto.response.ProductResponse;
+import com.tcc.doapet.model.entity.ONG;
+import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.repository.ONGRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -83,6 +88,31 @@ class ONGServiceImplTest {
 
         assertNotNull(actualONGResponse);
         verify(ongRepository, times(1)).save(any());
+    }
+
+    @Test
+    void updateStatus_WhenSendONGId_ExpectedONGResponse() {
+        when(ongRepository.findById(anyLong())).thenReturn(Optional.of(getONG()));
+        when(ongRepository.save(any())).thenReturn(getONG());
+
+        var response = ongService.updateStatus(1L);
+
+        assertNotNull(response);
+        assertEquals(ONGResponse.class, response.getClass());
+        assertEquals(getONGResponse().getName(), response.getName());
+        assertEquals(Boolean.TRUE, response.getStatus());
+    }
+
+    @Test
+    void findONGById_WhenSendONGId_ExpectedONG() {
+        when(ongRepository.findById(anyLong())).thenReturn(Optional.of(getONG()));
+
+        var response = ongService.findOngById(1L);
+
+        assertNotNull(response);
+        assertEquals(ONG.class, response.getClass());
+        assertEquals(getONGResponse().getName(), response.getName());
+        assertEquals(Boolean.TRUE, response.getStatus());
     }
 
 }

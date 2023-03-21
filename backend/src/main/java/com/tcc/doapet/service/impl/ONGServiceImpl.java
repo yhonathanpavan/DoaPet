@@ -2,7 +2,9 @@ package com.tcc.doapet.service.impl;
 
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.response.ONGResponse;
+import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.ONG;
+import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.service.ONGService;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +33,7 @@ public class ONGServiceImpl implements ONGService {
 
     @Override
     public ONGResponse getById(Long id) {
-        var ongEntity = ongRepository.findById(id).orElseThrow(NotFoundException::new);
+        var ongEntity = findOngById(id);
         return modelMapper.map(ongEntity, ONGResponse.class);
     }
 
@@ -46,10 +48,21 @@ public class ONGServiceImpl implements ONGService {
 
     @Override
     public ONGResponse updateById(Long id, ONGRequest ongRequest) {
-        var ongEntity = ongRepository.findById(id).orElseThrow(NotFoundException::new);
+        var ongEntity = findOngById(id);
         modelMapper.map(ongRequest, ongEntity);
         ongRepository.save(ongEntity);
 
         return modelMapper.map(ongEntity, ONGResponse.class);
+    }
+
+    @Override
+    public ONGResponse updateStatus(Long id) {
+        ONG ong = findOngById(id);
+        ong.setStatus(!ong.getStatus());
+        return modelMapper.map(ongRepository.save(ong), ONGResponse.class);
+    }
+
+    protected ONG findOngById(Long id){
+        return ongRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import javax.ws.rs.Path;
 
 @RestController
 @RequestMapping("/ongs")
@@ -75,6 +74,9 @@ public class ONGController {
         return ResponseEntity.ok(orderService.update(ongId, orderId, orderRequest));
     }
 
-
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id){
+        return ResponseEntity.ok(ongService.updateStatus(id));
+    }
 
 }
