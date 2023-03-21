@@ -1,6 +1,11 @@
 package com.tcc.doapet.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.tcc.doapet.factory.ProductFactory;
+import com.tcc.doapet.model.dto.response.AssistanceResponse;
+import com.tcc.doapet.model.dto.response.ProductResponse;
+import com.tcc.doapet.model.entity.Assistance;
+import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.repository.AssistanceRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -83,6 +88,31 @@ class AssistanceServiceImplTest {
 
         assertNotNull(actualAssistanceResponse);
         verify(assistanceRepository, times(1)).save(any());
+    }
+
+    @Test
+    void updateStatus_WhenSendAssistancetId_ExpectedAssistanceResponse() {
+        when(assistanceRepository.findById(anyLong())).thenReturn(Optional.of(getAssistance()));
+        when(assistanceRepository.save(any())).thenReturn(getAssistance());
+
+        var response = assistanceService.updateStatus(1L);
+
+        assertNotNull(response);
+        assertEquals(AssistanceResponse.class, response.getClass());
+        assertEquals(getAssistance().getName(), response.getName());
+        assertEquals(Boolean.TRUE, response.getStatus());
+    }
+
+    @Test
+    void findAssistanceById_WhenSendAssistanceId_ExpectedAssistance() {
+        when(assistanceRepository.findById(anyLong())).thenReturn(Optional.of(getAssistance()));
+
+        var response = assistanceService.findAssistanceById(1L);
+
+        assertNotNull(response);
+        assertEquals(Assistance.class, response.getClass());
+        assertEquals(getAssistance().getName(), response.getName());
+        assertEquals(Boolean.TRUE, response.getStatus());
     }
 
 }

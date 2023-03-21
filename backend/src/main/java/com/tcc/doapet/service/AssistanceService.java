@@ -17,4 +17,5 @@ public interface AssistanceService {
 
     AssistanceResponse updateById(Long id, AssistanceRequest assistanceRequest);
 
+    AssistanceResponse updateStatus(Long id);
 }

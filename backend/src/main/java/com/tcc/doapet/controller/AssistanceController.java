@@ -44,4 +44,9 @@ public class AssistanceController {
         return ResponseEntity.ok(assistanceService.updateById(id, assistanceRequest));
     }
 
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id){
+        return ResponseEntity.ok(assistanceService.updateStatus(id));
+    }
+
 }

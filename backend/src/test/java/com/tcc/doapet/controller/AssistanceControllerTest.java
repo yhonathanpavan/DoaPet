@@ -76,4 +76,13 @@ class AssistanceControllerTest {
         assertNotNull(assistanceActualResponse.getBody());
         assertEquals(assistanceActualResponse.getBody().getId(), getAssistanceResponse().getId());
     }
+
+    @Test
+    void updateStatus_WhenSendAssistanceId_ExpectedAssistanceResponse(){
+        when(assistanceService.updateStatus(anyLong())).thenReturn(getAssistanceResponse());
+
+        var assistanceActualResponse = assistanceController.updateStatus(1L);
+
+        assertEquals(HttpStatus.OK, assistanceActualResponse.getStatusCode());
+    }
 }

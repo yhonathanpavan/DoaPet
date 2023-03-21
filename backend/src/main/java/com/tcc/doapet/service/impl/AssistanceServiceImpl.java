@@ -8,7 +8,6 @@ import com.tcc.doapet.service.AssistanceService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,7 +31,7 @@ public class AssistanceServiceImpl implements AssistanceService {
 
     @Override
     public AssistanceResponse getById(Long id) {
-        var assistanceEntity = assistanceRepository.findById(id).orElseThrow(NotFoundException::new);
+        var assistanceEntity = findAssistanceById(id);
         return modelMapper.map(assistanceEntity, AssistanceResponse.class);
     }
 
@@ -47,11 +46,22 @@ public class AssistanceServiceImpl implements AssistanceService {
 
     @Override
     public AssistanceResponse updateById(Long id, AssistanceRequest assistanceRequest) {
-        var assistanceEntity = assistanceRepository.findById(id).orElseThrow(NotFoundException::new);
+        var assistanceEntity = findAssistanceById(id);
         modelMapper.map(assistanceRequest, assistanceEntity);
         assistanceRepository.save(assistanceEntity);
 
         return modelMapper.map(assistanceEntity, AssistanceResponse.class);
+    }
+
+    @Override
+    public AssistanceResponse updateStatus(Long id) {
+        Assistance assistance = findAssistanceById(id);
+        assistance.setStatus(!assistance.getStatus());
+        return modelMapper.map(assistanceRepository.save(assistance), AssistanceResponse.class);
+    }
+
+    protected Assistance findAssistanceById(Long id){
+        return assistanceRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
 }
