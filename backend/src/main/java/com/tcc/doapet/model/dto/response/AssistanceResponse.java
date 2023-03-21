@@ -25,7 +25,7 @@ public class AssistanceResponse {
     @JsonProperty("price")
     private BigDecimal price;
 
-    @JsonProperty("active")
-    private boolean active;
+    @JsonProperty("status")
+    private Boolean status;
 
 }

@@ -55,7 +55,7 @@ class DonorServiceImplTest {
         var actualDonorResponse = donorService.getById(1L);
 
         assertNotNull(actualDonorResponse);
-        assertTrue(actualDonorResponse.getActive());
+        assertTrue(actualDonorResponse.getStatus());
         assertEquals(getDonorResponse().getId(), actualDonorResponse.getId());
         assertEquals(getDonorResponse().getName(), actualDonorResponse.getName());
         assertEquals(getDonorResponse().getCpf(), actualDonorResponse.getCpf());

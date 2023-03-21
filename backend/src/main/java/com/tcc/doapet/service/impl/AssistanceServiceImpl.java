@@ -39,7 +39,7 @@ public class AssistanceServiceImpl implements AssistanceService {
     @Override
     public URI create(AssistanceRequest assistanceRequest) {
         var assistanceEntity = modelMapper.map(assistanceRequest, Assistance.class);
-
+        assistanceEntity.setStatus(Boolean.TRUE);
         assistanceRepository.save(assistanceEntity);
 
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(assistanceEntity.getId());

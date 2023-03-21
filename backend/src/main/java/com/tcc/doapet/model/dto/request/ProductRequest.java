@@ -34,6 +34,4 @@ public class ProductRequest {
     @JsonProperty("price")
     private BigDecimal price;
 
-    @JsonProperty("active")
-    private Boolean active;
 }

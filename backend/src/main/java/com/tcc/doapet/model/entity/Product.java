@@ -2,7 +2,6 @@ package com.tcc.doapet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.doapet.model.enums.Measures;
-import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.model.enums.ProductCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +34,5 @@ public class Product {
 
     private BigDecimal price;
 
-    private Boolean active;
+    private Boolean status;
 }

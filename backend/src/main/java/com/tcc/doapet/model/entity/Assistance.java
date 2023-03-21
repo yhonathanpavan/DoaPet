@@ -2,7 +2,6 @@ package com.tcc.doapet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.doapet.model.enums.AssistanceCategory;
-import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +27,5 @@ public class Assistance {
 
     private BigDecimal price;
 
-    private boolean active;
+    private Boolean status;
 }

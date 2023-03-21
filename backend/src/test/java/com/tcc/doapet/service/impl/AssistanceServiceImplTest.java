@@ -55,7 +55,7 @@ class AssistanceServiceImplTest {
         var actualAssistanceResponse = assistanceService.getById(1L);
 
         assertNotNull(actualAssistanceResponse);
-        assertTrue(actualAssistanceResponse.isActive());
+        assertTrue(actualAssistanceResponse.getStatus());
         assertEquals(getAssistanceResponse().getId(), actualAssistanceResponse.getId());
         assertEquals(getAssistanceResponse().getName(), actualAssistanceResponse.getName());
         assertEquals(getAssistanceResponse().getAssistanceCategory(), actualAssistanceResponse.getAssistanceCategory());

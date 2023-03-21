@@ -75,7 +75,7 @@ class ProductServiceImplTest {
         assertNotNull(response);
         assertEquals(ProductResponse.class, response.getClass());
         assertEquals(ProductFactory.getProduct().getName(), response.getName());
-        assertEquals(Boolean.TRUE, response.getActive());
+        assertEquals(Boolean.TRUE, response.getStatus());
     }
 
     @Test
@@ -88,7 +88,7 @@ class ProductServiceImplTest {
         assertNotNull(response);
         assertEquals(ProductResponse.class, response.getClass());
         assertEquals(ProductFactory.getProduct().getName(), response.getName());
-        assertEquals(Boolean.TRUE, response.getActive());
+        assertEquals(Boolean.TRUE, response.getStatus());
     }
 
     @Test
@@ -100,6 +100,6 @@ class ProductServiceImplTest {
         assertNotNull(response);
         assertEquals(Product.class, response.getClass());
         assertEquals(ProductFactory.getProduct().getName(), response.getName());
-        assertEquals(Boolean.TRUE, response.getActive());
+        assertEquals(Boolean.TRUE, response.getStatus());
     }
 }

@@ -39,7 +39,7 @@ public class DonorServiceImpl implements DonorService {
     @Override
     public URI create(DonorRequest donorRequest) {
         var donorEntity = modelMapper.map(donorRequest, Donor.class);
-
+        donorEntity.setStatus(Boolean.TRUE);
         donorRepository.save(donorEntity);
 
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(donorEntity.getId());

@@ -4,7 +4,6 @@ import com.tcc.doapet.model.dto.request.AssistanceRequest;
 import com.tcc.doapet.model.dto.response.AssistanceResponse;
 import com.tcc.doapet.model.entity.Assistance;
 import com.tcc.doapet.model.enums.AssistanceCategory;
-import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,7 +23,7 @@ public class AssistanceFactory {
                 .name("Castration of Dogs and Cats")
                 .assistanceCategory(AssistanceCategory.HEALTH)
                 .price(BigDecimal.valueOf(150))
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -34,7 +33,7 @@ public class AssistanceFactory {
                 .name("Vaccination")
                 .assistanceCategory(AssistanceCategory.HEALTH)
                 .price(BigDecimal.valueOf(150))
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -44,7 +43,7 @@ public class AssistanceFactory {
                 .name("Castration of Dogs and Cats")
                 .assistanceCategory(AssistanceCategory.HEALTH)
                 .price(BigDecimal.valueOf(150))
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -54,7 +53,7 @@ public class AssistanceFactory {
                 .name("Vaccination")
                 .assistanceCategory(AssistanceCategory.HEALTH)
                 .price(BigDecimal.valueOf(150))
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -63,7 +62,6 @@ public class AssistanceFactory {
                 .name("Castration of Dogs and Cats")
                 .assistanceCategory(AssistanceCategory.HEALTH)
                 .price(BigDecimal.valueOf(150))
-                .active(true)
                 .build();
     }
 

@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public URI save(ProductRequest productRequest) {
         Product product = mapper.map(productRequest, Product.class);
-        product.setActive(Boolean.TRUE);
+        product.setStatus(Boolean.TRUE);
         productRepository.save(product);
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(product.getId());
     }

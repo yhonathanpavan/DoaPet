@@ -38,7 +38,7 @@ public class ONGServiceImpl implements ONGService {
     @Override
     public URI create(ONGRequest ongRequest) {
         var ongEntity = modelMapper.map(ongRequest, ONG.class);
-
+        ongEntity.setStatus(Boolean.TRUE);
         ongRepository.save(ongEntity);
 
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(ongEntity.getId());

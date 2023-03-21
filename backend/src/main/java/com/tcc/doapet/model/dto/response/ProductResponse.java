@@ -2,14 +2,12 @@ package com.tcc.doapet.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.doapet.model.enums.Measures;
-import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.model.enums.ProductCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -33,6 +31,6 @@ public class ProductResponse {
     @JsonProperty("price")
     private BigDecimal price;
 
-    @JsonProperty("active")
-    private Boolean active;
+    @JsonProperty("status")
+    private Boolean status;
 }

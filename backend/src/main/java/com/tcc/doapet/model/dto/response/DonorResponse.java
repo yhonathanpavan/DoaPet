@@ -48,7 +48,7 @@ public class DonorResponse {
     @JsonProperty("profile_picture")
     private String profilePicture;
 
-    @JsonProperty("active")
-    private Boolean active;
+    @JsonProperty("status")
+    private Boolean status;
 
 }

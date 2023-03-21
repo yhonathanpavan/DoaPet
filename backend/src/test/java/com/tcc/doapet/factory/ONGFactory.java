@@ -28,7 +28,7 @@ public class ONGFactory {
                 .presidentName("Cláudia Carolina Sara da Luz")
                 .biography("A ONG Patinhas unidas foi fundada em 2014 com o propósito de dar uma nova vida para os animais de rua")
                 .profilePicture("aasssh")
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -49,7 +49,7 @@ public class ONGFactory {
                 .presidentName("Benedito Vicente Ribeiro")
                 .biography("A Focinhos Carinhosos atua na cidade de Barueri desde 2007, prestando serviços e ajudando os animaizinhos necessitados.")
                 .profilePicture("aasssh")
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -69,7 +69,7 @@ public class ONGFactory {
                 .presidentName("Cláudia Carolina Sara da Luz")
                 .biography("A ONG Patinhas unidas foi fundada em 2014 com o propósito de dar uma nova vida para os animais de rua")
                 .profilePicture("aasssh")
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -89,7 +89,7 @@ public class ONGFactory {
                 .presidentName("Benedito Vicente Ribeiro")
                 .biography("A Focinhos Carinhosos atua na cidade de Barueri desde 2007, prestando serviços e ajudando os animaizinhos necessitados.")
                 .profilePicture("aasssh")
-                .active(true)
+                .status(true)
                 .build();
     }
 
@@ -109,7 +109,6 @@ public class ONGFactory {
                 .presidentName("Cláudia Carolina Sara da Luz")
                 .biography("A ONG Patinhas unidas foi fundada em 2014 com o propósito de dar uma nova vida para os animais de rua")
                 .profilePicture("aasssh")
-                .active(true)
                 .build();
     }
 

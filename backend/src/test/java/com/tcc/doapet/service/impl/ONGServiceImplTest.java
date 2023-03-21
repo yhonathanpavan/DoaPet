@@ -54,7 +54,7 @@ class ONGServiceImplTest {
         var actualONGResponse = ongService.getById(1L);
 
         assertNotNull(actualONGResponse);
-        assertTrue(actualONGResponse.getActive());
+        assertTrue(actualONGResponse.getStatus());
         assertEquals(getONGResponse().getId(), actualONGResponse.getId());
         assertEquals(getONGResponse().getName(), actualONGResponse.getName());
         assertEquals(getONGResponse().getCnpj(), actualONGResponse.getCnpj());

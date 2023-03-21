@@ -28,6 +28,4 @@ public class AssistanceRequest {
     @JsonProperty("price")
     private BigDecimal price;
 
-    @JsonProperty("active")
-    private Boolean active;
 }
