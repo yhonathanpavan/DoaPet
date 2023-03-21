@@ -49,6 +49,9 @@ public class ONGResponse {
     @JsonProperty("biography")
     private String biography;
 
+    @JsonProperty("profile_picture")
+    private String profilePicture;
+
     @JsonProperty("active")
     private Boolean active;
 

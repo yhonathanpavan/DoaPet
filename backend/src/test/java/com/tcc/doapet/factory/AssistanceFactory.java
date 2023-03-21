@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class AssistanceFactory {
@@ -22,7 +23,7 @@ public class AssistanceFactory {
                 .id(1L)
                 .name("Castration of Dogs and Cats")
                 .assistanceCategory(AssistanceCategory.HEALTH)
-                .priorityLevelStatus(PriorityLevelStatus.HIGH)
+                .price(BigDecimal.valueOf(150))
                 .active(true)
                 .build();
     }
@@ -32,18 +33,17 @@ public class AssistanceFactory {
                 .id(2L)
                 .name("Vaccination")
                 .assistanceCategory(AssistanceCategory.HEALTH)
-                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
+                .price(BigDecimal.valueOf(150))
                 .active(true)
                 .build();
     }
-
 
     public static AssistanceResponse getAssistanceResponse(){
         return AssistanceResponse.builder()
                 .id(1L)
                 .name("Castration of Dogs and Cats")
                 .assistanceCategory(AssistanceCategory.HEALTH)
-                .priorityLevelStatus(PriorityLevelStatus.HIGH)
+                .price(BigDecimal.valueOf(150))
                 .active(true)
                 .build();
     }
@@ -53,7 +53,7 @@ public class AssistanceFactory {
                 .id(2L)
                 .name("Vaccination")
                 .assistanceCategory(AssistanceCategory.HEALTH)
-                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
+                .price(BigDecimal.valueOf(150))
                 .active(true)
                 .build();
     }
@@ -62,7 +62,7 @@ public class AssistanceFactory {
         return AssistanceRequest.builder()
                 .name("Castration of Dogs and Cats")
                 .assistanceCategory(AssistanceCategory.HEALTH)
-                .priorityLevelStatus(PriorityLevelStatus.HIGH)
+                .price(BigDecimal.valueOf(150))
                 .active(true)
                 .build();
     }
@@ -73,7 +73,6 @@ public class AssistanceFactory {
 
     public static List<Assistance> getAssistanceArray(){
         return List.of(getAssistance(), getAssistanceTwo());
-
     }
 
     public static Page<AssistanceResponse> getPageableAssistanceResponse(){

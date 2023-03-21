@@ -59,7 +59,6 @@ class AssistanceServiceImplTest {
         assertEquals(getAssistanceResponse().getId(), actualAssistanceResponse.getId());
         assertEquals(getAssistanceResponse().getName(), actualAssistanceResponse.getName());
         assertEquals(getAssistanceResponse().getAssistanceCategory(), actualAssistanceResponse.getAssistanceCategory());
-        assertEquals(getAssistanceResponse().getPriorityLevelStatus(), actualAssistanceResponse.getPriorityLevelStatus());
     }
 
     @Test

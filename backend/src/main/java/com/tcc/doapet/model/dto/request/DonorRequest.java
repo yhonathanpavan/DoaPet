@@ -60,6 +60,9 @@ public class DonorRequest {
     @JsonProperty("birthdate")
     private LocalDate birthdate;
 
+    @JsonProperty("profile_picture")
+    private String profilePicture;
+
     @NotNull
     @JsonProperty("active")
     private Boolean active;

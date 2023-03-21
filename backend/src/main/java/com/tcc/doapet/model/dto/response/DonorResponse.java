@@ -45,6 +45,9 @@ public class DonorResponse {
     @JsonProperty("birthdate")
     private LocalDate birthdate;
 
+    @JsonProperty("profile_picture")
+    private String profilePicture;
+
     @JsonProperty("active")
     private Boolean active;
 

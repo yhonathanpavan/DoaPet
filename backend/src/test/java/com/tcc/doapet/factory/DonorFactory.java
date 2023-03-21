@@ -26,6 +26,7 @@ public class DonorFactory {
                 .state("SP")
                 .cpf("84545610803")
                 .birthdate(LocalDate.of(2003, 3, 5))
+                .profilePicture("aasssh")
                 .active(true)
                 .build();
     }
@@ -44,6 +45,7 @@ public class DonorFactory {
                 .state("SP")
                 .cpf("92188673859")
                 .birthdate(LocalDate.of(2003, 3, 1))
+                .profilePicture("aasssh")
                 .active(true)
                 .build();
     }
@@ -61,6 +63,7 @@ public class DonorFactory {
                 .state("SP")
                 .cpf("84545610803")
                 .birthdate(LocalDate.of(2003, 3, 5))
+                .profilePicture("aasssh")
                 .active(true)
                 .build();
     }
@@ -78,6 +81,7 @@ public class DonorFactory {
                 .state("SP")
                 .cpf("92188673859")
                 .birthdate(LocalDate.of(2003, 3, 1))
+                .profilePicture("aasssh")
                 .active(true)
                 .build();
     }
@@ -94,6 +98,7 @@ public class DonorFactory {
                 .state("SP")
                 .cpf("84545610803")
                 .birthdate(LocalDate.of(2003, 3, 5))
+                .profilePicture("aasssh")
                 .active(true)
                 .build();
     }

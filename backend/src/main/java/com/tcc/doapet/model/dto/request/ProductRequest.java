@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,16 +26,13 @@ public class ProductRequest {
     @JsonProperty("unit")
     private String unit;
 
-    @JsonProperty("weight")
-    private Double weight;
-
-    @NotNull
-    @JsonProperty("priority_level_status")
-    private PriorityLevelStatus priorityLevelStatus;
-
     @NotNull
     @JsonProperty("product_category")
     private ProductCategory productCategory;
+
+    @NotNull
+    @JsonProperty("price")
+    private BigDecimal price;
 
     @JsonProperty("active")
     private Boolean active;

@@ -4,6 +4,7 @@ import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.entity.Order;
 import com.tcc.doapet.model.enums.OrderStatus;
+import com.tcc.doapet.model.enums.PriorityLevelStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class OrderFactory {
                 .quantity(1)
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
 
@@ -26,6 +28,7 @@ public class OrderFactory {
                 .quantity(1)
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
 
@@ -36,6 +39,7 @@ public class OrderFactory {
                 .orderStatus(OrderStatus.CANCELED)
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
 
@@ -50,8 +54,8 @@ public class OrderFactory {
                 .quantity(1)
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
-
     }
 
     public static Order getAssistanceOrder(){
@@ -65,6 +69,7 @@ public class OrderFactory {
                 .quantity(1)
                 .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
 
@@ -74,6 +79,7 @@ public class OrderFactory {
                .quantity(1)
                .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+               .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                .build();
     }
 
@@ -84,6 +90,7 @@ public class OrderFactory {
                 .orderStatus(OrderStatus.CANCELED)
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
 
@@ -98,6 +105,7 @@ public class OrderFactory {
                 .quantity(1)
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
 
     }
@@ -113,6 +121,7 @@ public class OrderFactory {
                 .quantity(1)
                 .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
 

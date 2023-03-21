@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -24,8 +25,8 @@ public class AssistanceRequest {
     private AssistanceCategory assistanceCategory;
 
     @NotNull
-    @JsonProperty("priority_level_status")
-    private PriorityLevelStatus priorityLevelStatus;
+    @JsonProperty("price")
+    private BigDecimal price;
 
     @JsonProperty("active")
     private Boolean active;

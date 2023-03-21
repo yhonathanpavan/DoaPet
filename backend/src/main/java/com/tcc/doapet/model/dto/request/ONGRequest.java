@@ -67,6 +67,9 @@ public class ONGRequest {
     @JsonProperty("biography")
     private String biography;
 
+    @JsonProperty("profile_picture")
+    private String profilePicture;
+
     @NotNull
     @JsonProperty("active")
     private Boolean active;

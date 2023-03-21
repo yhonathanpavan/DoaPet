@@ -7,6 +7,7 @@ import com.tcc.doapet.model.entity.Donor;
 import com.tcc.doapet.model.entity.ONG;
 import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.model.enums.OrderStatus;
+import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,4 +53,7 @@ public class OrderResponse {
 
     @JsonProperty("completion_date_service")
     private LocalDateTime completionDateService;
+
+    @JsonProperty("priority_level_status")
+    private PriorityLevelStatus priorityLevelStatus;
 }

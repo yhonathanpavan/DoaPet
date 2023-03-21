@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -23,14 +26,11 @@ public class ProductResponse {
     @JsonProperty("unit")
     private String unit;
 
-    @JsonProperty("weight")
-    private Double weight;
-
-    @JsonProperty("priority_level_status")
-    private PriorityLevelStatus priorityLevelStatus;
-
     @JsonProperty("product_category")
     private ProductCategory productCategory;
+
+    @JsonProperty("price")
+    private BigDecimal price;
 
     @JsonProperty("active")
     private Boolean active;

@@ -6,6 +6,7 @@ import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -25,9 +26,7 @@ public class Assistance {
     @JsonProperty("assistance_category")
     private AssistanceCategory assistanceCategory;
 
-    @Enumerated(value = EnumType.STRING)
-    @JsonProperty("priority_level_status")
-    private PriorityLevelStatus priorityLevelStatus;
+    private BigDecimal price;
 
     private boolean active;
 }

@@ -2,8 +2,9 @@ package com.tcc.doapet.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.doapet.model.enums.AssistanceCategory;
-import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import lombok.*;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -21,8 +22,8 @@ public class AssistanceResponse {
     @JsonProperty("assistance_category")
     private AssistanceCategory assistanceCategory;
 
-    @JsonProperty("priority_level_status")
-    private PriorityLevelStatus priorityLevelStatus;
+    @JsonProperty("price")
+    private BigDecimal price;
 
     @JsonProperty("active")
     private boolean active;

@@ -42,5 +42,8 @@ public abstract class User{
 
     private String state;
 
+    @JsonProperty("profile_picture")
+    private String profilePicture;
+
     private Boolean active;
 }

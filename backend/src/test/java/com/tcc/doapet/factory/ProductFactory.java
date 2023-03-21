@@ -8,6 +8,7 @@ import com.tcc.doapet.model.enums.ProductCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductFactory {
@@ -18,12 +19,9 @@ public class ProductFactory {
 
     private static final String UNIT = "unitário";
 
-    private static final Double WEIGHT = 2.5;
-
-    private static final PriorityLevelStatus PRIORITY_LEVEL_STATUS = PriorityLevelStatus.MEDIUM;
-
-
     private static final ProductCategory PRODUCT_CATEGORY = ProductCategory.TOOL;
+
+    private static final BigDecimal PRICE = BigDecimal.valueOf(50);
 
     private static final Boolean ACTIVE = Boolean.TRUE;
 
@@ -32,9 +30,8 @@ public class ProductFactory {
                 .id(ID)
                 .name(NAME)
                 .unit(UNIT)
-                .weight(WEIGHT)
-                .priorityLevelStatus(PRIORITY_LEVEL_STATUS)
                 .productCategory(PRODUCT_CATEGORY)
+                .price(PRICE)
                 .active(ACTIVE)
                 .build();
     }
@@ -43,9 +40,8 @@ public class ProductFactory {
         return ProductRequest.builder()
                 .name(NAME)
                 .unit(UNIT)
-                .weight(WEIGHT)
-                .priorityLevelStatus(PRIORITY_LEVEL_STATUS)
                 .productCategory(PRODUCT_CATEGORY)
+                .price(PRICE)
                 .build();
     }
 
@@ -53,9 +49,8 @@ public class ProductFactory {
         return ProductResponse.builder()
                 .name(NAME)
                 .unit(UNIT)
-                .weight(WEIGHT)
-                .priorityLevelStatus(PRIORITY_LEVEL_STATUS)
                 .productCategory(PRODUCT_CATEGORY)
+                .price(PRICE)
                 .active(ACTIVE)
                 .build();
     }

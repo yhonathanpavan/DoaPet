@@ -2,6 +2,7 @@ package com.tcc.doapet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.doapet.model.enums.OrderStatus;
+import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,6 +53,10 @@ public class Order {
 
     @JsonProperty("completion_date_assistance")
     private LocalDateTime completionDateAssistance;
+
+    @Enumerated(value = EnumType.STRING)
+    @JsonProperty("priority_level_status")
+    private PriorityLevelStatus priorityLevelStatus;
 
     @PrePersist
     private void prePersistFunction(){

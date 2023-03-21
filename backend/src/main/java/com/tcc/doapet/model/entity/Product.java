@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @AllArgsConstructor
@@ -25,15 +26,11 @@ public class Product {
 
     private String unit;
 
-    private Double weight;
-
-    @Enumerated(value = EnumType.STRING)
-    @JsonProperty("priority_level_status")
-    private PriorityLevelStatus priorityLevelStatus;
-
     @Enumerated(value = EnumType.STRING)
     @JsonProperty("product_category")
     private ProductCategory productCategory;
+
+    private BigDecimal price;
 
     private Boolean active;
 }
