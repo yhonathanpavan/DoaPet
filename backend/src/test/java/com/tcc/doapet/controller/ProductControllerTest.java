@@ -69,4 +69,13 @@ class ProductControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    void updateStatus_WhenSendProductId_ExpectedResponseEntityProductResponse() throws Exception {
+        String productRequest = objectMapper.writeValueAsString(ProductFactory.getProductRequest());
+        mockMvc.perform(MockMvcRequestBuilders.patch("/products/{id}/status", 1L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(productRequest))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
 }

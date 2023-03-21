@@ -92,6 +92,19 @@ class ProductServiceImplTest {
     }
 
     @Test
+    void updateStatus_WhenSendProductId_ExpectedProductResponse() {
+        when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
+        when(productRepository.save(any())).thenReturn(ProductFactory.getProduct());
+
+        var response = productService.updateStatus(ID);
+
+        assertNotNull(response);
+        assertEquals(ProductResponse.class, response.getClass());
+        assertEquals(ProductFactory.getProduct().getName(), response.getName());
+        assertEquals(Boolean.TRUE, response.getStatus());
+    }
+
+    @Test
     void findProductById_WhenSendProductId_ExpectedProduct() {
         when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
 

@@ -48,6 +48,13 @@ public class ProductServiceImpl implements ProductService {
         return mapper.map(productRepository.save(productEntity), ProductResponse.class);
     }
 
+    @Override
+    public ProductResponse updateStatus(Long id) {
+        Product product = findProductById(id);
+        product.setStatus(!product.getStatus());
+        return mapper.map(productRepository.save(product), ProductResponse.class);
+    }
+
     protected Product findProductById(Long id){
         return productRepository.findById(id).orElseThrow();
     }

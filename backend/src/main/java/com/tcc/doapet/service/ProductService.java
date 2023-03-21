@@ -17,4 +17,6 @@ public interface ProductService {
     ProductResponse findOne(Long id);
 
     ProductResponse update(Long id, ProductRequest productRequest);
+
+    ProductResponse updateStatus(Long id);
 }
