@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -46,8 +47,6 @@ public class Order {
 
     private LocalDate date;
 
-    private Integer quantity;
-
     @JsonProperty("start_date_assistance")
     private LocalDateTime startDateAssistance;
 
@@ -57,6 +56,20 @@ public class Order {
     @Enumerated(value = EnumType.STRING)
     @JsonProperty("priority_level_status")
     private PriorityLevelStatus priorityLevelStatus;
+
+    private Integer quantity;
+
+    @JsonProperty("remaining_quantity")
+    private Integer remainingQuantity;
+
+    @JsonProperty("intentions_quantity")
+    private Integer intentionsQuantity;
+
+    @JsonProperty("delivered_quantity")
+    private Integer deliveredQuantity;
+
+    @JsonProperty("total_price")
+    private BigDecimal totalPrice;
 
     @PrePersist
     private void prePersistFunction(){

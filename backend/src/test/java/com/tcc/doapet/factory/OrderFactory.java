@@ -6,6 +6,7 @@ import com.tcc.doapet.model.entity.Order;
 import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -55,6 +56,10 @@ public class OrderFactory {
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
+                .intentionsQuantity(0)
+                .deliveredQuantity(0)
+                .remainingQuantity(1)
+                .totalPrice(AssistanceFactory.getAssistanceResponse().getPrice().multiply(BigDecimal.valueOf(1)))
                 .build();
     }
 
@@ -70,6 +75,10 @@ public class OrderFactory {
                 .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
+                .intentionsQuantity(0)
+                .deliveredQuantity(0)
+                .remainingQuantity(1)
+                .totalPrice(AssistanceFactory.getAssistanceResponse().getPrice().multiply(BigDecimal.valueOf(1)))
                 .build();
     }
 
@@ -106,6 +115,10 @@ public class OrderFactory {
                 .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
+                .intentionsQuantity(0)
+                .deliveredQuantity(0)
+                .remainingQuantity(1)
+                .totalPrice(AssistanceFactory.getAssistanceResponse().getPrice().multiply(BigDecimal.valueOf(1)))
                 .build();
 
     }
@@ -122,6 +135,10 @@ public class OrderFactory {
                 .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
+                .intentionsQuantity(0)
+                .deliveredQuantity(0)
+                .remainingQuantity(1)
+                .totalPrice(AssistanceFactory.getAssistanceResponse().getPrice().multiply(BigDecimal.valueOf(1)))
                 .build();
     }
 

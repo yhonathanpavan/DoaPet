@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -45,9 +46,6 @@ public class OrderResponse {
     @JsonProperty("date")
     private LocalDate date;
 
-    @JsonProperty("quantity")
-    private Integer quantity;
-
     @JsonProperty("start_date_service")
     private LocalDateTime startDateService;
 
@@ -56,4 +54,20 @@ public class OrderResponse {
 
     @JsonProperty("priority_level_status")
     private PriorityLevelStatus priorityLevelStatus;
+
+    @JsonProperty("quantity")
+    private Integer quantity;
+
+    @JsonProperty("remaining_quantity")
+    private Integer remainingQuantity;
+
+    @JsonProperty("intentions_quantity")
+    private Integer intentionsQuantity;
+
+    @JsonProperty("delivered_quantity")
+    private Integer deliveredQuantity;
+
+    @JsonProperty("total_price")
+    private BigDecimal totalPrice;
+
 }
