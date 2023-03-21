@@ -1,6 +1,11 @@
 package com.tcc.doapet.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.tcc.doapet.factory.ProductFactory;
+import com.tcc.doapet.model.dto.response.DonorResponse;
+import com.tcc.doapet.model.dto.response.ProductResponse;
+import com.tcc.doapet.model.entity.Donor;
+import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.repository.DonorRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,6 +89,31 @@ class DonorServiceImplTest {
 
         assertNotNull(actualDonorResponse);
         verify(donorRepository, times(1)).save(any());
+    }
+
+    @Test
+    void updateStatus_WhenSendDonorId_ExpectedDonorResponse() {
+        when(donorRepository.findById(anyLong())).thenReturn(Optional.of(getDonor()));
+        when(donorRepository.save(any())).thenReturn(getDonor());
+
+        var response = donorService.updateStatus(1L);
+
+        assertNotNull(response);
+        assertEquals(DonorResponse.class, response.getClass());
+        assertEquals(getDonor().getName(), response.getName());
+        assertEquals(Boolean.TRUE, response.getStatus());
+    }
+
+    @Test
+    void findDonorById_WhenSendDonorId_ExpectedDonor(){
+        when(donorRepository.findById(anyLong())).thenReturn(Optional.of(getDonor()));
+
+        var response = donorService.findDonorById(1L);
+
+        assertNotNull(response);
+        assertEquals(Donor.class, response.getClass());
+        assertEquals(getDonor().getName(), response.getName());
+        assertEquals(Boolean.TRUE, response.getStatus());
     }
 
 }

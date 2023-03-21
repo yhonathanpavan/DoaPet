@@ -8,7 +8,6 @@ import com.tcc.doapet.service.DonorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,7 +31,7 @@ public class DonorServiceImpl implements DonorService {
 
     @Override
     public DonorResponse getById(Long id) {
-        var donorEntity = donorRepository.findById(id).orElseThrow(NotFoundException::new);
+        var donorEntity = findDonorById(id);
         return modelMapper.map(donorEntity, DonorResponse.class);
     }
 
@@ -47,10 +46,21 @@ public class DonorServiceImpl implements DonorService {
 
     @Override
     public DonorResponse updateById(Long id, DonorRequest donorRequest) {
-        var donorEntity = donorRepository.findById(id).orElseThrow(NotFoundException::new);
+        var donorEntity = findDonorById(id);
         modelMapper.map(donorRequest, donorEntity);
         donorRepository.save(donorEntity);
 
         return modelMapper.map(donorEntity, DonorResponse.class);
+    }
+
+    @Override
+    public DonorResponse updateStatus(Long id) {
+        Donor donor = findDonorById(id);
+        donor.setStatus(!donor.getStatus());
+        return modelMapper.map(donorRepository.save(donor), DonorResponse.class);
+    }
+
+    protected Donor findDonorById(Long id){
+        return donorRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 }

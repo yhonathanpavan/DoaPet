@@ -76,4 +76,14 @@ class DonorControllerTest {
         assertNotNull(donorActualResponse.getBody());
         assertEquals(donorActualResponse.getBody().getId(), getDonorResponse().getId());
     }
+
+    @Test
+    void updateStatus_WhenSendDonorId_ExpectedResponseEntityDonorResponse() {
+        when(donorService.updateStatus(anyLong())).thenReturn(getDonorResponse());
+
+        var donorActualResponse = donorController.updateStatus(1L);
+
+        assertEquals(HttpStatus.OK, donorActualResponse.getStatusCode());
+        assertNotNull(donorActualResponse.getBody());
+    }
 }

@@ -17,4 +17,5 @@ public interface DonorService {
 
     DonorResponse updateById(Long id, DonorRequest donorRequest);
 
+    DonorResponse updateStatus(Long id);
 }

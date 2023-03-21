@@ -44,4 +44,9 @@ public class DonorController {
         return ResponseEntity.ok(donorService.updateById(id, donorRequest));
     }
 
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id){
+        return ResponseEntity.ok(donorService.updateStatus(id));
+    }
+
 }
