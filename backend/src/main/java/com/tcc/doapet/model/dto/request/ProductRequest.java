@@ -1,7 +1,7 @@
 package com.tcc.doapet.model.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tcc.doapet.model.enums.PriorityLevelStatus;
+import com.tcc.doapet.model.enums.Measures;
 import com.tcc.doapet.model.enums.ProductCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,9 +22,9 @@ public class ProductRequest {
     @JsonProperty("name")
     private String name;
 
-    @NotEmpty
-    @JsonProperty("unit")
-    private String unit;
+    @NotNull
+    @JsonProperty("measure")
+    private Measures measure;
 
     @NotNull
     @JsonProperty("product_category")

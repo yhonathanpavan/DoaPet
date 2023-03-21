@@ -1,6 +1,7 @@
 package com.tcc.doapet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tcc.doapet.model.enums.Measures;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.model.enums.ProductCategory;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,9 @@ public class Product {
 
     private String name;
 
-    private String unit;
+    @Enumerated(value = EnumType.STRING)
+    @JsonProperty("measure")
+    private Measures measure;
 
     @Enumerated(value = EnumType.STRING)
     @JsonProperty("product_category")

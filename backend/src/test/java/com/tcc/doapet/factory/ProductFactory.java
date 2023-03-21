@@ -3,6 +3,7 @@ package com.tcc.doapet.factory;
 import com.tcc.doapet.model.dto.request.ProductRequest;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Product;
+import com.tcc.doapet.model.enums.Measures;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.model.enums.ProductCategory;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,7 @@ public class ProductFactory {
 
     private static final String NAME = "Pá";
 
-    private static final String UNIT = "unitário";
+    private static final Measures MEASURE = Measures.UNITS;
 
     private static final ProductCategory PRODUCT_CATEGORY = ProductCategory.TOOL;
 
@@ -29,7 +30,7 @@ public class ProductFactory {
         return Product.builder()
                 .id(ID)
                 .name(NAME)
-                .unit(UNIT)
+                .measure(MEASURE)
                 .productCategory(PRODUCT_CATEGORY)
                 .price(PRICE)
                 .active(ACTIVE)
@@ -39,7 +40,7 @@ public class ProductFactory {
     public static ProductRequest getProductRequest(){
         return ProductRequest.builder()
                 .name(NAME)
-                .unit(UNIT)
+                .measure(MEASURE)
                 .productCategory(PRODUCT_CATEGORY)
                 .price(PRICE)
                 .build();
@@ -48,7 +49,7 @@ public class ProductFactory {
     public static ProductResponse getProductResponse(){
         return ProductResponse.builder()
                 .name(NAME)
-                .unit(UNIT)
+                .measure(MEASURE)
                 .productCategory(PRODUCT_CATEGORY)
                 .price(PRICE)
                 .active(ACTIVE)
