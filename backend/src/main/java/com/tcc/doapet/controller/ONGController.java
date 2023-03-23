@@ -79,4 +79,10 @@ public class ONGController {
         return ResponseEntity.ok(ongService.updateStatus(id));
     }
 
+    @PatchMapping("{ongId}/orders/{orderId}/cancel")
+    public ResponseEntity<?> cancelOrder(@PathVariable Long ongId,
+                                         @PathVariable Long orderId){
+        return ResponseEntity.ok(orderService.cancelOrder(ongId, orderId));
+    }
+
 }

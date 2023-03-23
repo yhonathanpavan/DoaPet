@@ -1,8 +1,11 @@
 package com.tcc.doapet.service.impl;
 
 import com.tcc.doapet.model.dto.request.OrderRequest;
+import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.OrderResponse;
+import com.tcc.doapet.model.entity.ONG;
 import com.tcc.doapet.model.entity.Order;
+import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.repository.AssistanceRepository;
 import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.repository.OrderRepository;
@@ -85,6 +88,13 @@ public class OrderServiceImpl implements OrderService {
         Order order = findOrderByOngId(ongId, orderId);
         mapper.map(orderRequest, order);
         order.setId(orderId);
+        return mapper.map(orderRepository.save(order), OrderResponse.class);
+    }
+
+    @Override
+    public OrderResponse cancelOrder(Long ongId, Long orderId) {
+        Order order = findOrderByOngId(ongId, orderId);
+        order.setOrderStatus(OrderStatus.CANCELED);
         return mapper.map(orderRepository.save(order), OrderResponse.class);
     }
 

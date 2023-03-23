@@ -16,4 +16,6 @@ public interface OrderService {
     OrderResponse findOne(Long ongId, Long orderId);
 
     OrderResponse update(Long ongId, Long orderId, OrderRequest orderRequest);
+
+    OrderResponse cancelOrder(Long ongId, Long orderId);
 }

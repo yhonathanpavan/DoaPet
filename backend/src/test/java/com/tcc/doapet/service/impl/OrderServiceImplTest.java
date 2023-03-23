@@ -1,5 +1,10 @@
 package com.tcc.doapet.service.impl;
 
+import com.tcc.doapet.factory.OrderFactory;
+import com.tcc.doapet.factory.ProductFactory;
+import com.tcc.doapet.model.dto.response.OrderResponse;
+import com.tcc.doapet.model.dto.response.ProductResponse;
+import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.repository.AssistanceRepository;
 import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.repository.OrderRepository;
@@ -136,6 +141,17 @@ class OrderServiceImplTest {
         var actualOrderResponse = orderService.update(1L, 1L, getOrderAssistanceUpdateRequest());
 
         assertNotNull(actualOrderResponse);
+        verify(orderRepository, times(1)).save(any());
+    }
+
+    @Test
+    void cancelOrder_WhenSendONGIdAndOrderId_ExpectedSuccess() {
+        when(orderRepository.findByIdAndOngId(anyLong(), anyLong())).thenReturn(Optional.ofNullable(getAssistanceOrder()));
+        when(orderRepository.save(any())).thenReturn(getAssistanceOrder());
+
+        var response = orderService.cancelOrder(1L, 1L);
+
+        assertNotNull(response);
         verify(orderRepository, times(1)).save(any());
     }
 

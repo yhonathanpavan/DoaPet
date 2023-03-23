@@ -1,7 +1,9 @@
 package com.tcc.doapet.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.tcc.doapet.factory.OrderFactory;
 import com.tcc.doapet.service.ONGService;
+import com.tcc.doapet.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import static com.tcc.doapet.factory.DonorFactory.getDonorResponse;
 import static com.tcc.doapet.factory.ONGFactory.*;
+import static com.tcc.doapet.factory.OrderFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,6 +31,9 @@ class ONGControllerTest {
 
     @Mock
     private ONGService ongService;
+
+    @Mock
+    private OrderService orderService;
 
     @Test
     void getAll() throws JsonProcessingException {
@@ -87,5 +93,15 @@ class ONGControllerTest {
 
         assertEquals(HttpStatus.OK, ongActualResponse.getStatusCode());
         assertNotNull(ongActualResponse.getBody());
+    }
+
+    @Test
+    void cancelOrder_WhenSendONGIdAndOrderId_ExpectedOK() {
+        when(orderService.cancelOrder(anyLong(), anyLong())).thenReturn(getOrderProductResponse());
+
+        var response = ongController.cancelOrder(1L, 1L);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 }
