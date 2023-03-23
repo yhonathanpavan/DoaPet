@@ -42,13 +42,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public URI save(Long ongId, OrderRequest orderRequest) {
 
-        mapper.addMappings(new PropertyMap<OrderRequest, Order>() {
-            @Override
-            protected void configure() {
-                skip(destination.getId());
-            }
-        });
-
         Order order = mapper.map(orderRequest, Order.class);
         if (Objects.nonNull(orderRequest.getProductId())) {
             order.setProduct(productRepository.findById(orderRequest.getProductId()).orElseThrow(NotFoundException::new));
@@ -78,13 +71,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse update(Long ongId, Long orderId, OrderRequest orderRequest) {
-        mapper.addMappings(new PropertyMap<OrderRequest, Order>() {
-            @Override
-            protected void configure() {
-                skip(destination.getId());
-            }
-        });
-
         Order order = findOrderByOngId(ongId, orderId);
         mapper.map(orderRequest, order);
         order.setId(orderId);

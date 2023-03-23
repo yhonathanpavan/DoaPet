@@ -31,12 +31,12 @@ public class OrderRequest {
     private OrderStatus orderStatus;
 
     @FutureOrPresent
-    @JsonProperty("start_date_service")
-    private LocalDateTime startDateService;
+    @JsonProperty("start_date_assistance")
+    private LocalDateTime startDateAssistance;
 
     @FutureOrPresent
-    @JsonProperty("completion_date_service")
-    private LocalDateTime completionDateService;
+    @JsonProperty("completion_date_assistance")
+    private LocalDateTime completionDateAssistance;
 
     @NotNull
     @JsonProperty("priority_level_status")

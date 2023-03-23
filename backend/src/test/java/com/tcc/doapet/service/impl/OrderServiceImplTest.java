@@ -9,6 +9,7 @@ import com.tcc.doapet.repository.AssistanceRepository;
 import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.repository.OrderRepository;
 import com.tcc.doapet.repository.ProductRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -57,6 +59,12 @@ class OrderServiceImplTest {
 
     @Spy
     private ModelMapper modelMapper;
+
+    @BeforeEach
+    void setUp() {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+    }
+
 
     @Test
     void saveOrderAssistance(){

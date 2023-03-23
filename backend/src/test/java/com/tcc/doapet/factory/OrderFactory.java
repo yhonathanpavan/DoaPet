@@ -17,8 +17,8 @@ public class OrderFactory {
     public static OrderRequest getOrderWithNoAssistanceOrProductSaveRequest(){
         return OrderRequest.builder()
                 .quantity(1)
-                .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
@@ -27,8 +27,8 @@ public class OrderFactory {
         return OrderRequest.builder()
                 .assistanceId(1L)
                 .quantity(1)
-                .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
@@ -38,8 +38,8 @@ public class OrderFactory {
                 .assistanceId(1L)
                 .quantity(1)
                 .orderStatus(OrderStatus.CANCELED)
-                .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
@@ -53,8 +53,8 @@ public class OrderFactory {
                 .orderStatus(OrderStatus.PENDING)
                 .date(LocalDate.of(2023, 3, 16))
                 .quantity(1)
-                .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .intentionsQuantity(0)
                 .deliveredQuantity(0)
@@ -86,8 +86,8 @@ public class OrderFactory {
        return OrderRequest.builder()
                .productId(1L)
                .quantity(1)
-               .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-               .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+               .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+               .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                .build();
     }
@@ -97,8 +97,8 @@ public class OrderFactory {
                 .productId(1L)
                 .quantity(1)
                 .orderStatus(OrderStatus.CANCELED)
-                .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
@@ -112,8 +112,8 @@ public class OrderFactory {
                 .orderStatus(OrderStatus.PENDING)
                 .date(LocalDate.of(2023, 3, 16))
                 .quantity(1)
-                .startDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .completionDateService(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .startDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .completionDateAssistance(LocalDateTime.parse("1986-04-08T12:30:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .intentionsQuantity(0)
                 .deliveredQuantity(0)

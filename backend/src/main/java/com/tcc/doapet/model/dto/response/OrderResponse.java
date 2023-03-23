@@ -2,10 +2,6 @@ package com.tcc.doapet.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tcc.doapet.model.entity.Assistance;
-import com.tcc.doapet.model.entity.Donor;
-import com.tcc.doapet.model.entity.ONG;
-import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import lombok.AllArgsConstructor;
@@ -46,11 +42,11 @@ public class OrderResponse {
     @JsonProperty("date")
     private LocalDate date;
 
-    @JsonProperty("start_date_service")
-    private LocalDateTime startDateService;
+    @JsonProperty("start_date_assistance")
+    private LocalDateTime startDateAssistance;
 
-    @JsonProperty("completion_date_service")
-    private LocalDateTime completionDateService;
+    @JsonProperty("completion_date_assistance")
+    private LocalDateTime completionDateAssistance;
 
     @JsonProperty("priority_level_status")
     private PriorityLevelStatus priorityLevelStatus;
