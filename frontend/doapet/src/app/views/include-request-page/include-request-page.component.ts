@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IncludeRequestPageComponent implements OnInit {
 
+  goalList = [
+    {option: 'produto', value: 'product'},
+    {option: 'serviço', value: 'assistance'}
+  ];
+
   quantityLabel: string = 'Quantidade';
   quantityType: string = 'number';
   quantityWidth: string = '300px';
@@ -21,9 +26,16 @@ export class IncludeRequestPageComponent implements OnInit {
   itemPrice = '';
   itemTotalPrice = '';
 
+  selectedOption = '';
+  printedOption = '';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSelected() {
+    this.printedOption = this.selectedOption;
   }
 
 }

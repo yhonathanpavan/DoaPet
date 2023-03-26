@@ -14,22 +14,19 @@
         [inputType]='nameType'
         [inputStyle]='nameStyle'
         ></app-input-inside>
-        <select name="category" id="category">
-          <option value="" disabled selected>Selecione a categoria</option>
-        </select>
-        <app-input-inside
-        [inputPlaceholder]='weightPlaceholder'
-        [inputType]='weightType'
-        [inputStyle]='weightStyle'
-        ></app-input-inside>
-        <select name="unit" id="unit">
-          <option value="" disabled selected>Unidade</option>
-        </select>
-        <app-input-inside
-        [inputPlaceholder]='pricePlaceholder'
-        [inputType]='priceType'
-        [inputStyle]='priceStyle'
-        ></app-input-inside>
+        <div class="second-line">
+          <select name="category" id="category">
+            <option value="" disabled selected>Selecione a categoria</option>
+          </select>
+          <select name="unit" id="unit">
+            <option value="" disabled selected>Unidade</option>
+          </select>
+          <app-input-inside
+          [inputPlaceholder]='pricePlaceholder'
+          [inputType]='priceType'
+          [inputStyle]='priceStyle'
+          ></app-input-inside>
+        </div>
       </form>
       <button>Incluir</button>
     </div>
