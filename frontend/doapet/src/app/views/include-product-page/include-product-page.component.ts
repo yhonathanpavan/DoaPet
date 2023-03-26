@@ -16,21 +16,12 @@ export class IncludeProductPageComponent implements OnInit {
 
   nameStyle = {'width': this.nameWidth, 'height': this.nameHeight, 'fontSize': this.nameFont, 'margin': this.nameMargin};
 
-  weightPlaceholder: string = 'Peso';
-  weightType: string = 'number';
-  weightWidth: string = '80%';
-  weightHeight: string = '40px';
-  weightFont: string = '16px';
-  weightMargin: string = '10px 0 10px 0px';
-
-  weightStyle = {'width': this.weightWidth, 'height': this.weightHeight, 'fontSize': this.weightFont, 'margin': this.weightMargin};
-
   pricePlaceholder: string = 'Valor Unitário';
   priceType: string = 'number';
   priceWidth: string = '100%';
   priceHeight: string = '40px';
   priceFont: string = '16px';
-  priceMargin: string = '10px 0 10px 0';
+  priceMargin: string = '0px 0 0px 0';
 
   priceStyle = {'width': this.priceWidth, 'height': this.priceHeight, 'fontSize': this.priceFont, 'margin': this.priceMargin};
 

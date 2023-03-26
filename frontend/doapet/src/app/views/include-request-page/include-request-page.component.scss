@@ -101,6 +101,24 @@ p {
   padding-left: 15px;
 }
 
+#labelName {
+  align-self: flex-start;
+}
+
+#name {
+  width: 100%;
+}
+
+.first-line {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
 .second-line,
 .third-line {
   width: 100%;
@@ -111,11 +129,13 @@ p {
   margin-top: 25px;
 }
 
-#weight,
-#price,
-#totalPrice,
 #priority {
-  width: 300px;
+  width: 400px;
+}
+
+#price,
+#totalPrice {
+  width: 450px;
 }
 
 #unit {
