@@ -14,4 +14,10 @@ label {
 input {
   border: solid 3px #D5D5D5;
   border-radius: 8px;
+  outline: none;
+  padding-left: 10px;
+}
+
+input:focus {
+  border: 2.5px solid #EF6611
 }
