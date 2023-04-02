@@ -1,0 +1,59 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  background: #FFF1B6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 80%;
+  height: 80%;
+
+  background: #FFF;
+
+  border-radius: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 20px;
+
+  margin-bottom: 20px;
+}
+
+.button-area {
+  width: 55%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 20px;
+}
+
+button {
+  width: 250px;
+  height: 250px;
+
+  background: #FFF;
+
+  border: 5px solid #D9D9D9;
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+img {
+  width: 220px;
+  height: 220px;
+}

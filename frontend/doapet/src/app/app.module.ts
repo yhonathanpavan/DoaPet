@@ -19,6 +19,9 @@ import { ViewDonationsPageComponent } from './views/view-donations-page/view-don
 import { IncludeProductPageComponent } from './views/include-product-page/include-product-page.component';
 import { IncludeAssistancePageComponent } from './views/include-assistance-page/include-assistance-page.component';
 import { IncludeRequestPageComponent } from './views/include-request-page/include-request-page.component';
+import { LoginPageComponent } from './views/login-page/login-page.component';
+import { PreLoginPageComponent } from './views/pre-login-page/pre-login-page.component';
+import { RegisterPageComponent } from './views/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { IncludeRequestPageComponent } from './views/include-request-page/includ
     ViewDonationsPageComponent,
     IncludeProductPageComponent,
     IncludeAssistancePageComponent,
-    IncludeRequestPageComponent
+    IncludeRequestPageComponent,
+    LoginPageComponent,
+    PreLoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,

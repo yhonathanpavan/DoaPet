@@ -1,0 +1,91 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-area {
+  width: 30%;
+  height: 100%;
+
+  background: #FFF1B6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+img {
+  width: 400px;
+}
+
+.data-area {
+  width: 70%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+.title-area {
+  width: 90%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin-bottom: 15px;
+}
+
+h1 {
+  text-decoration: underline;
+  text-decoration-color: #EF6611;
+}
+
+form {
+  width: 90%;
+}
+
+#login-data,
+#contact-data,
+#adress-data,
+#city-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#description {
+  width: 100%;
+  height: 100px;
+
+  border: 3px solid #D5D5D5;
+  border-radius: 10px;
+
+  margin-top: 5px;
+
+  outline: none;
+}
+
+#description:focus {
+  border: 2.5px solid #EF6611;
+}
+
+#description-area {
+  margin-top: 20px;
+}
+
+#label-description {
+  font-weight: 700;
+  font-size: 14px;
+
+  color: rgba(0, 0, 0, 0.48);
+}
+
+
