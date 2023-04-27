@@ -53,7 +53,7 @@ class ONGControllerTest {
     void getById() throws JsonProcessingException {
         when(ongService.getById(anyLong())).thenReturn(getONGResponse());
 
-        var ongActualResponse = ongController.create(1L);
+        var ongActualResponse = ongController.getById(1L);
 
 
         assertNotNull(ongActualResponse.getBody());

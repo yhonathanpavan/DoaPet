@@ -40,7 +40,7 @@ public class DonorController {
     @Transactional
     @PatchMapping("/{id}")
     public ResponseEntity<DonorResponse> updateById(@PathVariable Long id,
-                                                         @RequestBody DonorRequest donorRequest){
+                                                    @RequestBody DonorRequest donorRequest){
         return ResponseEntity.ok(donorService.updateById(id, donorRequest));
     }
 

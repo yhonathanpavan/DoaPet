@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Builder
-public class OrderRequest {
+public class OrderRequestUpdate {
 
     @JsonProperty("product_id")
     private Long productId;
@@ -24,7 +24,6 @@ public class OrderRequest {
     @JsonProperty("assistance_id")
     private Long assistanceId;
 
-    @NotNull
     @JsonProperty("quantity")
     private Integer quantity;
 
@@ -39,7 +38,6 @@ public class OrderRequest {
     @JsonProperty("completion_date_assistance")
     private LocalDateTime completionDateAssistance;
 
-    @NotNull
     @JsonProperty("priority_level_status")
     private PriorityLevelStatus priorityLevelStatus;
 }

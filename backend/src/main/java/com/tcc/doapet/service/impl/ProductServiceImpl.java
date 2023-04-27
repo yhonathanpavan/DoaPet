@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.ws.rs.NotFoundException;
 import java.net.URI;
 
 @Service
@@ -56,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     protected Product findProductById(Long id){
-        return productRepository.findById(id).orElseThrow();
+        return productRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
 }

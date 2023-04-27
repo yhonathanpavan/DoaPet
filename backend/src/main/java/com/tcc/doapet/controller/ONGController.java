@@ -2,6 +2,7 @@ package com.tcc.doapet.controller;
 
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.request.OrderRequest;
+import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
 import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.service.ONGService;
@@ -32,7 +33,7 @@ public class ONGController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ONGResponse> create(@PathVariable Long id){
+    public ResponseEntity<ONGResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(ongService.getById(id));
     }
 
@@ -45,13 +46,13 @@ public class ONGController {
     @Transactional
     @PatchMapping("/{id}")
     public ResponseEntity<ONGResponse> updateById(@PathVariable Long id,
-                                                         @RequestBody ONGRequest ongRequest){
+                                                  @RequestBody ONGRequest ongRequest){
         return ResponseEntity.ok(ongService.updateById(id, ongRequest));
     }
 
     @PostMapping("/{ongId}/orders")
     public ResponseEntity<OrderResponse> saveOrder(@PathVariable Long ongId,
-                                                   @RequestBody OrderRequest orderRequest){
+                                                   @Valid @RequestBody OrderRequest orderRequest){
         return ResponseEntity.created(orderService.save(ongId, orderRequest)).build();
     }
 
@@ -70,7 +71,7 @@ public class ONGController {
     @PatchMapping("/{ongId}/orders/{orderId}")
     public ResponseEntity<OrderResponse> updateOrderById(@PathVariable Long ongId,
                                                          @PathVariable Long orderId,
-                                                         @RequestBody OrderRequest orderRequest){
+                                                         @RequestBody OrderRequestUpdate orderRequest){
         return ResponseEntity.ok(orderService.update(ongId, orderId, orderRequest));
     }
 

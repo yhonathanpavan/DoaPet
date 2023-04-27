@@ -1,6 +1,7 @@
 package com.tcc.doapet.factory;
 
 import com.tcc.doapet.model.dto.request.OrderRequest;
+import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.entity.Order;
 import com.tcc.doapet.model.enums.OrderStatus;
@@ -33,8 +34,8 @@ public class OrderFactory {
                 .build();
     }
 
-    public static OrderRequest getOrderAssistanceUpdateRequest(){
-        return OrderRequest.builder()
+    public static OrderRequestUpdate getOrderAssistanceUpdateRequest(){
+        return OrderRequestUpdate.builder()
                 .assistanceId(1L)
                 .quantity(1)
                 .orderStatus(OrderStatus.CANCELED)
@@ -43,6 +44,8 @@ public class OrderFactory {
                 .priorityLevelStatus(PriorityLevelStatus.MEDIUM)
                 .build();
     }
+
+
 
     public static OrderResponse getOrderAssistanceResponse() {
         return OrderResponse.builder()

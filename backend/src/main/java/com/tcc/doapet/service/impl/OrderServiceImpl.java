@@ -1,6 +1,7 @@
 package com.tcc.doapet.service.impl;
 
 import com.tcc.doapet.model.dto.request.OrderRequest;
+import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
 import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.entity.ONG;
@@ -70,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse update(Long ongId, Long orderId, OrderRequest orderRequest) {
+    public OrderResponse update(Long ongId, Long orderId, OrderRequestUpdate orderRequest) {
         Order order = findOrderByOngId(ongId, orderId);
         mapper.map(orderRequest, order);
         order.setId(orderId);
