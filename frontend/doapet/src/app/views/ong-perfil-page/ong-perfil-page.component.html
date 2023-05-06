@@ -1,0 +1,97 @@
+<div class="container">
+  <app-menu-bar></app-menu-bar>
+  <div class="header">
+    <app-go-back-button></app-go-back-button>
+  </div>
+  <div class="perfil-content">
+    <div class="information-area">
+      <div class="photo">
+        <img src="../../../assets/images/image 2.svg" alt="User Image">
+      </div>
+      <div class="info">
+        <p id="name">Anjos de Focinho</p>
+        <p id="email">Indaiatuba, São Paulo</p>
+      </div>
+    </div>
+    <div class="edit-area">
+      <form action="">
+        <div id="first-line">
+          <app-input-top
+            [inputLabel]="nameLabel"
+            [inputType]="nameType"
+            [inputStyle]="nameStyle"
+          ></app-input-top>
+        </div>
+        <div id="second-line">
+          <app-input-top
+            [inputLabel]="cpfLabel"
+            [inputType]="cpfType"
+            [inputStyle]="cpfStyle"
+          ></app-input-top>
+        </div>
+        <div id="third-line">
+          <app-input-top
+            [inputLabel]="emailLabel"
+            [inputType]="emailType"
+            [inputStyle]="emailStyle"
+          ></app-input-top>
+          <app-input-top
+            [inputLabel]="passLabel"
+            [inputType]="passType"
+            [inputStyle]="passStyle"
+          ></app-input-top>
+        </div>
+        <div id="fourth-line">
+          <app-input-top
+            [inputLabel]="presidentLabel"
+            [inputType]="presidentType"
+            [inputStyle]="presidentStyle"
+          ></app-input-top>
+          <app-input-top
+            [inputLabel]="phoneLabel"
+            [inputType]="phoneType"
+            [inputStyle]="phoneStyle"
+          ></app-input-top>
+        </div>
+        <div id="fifth-line">
+          <app-input-top
+            [inputLabel]="adressLabel"
+            [inputType]="adressType"
+            [inputStyle]="adressStyle"
+          ></app-input-top>
+          <app-input-top
+            [inputLabel]="neighborLabel"
+            [inputType]="neighborType"
+            [inputStyle]="neighborStyle"
+          ></app-input-top>
+        </div>
+        <div id="sixth-line">
+          <app-input-top
+            [inputLabel]="cityLabel"
+            [inputType]="cityType"
+            [inputStyle]="cityStyle"
+          ></app-input-top>
+          <app-input-top
+            [inputLabel]="cepLabel"
+            [inputType]="cepType"
+            [inputStyle]="cepStyle"
+          ></app-input-top>
+        </div>
+        <div id="seventh-line">
+          <app-input-top
+            [inputLabel]="pixLabel"
+            [inputType]="pixType"
+            [inputStyle]="pixStyle"
+          ></app-input-top>
+        </div>
+        <div id="octave-line">
+          <label id="description-label" for="description">Descrição</label>
+          <textarea name="description" id="" cols="30" rows="10"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="button-area">
+      <button id="save-btn">Salvar Alterações</button>
+    </div>
+  </div>
+</div>

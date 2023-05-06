@@ -22,6 +22,10 @@ import { IncludeRequestPageComponent } from './views/include-request-page/includ
 import { LoginPageComponent } from './views/login-page/login-page.component';
 import { PreLoginPageComponent } from './views/pre-login-page/pre-login-page.component';
 import { RegisterPageComponent } from './views/register-page/register-page.component';
+import { HomeDonorComponent } from './views/home-donor/home-donor.component';
+import { HomeOngComponent } from './views/home-ong/home-ong.component';
+import { PerfilPageComponent } from './views/perfil-page/perfil-page.component';
+import { OngPerfilPageComponent } from './views/ong-perfil-page/ong-perfil-page.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { RegisterPageComponent } from './views/register-page/register-page.compo
     IncludeRequestPageComponent,
     LoginPageComponent,
     PreLoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    HomeDonorComponent,
+    HomeOngComponent,
+    PerfilPageComponent,
+    OngPerfilPageComponent
   ],
   imports: [
     BrowserModule,

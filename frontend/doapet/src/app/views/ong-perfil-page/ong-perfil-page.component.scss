@@ -1,0 +1,127 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+app-menu-bar {
+  width: 100%;
+}
+
+.header {
+  width: 70%;
+
+  margin-top: 20px;
+}
+
+.perfil-content {
+  width: 70%;
+}
+
+.information-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin-top: 50px;
+}
+
+.photo {
+  margin-right: 50px;
+}
+
+img {
+  width: 150px;
+}
+
+#name {
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #EF6611;
+}
+
+.edit-area, form {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+#first-line,
+#second-line,
+#octave-line {
+  width: 100%;
+
+  margin-top: 30px;
+}
+
+#second-line {
+  margin-top: 15px;
+}
+
+#third-line,
+#fourth-line,
+#fifth-line,
+#sixth-line,
+#seventh-line {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 15px;
+}
+
+textarea {
+  width: 100%;
+
+  border: 3px solid #D5D5D5;
+  border-radius: 10px;
+}
+
+#description-label {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 15px;
+
+  color: rgba(0, 0, 0, 0.48);
+}
+
+.button-area {
+  width: 100%;
+
+  margin-top: 90px;
+  margin-bottom: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#save-btn {
+  width: 70%;
+  height: 40px;
+
+  background: #EF6611;
+
+  border: none;
+  border-radius: 10px;
+
+  color: #FFF;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+#save-btn:hover {
+  background: #F18847;
+}
+

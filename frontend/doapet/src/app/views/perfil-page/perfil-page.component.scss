@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+app-menu-bar {
+  width: 100%;
+}
+
+.header {
+  width: 70%;
+
+  margin-top: 20px;
+}
+
+.perfil-content {
+  width: 70%;
+}
+
+.information-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin-top: 50px;
+}
+
+.photo {
+  margin-right: 50px;
+}
+
+img {
+  width: 150px;
+}
+
+#name {
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #EF6611;
+}
+
+.edit-area, form {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+#first-line {
+  width: 100%;
+
+  margin-top: 30px;
+}
+
+#second-line,
+#third-line {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 15px;
+}
+
+.button-area {
+  width: 100%;
+
+  margin-top: 130px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#save-btn {
+  width: 70%;
+  height: 40px;
+
+  background: #EF6611;
+
+  border: none;
+  border-radius: 10px;
+
+  color: #FFF;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+#save-btn:hover {
+  background: #F18847;
+}
+
