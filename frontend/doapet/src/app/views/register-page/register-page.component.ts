@@ -75,7 +75,27 @@ export class RegisterPageComponent implements OnInit {
   pixWidth: string = '100%';
   pixStyle = {'width': this.pixWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
 
-  userType: string = 'ong'
+  emailDonorLabel: string = 'E-mail';
+  emailDonorType: string = 'email';
+  emailDonorWidth: string = '100%';
+  emailDonorStyle = {'width': this.emailWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
+
+  passDonorLabel: string = 'Senha';
+  passDonorType: string = 'password';
+  passDonorWidth: string = '';
+  passDonorStyle = {'width': this.passWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
+
+  cpfDonorLabel: string = 'CPF';
+  cpfDonorType: string = 'number';
+  cpfDonorWidth: string = '100%';
+  cpfDonorStyle = {'width': this.emailWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
+
+  bornDonorLabel: string = 'Data de Nascimento';
+  bornDonorType: string = 'date';
+  bornDonorWidth: string = '';
+  bornDonorStyle = {'width': this.passWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
+
+  userType: string = 'donor'
   imagePreviewUrl: string | undefined;
   imageName: string = ''
 
