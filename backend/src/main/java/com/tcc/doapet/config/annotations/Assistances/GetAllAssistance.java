@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Operation(summary = "Lista todos os serviços, podem ser usados filtros.", description = "Retorna uma página de serviços",
-        tags = {"Assistances"})
+        tags = {"Serviços"})
 @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ok",
         content = @Content(mediaType = "application/json"))})
 public @interface GetAllAssistance {

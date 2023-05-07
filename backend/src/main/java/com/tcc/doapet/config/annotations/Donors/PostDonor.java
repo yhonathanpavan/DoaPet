@@ -1,4 +1,4 @@
-package com.tcc.doapet.config.annotations.Assistances;
+package com.tcc.doapet.config.annotations.Donors;
 
 import com.tcc.doapet.exception.handler.ApiExceptionHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,10 +15,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Operation(summary = "Cria um novo serviço.", description = "Persiste um novo serviço no banco de dados",
-        tags = {"Serviços"})
+@Operation(summary = "Cria um novo doador.", description = "Persiste um novo doador no banco de dados",
+        tags = {"Doadores"})
 @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Created", content = @Content(mediaType = "application/json")),
         @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApiExceptionHandler.class)), mediaType = "application/json"))} )
-public @interface PostAssistance {
+public @interface PostDonor {
 }
 

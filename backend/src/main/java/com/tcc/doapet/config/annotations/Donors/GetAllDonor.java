@@ -1,9 +1,7 @@
-package com.tcc.doapet.config.annotations.Assistances;
+package com.tcc.doapet.config.annotations.Donors;
 
-import com.tcc.doapet.exception.handler.ApiExceptionHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -14,10 +12,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Operation(summary = "Lista as categorias.", description = "Retorna lista com todos as categorias de serviços",
-        tags = {"Serviços"})
+@Operation(summary = "Lista todos os doadores, podem ser usados filtros.", description = "Retorna uma página de doadores",
+        tags = {"Doadores"})
 @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ok",
         content = @Content(mediaType = "application/json"))})
-public @interface GetAssistanceCategories {
+public @interface GetAllDonor {
 }
 

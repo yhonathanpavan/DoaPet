@@ -1,4 +1,4 @@
-package com.tcc.doapet.config.annotations.Assistances;
+package com.tcc.doapet.config.annotations.Donors;
 
 import com.tcc.doapet.exception.handler.ApiExceptionHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,11 +15,11 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Operation(summary = "Atualiza um serviço existente.", description = "Atualiza os dados de serviço já existente",
-        tags = {"Serviços"})
+@Operation(summary = "Atualiza um doador existente.", description = "Atualiza os dados de um doador já existente",
+        tags = {"Doadores"})
 @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ok", content = @Content(mediaType = "application/json")),
         @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApiExceptionHandler.class)), mediaType = "application/json")),
         @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ApiExceptionHandler.class), mediaType = "application/json"))} )
-public @interface PatchAssistance {
+public @interface PatchDonor {
 }
 
