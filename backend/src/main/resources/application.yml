@@ -25,3 +25,8 @@ spring:
   jackson:
     mapper:
       ACCEPT_CASE_INSENSITIVE_ENUMS: 'true'
+
+security:
+  jwt:
+    expirationInMinutes: 60
+    secret: c3RyaW5nw6dpbmlzdHJh
