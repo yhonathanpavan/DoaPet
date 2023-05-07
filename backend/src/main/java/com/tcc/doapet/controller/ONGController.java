@@ -1,5 +1,6 @@
 package com.tcc.doapet.controller;
 
+import com.tcc.doapet.helper.TokenValidation;
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.response.ONGResponse;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -27,12 +29,15 @@ public class ONGController {
     private final OrderService orderService;
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_DONOR')")
     public ResponseEntity<Page<ONGResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(ongService.getAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ONGResponse> create(@PathVariable Long id){
+    public ResponseEntity<ONGResponse> getById(@PathVariable Long id){
+
         return ResponseEntity.ok(ongService.getById(id));
     }
 
@@ -44,12 +49,19 @@ public class ONGController {
 
     @Transactional
     @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<ONGResponse> updateById(@PathVariable Long id,
-                                                         @RequestBody ONGRequest ongRequest){
+                                                  @RequestBody ONGRequest ongRequest,
+                                                  @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(ongService.updateById(id, ongRequest));
     }
 
     @PostMapping("/{ongId}/orders")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<OrderResponse> saveOrder(@PathVariable Long ongId,
                                                    @RequestBody OrderRequest orderRequest){
         return ResponseEntity.created(orderService.save(ongId, orderRequest)).build();
@@ -68,20 +80,35 @@ public class ONGController {
     }
 
     @PatchMapping("/{ongId}/orders/{orderId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<OrderResponse> updateOrderById(@PathVariable Long ongId,
                                                          @PathVariable Long orderId,
-                                                         @RequestBody OrderRequest orderRequest){
+                                                         @RequestBody OrderRequest orderRequest,
+                                                         @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(ongId, authorization);
         return ResponseEntity.ok(orderService.update(ongId, orderId, orderRequest));
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<?> updateStatus(@PathVariable Long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id,
+                                          @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(ongService.updateStatus(id));
     }
 
     @PatchMapping("{ongId}/orders/{orderId}/cancel")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<?> cancelOrder(@PathVariable Long ongId,
-                                         @PathVariable Long orderId){
+                                         @PathVariable Long orderId,
+                                         @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(ongId, authorization);
         return ResponseEntity.ok(orderService.cancelOrder(ongId, orderId));
     }
 

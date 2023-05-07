@@ -1,5 +1,6 @@
 package com.tcc.doapet.controller;
 
+import com.tcc.doapet.helper.TokenValidation;
 import com.tcc.doapet.model.dto.request.DonorRequest;
 import com.tcc.doapet.model.dto.response.DonorResponse;
 import com.tcc.doapet.service.DonorService;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -27,7 +29,12 @@ public class DonorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DonorResponse> getById(@PathVariable Long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_DONOR')")
+    public ResponseEntity<DonorResponse> getById(@PathVariable Long id,
+                                                 @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(donorService.getById(id));
     }
 
@@ -39,13 +46,23 @@ public class DonorController {
 
     @Transactional
     @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_DONOR')")
     public ResponseEntity<DonorResponse> updateById(@PathVariable Long id,
-                                                         @RequestBody DonorRequest donorRequest){
+                                                    @RequestBody DonorRequest donorRequest,
+                                                    @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(donorService.updateById(id, donorRequest));
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<?> updateStatus(@PathVariable Long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_DONOR')")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id,
+                                          @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(donorService.updateStatus(id));
     }
 
