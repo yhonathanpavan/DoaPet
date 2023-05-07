@@ -60,18 +60,43 @@ export class RegisterPageComponent implements OnInit {
   codeWidth: string = '';
   codeStyle = {'width': this.codeWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
 
+  estateLabel: string = 'Estado';
+  estateType: string = 'text';
+  estateWidth: string = '';
+  estateStyle = {'width': this.estateWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
+
+  numberLabel: string = 'Número';
+  numberType: string = 'number';
+  numberWidth: string = '';
+  numberStyle = {'width': this.numberWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
+
   pixLabel: string = 'Chave PIX';
   pixType: string = 'text';
   pixWidth: string = '100%';
   pixStyle = {'width': this.pixWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
 
-  userType: string = 'donor'
+  userType: string = 'ong'
+  imagePreviewUrl: string | undefined;
+  imageName: string = ''
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  
+  onFileSelected(event:any): void {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imagePreviewUrl = reader.result as string;
+    };
+
+    reader.readAsDataURL(file);
+
+    this.imageName = file.name
+  }
+
+
 
 }
