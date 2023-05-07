@@ -27,6 +27,9 @@ class DonorControllerTest {
     @Mock
     private DonorService donorService;
 
+    private final String authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJEb2FQZXQgQXBwbGljYXRpb24iLCJzdWIiOiIxIiwiaWF0IjoxNjgxNjkyOTg2LCJleHAiOjE2ODE2OTY1ODYsImNsYXNzVHlwZSI6IkRPTk9SIn0.xkg_0ZycUof3n6Gbd2zbvM0S4SYToUlA5pmFg1gqyRM";
+
+
     @Test
     void getAll(){
         when(donorService.getAll(any(Pageable.class))).thenReturn(getPageableDonorResponse());
@@ -45,7 +48,7 @@ class DonorControllerTest {
     void getById(){
         when(donorService.getById(anyLong())).thenReturn(getDonorResponse());
 
-        var donorActualResponse = donorController.getById(1L);
+        var donorActualResponse = donorController.getById(1L, authorization);
 
 
         assertNotNull(donorActualResponse.getBody());
@@ -70,7 +73,7 @@ class DonorControllerTest {
     void updateById(){
         when(donorService.updateById(anyLong(), any())).thenReturn(getDonorResponse());
 
-        var donorActualResponse = donorController.updateById(1L, getDonorRequest());
+        var donorActualResponse = donorController.updateById(1L, getDonorRequest(), authorization);
 
         assertEquals(HttpStatus.OK, donorActualResponse.getStatusCode());
         assertNotNull(donorActualResponse.getBody());
@@ -81,7 +84,7 @@ class DonorControllerTest {
     void updateStatus_WhenSendDonorId_ExpectedResponseEntityDonorResponse() {
         when(donorService.updateStatus(anyLong())).thenReturn(getDonorResponse());
 
-        var donorActualResponse = donorController.updateStatus(1L);
+        var donorActualResponse = donorController.updateStatus(1L, authorization);
 
         assertEquals(HttpStatus.OK, donorActualResponse.getStatusCode());
         assertNotNull(donorActualResponse.getBody());

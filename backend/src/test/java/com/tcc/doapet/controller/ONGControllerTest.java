@@ -35,8 +35,10 @@ class ONGControllerTest {
     @Mock
     private OrderService orderService;
 
+    private final String authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJEb2FQZXQgQXBwbGljYXRpb24iLCJzdWIiOiIxIiwiaWF0IjoxNjgxNjkyOTU3LCJleHAiOjE2ODE2OTY1NTcsImNsYXNzVHlwZSI6Ik9ORyJ9.WEY92AEX61C8UsIcDX4_aHZLIrfB6gmiQtIm50pDG34";
+
     @Test
-    void getAll() throws JsonProcessingException {
+    void getAll(){
         when(ongService.getAll(any(Pageable.class))).thenReturn(getPageableONGResponse());
 
         Pageable pageable = PageRequest.of(0, 10);
@@ -50,10 +52,10 @@ class ONGControllerTest {
     }
 
     @Test
-    void getById() throws JsonProcessingException {
+    void getById(){
         when(ongService.getById(anyLong())).thenReturn(getONGResponse());
 
-        var ongActualResponse = ongController.create(1L);
+        var ongActualResponse = ongController.getById(1L);
 
 
         assertNotNull(ongActualResponse.getBody());
@@ -63,7 +65,7 @@ class ONGControllerTest {
     }
 
     @Test
-    void create() throws JsonProcessingException {
+    void create(){
         var uri = ServletUriComponentsBuilder.fromPath("/doapet/v1/ONGs/{id}").build(1L);
         when(ongService.create(any())).thenReturn(uri);
 
@@ -75,10 +77,10 @@ class ONGControllerTest {
     }
 
     @Test
-    void updateById() throws JsonProcessingException {
+    void updateById() {
         when(ongService.updateById(anyLong(), any())).thenReturn(getONGResponse());
 
-        var ongActualResponse = ongController.updateById(1L, getONGRequest());
+        var ongActualResponse = ongController.updateById(1L, getONGRequest(), authorization);
 
         assertEquals(HttpStatus.OK, ongActualResponse.getStatusCode());
         assertNotNull(ongActualResponse.getBody());
@@ -89,7 +91,7 @@ class ONGControllerTest {
     void updateStatus_WhenSendONGId_ExpectedResponseEntityONGResponse() {
         when(ongService.updateStatus(anyLong())).thenReturn(getONGResponse());
 
-        var ongActualResponse = ongController.updateStatus(1L);
+        var ongActualResponse = ongController.updateStatus(1L, authorization);
 
         assertEquals(HttpStatus.OK, ongActualResponse.getStatusCode());
         assertNotNull(ongActualResponse.getBody());
@@ -99,7 +101,7 @@ class ONGControllerTest {
     void cancelOrder_WhenSendONGIdAndOrderId_ExpectedOK() {
         when(orderService.cancelOrder(anyLong(), anyLong())).thenReturn(getOrderProductResponse());
 
-        var response = ongController.cancelOrder(1L, 1L);
+        var response = ongController.cancelOrder(1L, 1L, authorization);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());

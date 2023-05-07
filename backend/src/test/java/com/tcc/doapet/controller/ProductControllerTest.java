@@ -1,8 +1,10 @@
 package com.tcc.doapet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tcc.doapet.factory.ONGFactory;
 import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.repository.ProductRepository;
+import com.tcc.doapet.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -25,10 +29,17 @@ class ProductControllerTest {
 
     private final ProductRepository productRepository;
 
+    private final TokenService tokenService;
+
     private final ObjectMapper objectMapper;
+
+    private String token;
 
     @BeforeEach
     void setUp(){
+        var ong = ONGFactory.getONG();
+        Authentication authentication = new UsernamePasswordAuthenticationToken(ong, null);
+        token = "Bearer "+tokenService.generateToken(authentication);
         productRepository.save(ProductFactory.getProduct());
     }
 
@@ -38,6 +49,7 @@ class ProductControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/products")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(productRequest))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andDo(MockMvcResultHandlers.print());
@@ -45,7 +57,9 @@ class ProductControllerTest {
 
     @Test
     void findAll_WhenFindAllPageable_ExpectedResponseEntityPageableProductResponse() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/products"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/products")
+                        .header("Authorization", token)
+                )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(Assertions::assertNotNull)
                 .andDo(MockMvcResultHandlers.print());
@@ -53,7 +67,9 @@ class ProductControllerTest {
 
     @Test
     void findOne_WhenSendProductId_ExpectedResponseEntityProductResponse() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/products/{id}", 1L))
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/{id}", 1L)
+                .header("Authorization", token)
+                )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(Assertions::assertNotNull)
                 .andDo(MockMvcResultHandlers.print());
@@ -64,6 +80,7 @@ class ProductControllerTest {
         String productRequest = objectMapper.writeValueAsString(ProductFactory.getProductRequest());
         mockMvc.perform(MockMvcRequestBuilders.patch("/products/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(productRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
@@ -74,6 +91,7 @@ class ProductControllerTest {
         String productRequest = objectMapper.writeValueAsString(ProductFactory.getProductRequest());
         mockMvc.perform(MockMvcRequestBuilders.patch("/products/{id}/status", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(productRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());

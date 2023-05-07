@@ -1,10 +1,13 @@
 package com.tcc.doapet.service.impl;
 
+import com.tcc.doapet.factory.DonorFactory;
+import com.tcc.doapet.factory.ONGFactory;
 import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.ONG;
 import com.tcc.doapet.model.entity.Product;
+import com.tcc.doapet.repository.DonorRepository;
 import com.tcc.doapet.repository.ONGRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,12 +20,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.ws.rs.WebApplicationException;
 import java.util.Optional;
 
+import static com.tcc.doapet.factory.DonorFactory.getDonorRequest;
 import static com.tcc.doapet.factory.ONGFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,8 +45,14 @@ class ONGServiceImplTest {
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
     private ONGRepository ongRepository;
 
+    @Mock(answer = Answers.RETURNS_SMART_NULLS)
+    private DonorRepository donorRepository;
+
     @Spy
     private ModelMapper modelMapper;
+
+    @Spy
+    private PasswordEncoder passwordEncoder;
 
     @Test
     void getAll(){
@@ -72,6 +85,7 @@ class ONGServiceImplTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         when(ongRepository.save(any())).thenReturn(getONG());
+        when(donorRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
         var actualONGResponse = ongService.create(getONGRequest());
 
@@ -80,9 +94,27 @@ class ONGServiceImplTest {
     }
 
     @Test
+    void whenCreateAndEmailAlreadyRegisteredThrowAConflictException(){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        var webApplicationException = new WebApplicationException();
+
+        when(donorRepository.findByEmail(anyString())).thenReturn(Optional.of(DonorFactory.getDonor()));
+
+        try {
+            var actualDonorResponse = ongService.create(getONGRequest());
+        }catch(WebApplicationException ex){
+            webApplicationException = ex;
+        }
+
+        assertEquals(HttpStatus.CONFLICT.value(), webApplicationException.getResponse().getStatus());
+    }
+
+    @Test
     void updateById(){
         when(ongRepository.findById(anyLong())).thenReturn(Optional.of(getONG()));
         when(ongRepository.save(any())).thenReturn(getONG());
+        when(donorRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
         var actualONGResponse = ongService.updateById(1L, getONGRequest());
 
