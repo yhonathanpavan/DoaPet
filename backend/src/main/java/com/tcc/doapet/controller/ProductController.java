@@ -2,6 +2,8 @@ package com.tcc.doapet.controller;
 
 import com.tcc.doapet.model.dto.request.ProductRequest;
 import com.tcc.doapet.model.dto.response.ProductResponse;
+import com.tcc.doapet.model.enums.Measures;
+import com.tcc.doapet.model.enums.ProductCategory;
 import com.tcc.doapet.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +37,16 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> findOne(@PathVariable Long id){
         return ResponseEntity.ok(productService.findOne(id));
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<ProductCategory>> getProductCategories(){
+        return ResponseEntity.ok(productService.getProductCategories());
+    }
+
+    @GetMapping("/measures")
+    public ResponseEntity<List<Measures>> getProductMeasures(){
+        return ResponseEntity.ok(productService.getProductMeasures());
     }
 
     @PatchMapping("/{id}")

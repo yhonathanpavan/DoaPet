@@ -2,6 +2,7 @@ package com.tcc.doapet.controller;
 
 import com.tcc.doapet.model.dto.request.AssistanceRequest;
 import com.tcc.doapet.model.dto.response.AssistanceResponse;
+import com.tcc.doapet.model.enums.AssistanceCategory;
 import com.tcc.doapet.service.AssistanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/assistances")
@@ -29,6 +31,11 @@ public class AssistanceController {
     @GetMapping("/{id}")
     public ResponseEntity<AssistanceResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(assistanceService.getById(id));
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<AssistanceCategory>> getAssistanceCategories(){
+        return ResponseEntity.ok(assistanceService.getAssistanceCategories());
     }
 
     @Transactional

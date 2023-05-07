@@ -1,9 +1,12 @@
 package com.tcc.doapet.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AssistanceCategory {
+    @JsonProperty("Estética")
     AESTHETICS("aesthetics"),
+    @JsonProperty("Saúde")
     HEALTH("health");
 
     private final String value;

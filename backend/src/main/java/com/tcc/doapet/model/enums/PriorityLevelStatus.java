@@ -1,10 +1,14 @@
 package com.tcc.doapet.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum PriorityLevelStatus {
+    @JsonProperty("Alto")
     HIGH("high"),
+    @JsonProperty("Médio")
     MEDIUM("medium"),
+    @JsonProperty("Baixo")
     LOW("low");
 
 

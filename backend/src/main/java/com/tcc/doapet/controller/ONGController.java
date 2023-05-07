@@ -5,6 +5,7 @@ import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
 import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.OrderResponse;
+import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.service.ONGService;
 import com.tcc.doapet.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ongs")
@@ -66,6 +68,11 @@ public class ONGController {
     public ResponseEntity<OrderResponse> findOrderById(@PathVariable Long ongId,
                                                        @PathVariable Long orderId){
         return ResponseEntity.ok(orderService.findOne(ongId, orderId));
+    }
+
+    @GetMapping("/priorities_level_status")
+    public ResponseEntity<List<PriorityLevelStatus>> getPrioritiesLevelStatus(){
+        return ResponseEntity.ok(orderService.getPrioritiesLevelStatus());
     }
 
     @PatchMapping("/{ongId}/orders/{orderId}")

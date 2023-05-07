@@ -3,6 +3,8 @@ package com.tcc.doapet.service.impl;
 import com.tcc.doapet.model.dto.request.ProductRequest;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Product;
+import com.tcc.doapet.model.enums.Measures;
+import com.tcc.doapet.model.enums.ProductCategory;
 import com.tcc.doapet.repository.ProductRepository;
 import com.tcc.doapet.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.ws.rs.NotFoundException;
 import java.net.URI;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +43,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse findOne(Long id) {
         return mapper.map(findProductById(id), ProductResponse.class);
+    }
+
+    @Override
+    public List<ProductCategory> getProductCategories() {
+        return List.of(ProductCategory.values());
+    }
+
+    @Override
+    public List<Measures> getProductMeasures() {
+        return List.of(Measures.values());
     }
 
     @Override
