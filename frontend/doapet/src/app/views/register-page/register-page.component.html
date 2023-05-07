@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="logo-area">
+  <div [ngClass]="{'donor-logo-area' : userType == 'donor', 'ong-logo-area' : userType == 'ong'}">
     <img src="../../../assets/images/doaPet-logo.svg" alt="Logo DoaPet">
   </div>
   <div class="data-area" *ngIf="userType != 'donor'">
@@ -20,6 +20,13 @@
         [inputType]="cnpjType"
         [inputStyle]="cnpjStyle"
         ></app-input-top>
+      </div>
+      <div id="image-data">
+        <label for="image-input">Imagem de Perfil</label>
+        <div id="upload-area">
+          <input id="image-input" type="file" accept="image/*" (change)="onFileSelected($event)">
+          <p>{{imageName}}</p>
+        </div>
       </div>
       <div id="login-data">
         <app-input-top
@@ -57,17 +64,31 @@
         style="width: 60%"
         ></app-input-top>
         <app-input-top
+        [inputLabel]="numberLabel"
+        [inputType]="numberType"
+        [inputStyle]="numberStyle"
+        style="width: 30%"
+        ></app-input-top>
+      </div>
+      <div id="city-data">
+        <app-input-top
+        [inputLabel]="cityLabel"
+        [inputType]="cityType"
+        [inputStyle]="cityStyle"
+        style="width: 60%"
+        ></app-input-top>
+        <app-input-top
         [inputLabel]="bairroLabel"
         [inputType]="bairroType"
         [inputStyle]="bairroStyle"
         style="width: 30%"
         ></app-input-top>
       </div>
-      <div id="city-area">
+      <div id="estate-data">
         <app-input-top
-        [inputLabel]="cityLabel"
-        [inputType]="cityType"
-        [inputStyle]="cityStyle"
+        [inputLabel]="estateLabel"
+        [inputType]="estateType"
+        [inputStyle]="estateStyle"
         style="width: 60%"
         ></app-input-top>
         <app-input-top
@@ -103,6 +124,13 @@
         [inputStyle]="nameStyle"
         ></app-input-top>
       </div>
+      <div id="image-data">
+        <label for="image-input">Imagem de Perfil</label>
+        <div id="upload-area">
+          <input id="image-input" type="file" accept="image/*" (change)="onFileSelected($event)">
+          <p>{{imageName}}</p>
+        </div>
+      </div>
       <div id="login-data">
         <app-input-top
         [inputLabel]="emailLabel"
@@ -114,6 +142,20 @@
         [inputLabel]="passLabel"
         [inputType]="passType"
         [inputStyle]="passStyle"
+        style="width: 30%"
+        ></app-input-top>
+      </div>
+      <div id="login-data">
+        <app-input-top
+        [inputLabel]="cpfDonorLabel"
+        [inputType]="cpfDonorType"
+        [inputStyle]="cpfDonorStyle"
+        style="width: 60%"
+        ></app-input-top>
+        <app-input-top
+        [inputLabel]="bornDonorLabel"
+        [inputType]="bornDonorType"
+        [inputStyle]="bornDonorStyle"
         style="width: 30%"
         ></app-input-top>
       </div>
