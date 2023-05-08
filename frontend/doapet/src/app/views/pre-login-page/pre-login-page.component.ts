@@ -12,4 +12,12 @@ export class PreLoginPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToOng() {
+    localStorage.setItem('userType', 'ong');
+  }
+
+  goToDonor() {
+    localStorage.setItem('userType', 'donor');
+  }
+
 }

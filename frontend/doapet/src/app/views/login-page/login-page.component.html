@@ -18,7 +18,10 @@
     >
     </app-light-orange-button>
   </div>
-  <div class="img-area">
-    <img id="id-image" src="../../../assets/images/happy-cat.svg" alt="Imagem DOG">
+  <div class="img-area" *ngIf="userType != 'ong'">
+    <img id="id-image" src="../../../assets/images/happy-cat.svg" alt="Imagem Gato">
+  </div>
+  <div class="img-area" *ngIf="userType != 'donor'">
+    <img id="id-image" src="../../../assets/images/dog.svg" alt="Imagem DOG">
   </div>
 </div>

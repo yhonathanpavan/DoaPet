@@ -23,6 +23,8 @@ export class LoginPageComponent implements OnInit {
 
   lightBtnStyle = {'width': this.lightBtnWidth, 'height': this.lightBtnHeight, 'font-size': this.lightBtnFontSize};
 
+  userType = 'ong';
+
   constructor() { }
 
   ngOnInit() {

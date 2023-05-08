@@ -1,5 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +29,8 @@ import { HomeOngComponent } from './views/home-ong/home-ong.component';
 import { PerfilPageComponent } from './views/perfil-page/perfil-page.component';
 import { OngPerfilPageComponent } from './views/ong-perfil-page/ong-perfil-page.component';
 
+import { DoapetService } from './services/doapet.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,9 +56,13 @@ import { OngPerfilPageComponent } from './views/ong-perfil-page/ong-perfil-page.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    DoapetService
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

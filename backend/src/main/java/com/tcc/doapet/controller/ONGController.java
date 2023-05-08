@@ -27,16 +27,19 @@ public class ONGController {
 
     private final OrderService orderService;
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping
     public ResponseEntity<Page<ONGResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(ongService.getAll(pageable));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/{id}")
     public ResponseEntity<ONGResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(ongService.getById(id));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @Transactional
     @PostMapping
     public ResponseEntity<Void> create(@Valid @RequestBody ONGRequest ongRequest){

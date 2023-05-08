@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { sha256 } from 'js-sha256';
+
+import { Ong } from 'src/app/models/ong';
+import { DoapetService } from 'src/app/services/doapet.service';
 
 @Component({
   selector: 'app-register-page',
@@ -60,10 +65,10 @@ export class RegisterPageComponent implements OnInit {
   codeWidth: string = '';
   codeStyle = {'width': this.codeWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
 
-  estateLabel: string = 'Estado';
-  estateType: string = 'text';
-  estateWidth: string = '';
-  estateStyle = {'width': this.estateWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
+  stateLabel: string = 'Estado';
+  stateType: string = 'text';
+  stateWidth: string = '';
+  stateStyle = {'width': this.stateWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
 
   numberLabel: string = 'Número';
   numberType: string = 'number';
@@ -95,28 +100,72 @@ export class RegisterPageComponent implements OnInit {
   bornDonorWidth: string = '';
   bornDonorStyle = {'width': this.passWidth, 'height': this.inputHeight, 'fontSize': this.inputFont};
 
-  userType: string = 'donor'
+  userType: string = 'ong';
   imagePreviewUrl: string | undefined;
-  imageName: string = ''
+  imageName: string = '';
 
-  constructor() { }
+  ong: Ong = {
+    name:"",
+    email:"",
+    password:"",
+    phone_number:"",
+    street:"",
+    number:"",
+    neighborhood:"",
+    city:"",
+    state:"",
+    cnpj:"",
+    pix:"",
+    president_name:"",
+    biography:"",
+    profile_picture: ""
+  };
+
+  imageHash: any;
+
+  constructor(
+    private doapetService: DoapetService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+
   }
 
   onFileSelected(event:any): void {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = () => {
-      this.imagePreviewUrl = reader.result as string;
-    };
+    // reader.onload = () => {
+    //   this.imagePreviewUrl = reader.result as string;
+    // };
+    reader.onloadend = () => {
+      const buffer = reader.result as ArrayBuffer;
+      const hash = sha256.create().update(buffer).hex();
+      this.ong.profile_picture = hash;
+      console.log('profile_pic ', this.ong.profile_picture);
+    }
 
-    reader.readAsDataURL(file);
+    reader.readAsArrayBuffer(file);
+    console.log('file => ', file)
 
     this.imageName = file.name
   }
 
+  onSubmit() {
+    console.log('ong', this.ong)
+    this.doapetService.createOng(this.ong).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+    this.redirectToLogin()
+  }
 
-
+  redirectToLogin() {
+    this.router.navigate(['/login'])
+  }
 }
