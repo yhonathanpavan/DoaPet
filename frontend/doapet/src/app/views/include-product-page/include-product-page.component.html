@@ -1,0 +1,34 @@
+<div class="container">
+  <app-menu-bar></app-menu-bar>
+  <div class="header">
+    <app-go-back-button></app-go-back-button>
+  </div>
+  <div class="title-area">
+    <h1>Incluir Produto</h1>
+  </div>
+  <div class="body">
+    <div class="card-form">
+      <form action="">
+        <app-input-inside
+        [inputPlaceholder]='namePlaceholder'
+        [inputType]='nameType'
+        [inputStyle]='nameStyle'
+        ></app-input-inside>
+        <div class="second-line">
+          <select name="category" id="category">
+            <option value="" disabled selected>Selecione a categoria</option>
+          </select>
+          <select name="unit" id="unit">
+            <option value="" disabled selected>Unidade</option>
+          </select>
+          <app-input-inside
+          [inputPlaceholder]='pricePlaceholder'
+          [inputType]='priceType'
+          [inputStyle]='priceStyle'
+          ></app-input-inside>
+        </div>
+      </form>
+      <button>Incluir</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <app-menu-bar></app-menu-bar>
+  <div class="ong-area">
+    <img src="../../../assets/images/ong-example.svg" alt="Logo Ong">
+    <app-light-orange-button
+    [btnText]='btnText'
+    [buttonLightStyle]='buttonLightStyle'
+    ></app-light-orange-button>
+  </div>
+  <div class="cards-donation">
+    <app-card-donations
+    *ngFor="let request of listDonationsRequest"
+    [name]="request.name"
+    [unit]="request.unit"
+    [quantity]="request.quantity"
+    [price]="request.price"
+    [totalPrice]="request.totalPrice"
+    ></app-card-donations>
+  </div>
+</div>

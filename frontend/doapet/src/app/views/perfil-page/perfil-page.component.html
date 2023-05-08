@@ -1,0 +1,55 @@
+<div class="container">
+  <app-menu-bar></app-menu-bar>
+  <div class="header">
+    <app-go-back-button></app-go-back-button>
+  </div>
+  <div class="perfil-content">
+    <div class="information-area">
+      <div class="photo">
+        <img src="../../../assets/images/image 2.svg" alt="User Image">
+      </div>
+      <div class="info">
+        <p id="name">João Silva</p>
+        <p id="email">joao_silva@gmail.com</p>
+      </div>
+    </div>
+    <div class="edit-area">
+      <form action="">
+        <div id="first-line">
+          <app-input-top
+          [inputLabel]="nameLabel"
+          [inputType]="nameType"
+          [inputStyle]="nameStyle"
+          ></app-input-top>
+        </div>
+        <div id="second-line">
+          <app-input-top
+          [inputLabel]="emailLabel"
+          [inputType]="emailType"
+          [inputStyle]="emailStyle"
+          ></app-input-top>
+          <app-input-top
+          [inputLabel]="passLabel"
+          [inputType]="passType"
+          [inputStyle]="passStyle"
+          ></app-input-top>
+        </div>
+        <div id="third-line">
+          <app-input-top
+          [inputLabel]="phoneLabel"
+          [inputType]="phoneType"
+          [inputStyle]="phoneStyle"
+          ></app-input-top>
+          <app-input-top
+          [inputLabel]="bornLabel"
+          [inputType]="bornType"
+          [inputStyle]="bornStyle"
+          ></app-input-top>
+        </div>
+      </form>
+    </div>
+    <div class="button-area">
+      <button id="save-btn">Salvar Alterações</button>
+    </div>
+  </div>
+</div>

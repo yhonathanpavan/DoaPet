@@ -1,0 +1,99 @@
+<div class="container">
+  <app-menu-bar></app-menu-bar>
+  <div class="header">
+    <app-go-back-button></app-go-back-button>
+  </div>
+  <div class="perfil-content">
+    <div class="information-area">
+      <div class="photo">
+        <img src="../../../assets/images/image 2.svg" alt="User Image">
+      </div>
+      <div class="info">
+        <p id="name_title">{{ ong.name }}</p>
+        <p id="email">{{ ong.city }}, {{ ong.state }}</p>
+      </div>
+    </div>
+    <div class="edit-area">
+      <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        <div class="form-group" id="name-group">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="ong.name" required>
+        </div>
+        <div class="form-group" id="cnpj-group">
+          <label for="cnpj">CNPJ</label>
+          <input type="number" class="form-control" id="cnpj" name="cnpj" [(ngModel)]="ong.cnpj" required>
+        </div>
+        <div id="image-data">
+          <label for="image-input">Imagem de Perfil</label>
+          <div id="upload-area">
+            <input id="image-input" type="file" accept="image/*" (change)="onFileSelected($event)">
+            <p>{{imageName}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="email-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="ong.email" required>
+          </div>
+          <div id="password-group">
+            <label for="name">Senha</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="ong.password" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="president-group">
+            <label for="president_name">Presidente</label>
+            <input type="text" class="form-control" id="president_name" name="president_name" [(ngModel)]="ong.president_name" required>
+          </div>
+          <div id="phone-group">
+            <label for="phone_number">Telefone</label>
+            <input type="tel" class="form-control" id="phone_number" name="phone_number" [(ngModel)]="ong.phone_number" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="street-group">
+            <label for="street">Endereço</label>
+            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="ong.street" required>
+          </div>
+          <div id="number-group">
+            <label for="number">Número</label>
+            <input type="number" class="form-control" id="number" name="number" [(ngModel)]="ong.number" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="neighborhood-group">
+            <label for="neighborhood">Bairro</label>
+            <input type="text" class="form-control" id="neighborhood" name="neighborhood" [(ngModel)]="ong.neighborhood" required>
+          </div>
+          <div id="city-group">
+            <label for="city">Cidade</label>
+            <input type="text" class="form-control" id="city" name="city" [(ngModel)]="ong.city" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="state-group">
+            <label for="state">Estado</label>
+            <input type="text" class="form-control" id="state" name="state" [(ngModel)]="ong.state" required>
+          </div>
+          <!-- <div id="postcode-group">
+            <label for="name">CEP</label>
+            <input type="number" class="form-control" id="postcode" name="postcode" required>
+          </div> -->
+        </div>
+        <div class="form-group" id="pix-group">
+          <label for="pix">Pix</label>
+          <input type="text" class="form-control" id="pix" name="pix" [(ngModel)]="ong.pix" required>
+        </div>
+
+        <div id="description-area">
+          <label id="label-description" for="description">Descrição</label>
+          <textarea name="description" id="description" cols="30" rows="10" [(ngModel)]="ong.biography" required></textarea>
+        </div>
+        <div type="submit" class="button-area">
+          <button id="save-btn">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

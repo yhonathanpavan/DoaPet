@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="info-area">
+    <div class="first-line">
+       <p id="name">{{ name }}</p>
+    </div>
+    <div class="second-line">
+
+      <p id="unit">{{ unit }}</p>
+      <div class="quantity">
+        <label for="quantity">Quantidade</label>
+        <p id="quantity">{{ quantity}} unidades</p>
+      </div>
+    </div>
+    <div class="third-line">
+      <div class="price">
+        <label for="price">Valor Unitário R$</label>
+        <p id="price">{{ price }}</p>
+      </div>
+      <div class="totalPrice">
+        <label for="totalPrice">Valor Total R$</label>
+        <p id="totalPrice">{{ totalPrice }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="btn-area">
+    <app-priority></app-priority>
+    <button id="donation-button">Doar</button>
+  </div>
+</div>

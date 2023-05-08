@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="data-area">
+    <img id="logo" src="../../../assets/images/doaPet-logo.svg" alt="Lodo DoaPet">
+    <form action="">
+      <input type="email" placeholder="usuário">
+      <input type="password" placeholder="senha">
+    </form>
+    <app-dark-orange-button
+    [btnDarkIcon]="darkBtnIcon"
+    [btnDarkText]="darkBtnText"
+    [buttonDarkStyle]="darkBtnStyle"
+    >
+    </app-dark-orange-button>
+    <app-light-orange-button
+    [btnIcon]="lightBtnIcon"
+    [btnText]="lightBtnText"
+    [buttonLightStyle]="lightBtnStyle"
+    >
+    </app-light-orange-button>
+  </div>
+  <div class="img-area" *ngIf="userType != 'ong'">
+    <img id="id-image" src="../../../assets/images/happy-cat.svg" alt="Imagem Gato">
+  </div>
+  <div class="img-area" *ngIf="userType != 'donor'">
+    <img id="id-image" src="../../../assets/images/dog.svg" alt="Imagem DOG">
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <app-menu-bar></app-menu-bar>
+  <div class="header">
+    <app-go-back-button></app-go-back-button>
+  </div>
+  <div class="title-area">
+    <h1>Incluir Solicitação de Produto ou Serviço</h1>
+  </div>
+  <div class="body">
+    <div class="card">
+      <div class="form-header">
+        <select name="goalRequest" id="goalRequest">
+          <option value="">Selecione uma opção</option>
+          <option *ngFor="let goal of goalList" value="{{ goal.value }}">{{ goal.option }}</option>
+        </select>
+        <img src="../../../assets/images/doaPet-logo.svg" alt="Logo DoaPet">
+      </div>
+      <div class="form">
+        <form action="">
+          <div class="first-line">
+            <label id="labelName" for="name">Nome</label>
+            <select id="name">
+              <option value="">Selecione uma opção</option>
+            </select>
+          </div>
+          <div class="second-line">
+            <div class="unit">
+              <label for="unit">Unidade</label>
+              <p id="unit">{{ itemUnit }}</p>
+            </div>
+            <app-input-top
+            [inputLabel]='quantityLabel'
+            [inputType]='quantityType'
+            [inputStyle]='quantityStyle'
+            ></app-input-top>
+            <div class="priority">
+              <label for="priority" id="labelPriority">Prioridade</label>
+              <select name="priority" id="priority">
+                <option value="">Selecione uma opção</option>
+                <option value="Low">Baixa</option>
+                <option value="medium">Média</option>
+                <option value="high">Alta</option>
+                <option value="urgent">Urgente</option>
+              </select>
+            </div>
+          </div>
+          <div class="third-line">
+            <div class="price">
+              <label for="price">Valor Unitário</label>
+              <p id="price">R$ {{ itemPrice }}</p>
+            </div>
+            <div class="totalPrice">
+              <label for="totalPrice">Valor Total</label>
+              <p id="totalPrice">R$ {{ itemTotalPrice }}</p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button>Incluir</button>
+    </div>
+  </div>
+</div>
