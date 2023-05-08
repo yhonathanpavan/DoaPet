@@ -1,5 +1,6 @@
 package com.tcc.doapet.controller;
 
+import com.tcc.doapet.model.enums.AssistanceCategory;
 import com.tcc.doapet.service.AssistanceService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.util.List;
 
 import static com.tcc.doapet.factory.AssistanceFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,6 +55,16 @@ class AssistanceControllerTest {
         assertEquals(HttpStatus.OK, assistanceActualResponse.getStatusCode());
 
         assertEquals(getAssistanceResponse().getName(), assistanceActualResponse.getBody().getName());
+    }
+
+    @Test
+    void getAssistanceCategories(){
+        when(assistanceService.getAssistanceCategories()).thenReturn(List.of(AssistanceCategory.values()));
+
+        var assistanceActualResponse = assistanceController.getAssistanceCategories();
+
+        assertNotNull(assistanceActualResponse.getBody());
+        assertEquals(HttpStatus.OK, assistanceActualResponse.getStatusCode());
     }
 
     @Test

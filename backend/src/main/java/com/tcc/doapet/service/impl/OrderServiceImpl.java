@@ -7,6 +7,7 @@ import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.entity.ONG;
 import com.tcc.doapet.model.entity.Order;
 import com.tcc.doapet.model.enums.OrderStatus;
+import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.repository.AssistanceRepository;
 import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.repository.OrderRepository;
@@ -24,6 +25,7 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -68,6 +70,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderResponse findOne(Long ongId, Long orderId) {
         return mapper.map(findOrderByOngId(ongId, orderId), OrderResponse.class);
+    }
+
+    @Override
+    public List<PriorityLevelStatus> getPrioritiesLevelStatus() {
+        return List.of(PriorityLevelStatus.values());
     }
 
     @Override

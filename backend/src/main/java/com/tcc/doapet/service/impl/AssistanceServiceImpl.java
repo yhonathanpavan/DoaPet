@@ -3,9 +3,11 @@ package com.tcc.doapet.service.impl;
 import com.tcc.doapet.model.dto.request.AssistanceRequest;
 import com.tcc.doapet.model.dto.response.AssistanceResponse;
 import com.tcc.doapet.model.entity.Assistance;
+import com.tcc.doapet.model.enums.AssistanceCategory;
 import com.tcc.doapet.repository.AssistanceRepository;
 import com.tcc.doapet.service.AssistanceService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.EAN;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.ws.rs.NotFoundException;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +37,11 @@ public class AssistanceServiceImpl implements AssistanceService {
     public AssistanceResponse getById(Long id) {
         var assistanceEntity = findAssistanceById(id);
         return modelMapper.map(assistanceEntity, AssistanceResponse.class);
+    }
+
+    @Override
+    public List<AssistanceCategory> getAssistanceCategories() {
+        return List.of(AssistanceCategory.values());
     }
 
     @Override
@@ -59,6 +68,7 @@ public class AssistanceServiceImpl implements AssistanceService {
         assistance.setStatus(!assistance.getStatus());
         return modelMapper.map(assistanceRepository.save(assistance), AssistanceResponse.class);
     }
+
 
     protected Assistance findAssistanceById(Long id){
         return assistanceRepository.findById(id).orElseThrow(NotFoundException::new);
