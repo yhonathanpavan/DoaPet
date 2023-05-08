@@ -26,7 +26,7 @@ public class AssistanceController {
     private final AssistanceService assistanceService;
 
     @GetMapping
-    @GetAllAssistance
+    @GetAllAssistances
     public ResponseEntity<Page<AssistanceResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(assistanceService.getAll(pageable));
     }

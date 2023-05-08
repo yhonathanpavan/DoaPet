@@ -24,7 +24,7 @@ public class DonorController {
     private final DonorService donorService;
 
     @GetMapping
-    @GetAllDonor
+    @GetAllDonors
     public ResponseEntity<Page<DonorResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(donorService.getAll(pageable));
     }

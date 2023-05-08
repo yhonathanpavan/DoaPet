@@ -1,4 +1,4 @@
-package com.tcc.doapet.config.annotations.Donors;
+package com.tcc.doapet.config.annotations.ONG;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,10 +12,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Operation(summary = "Lista todos os doadores, podem ser usados filtros.", description = "Retorna uma página de doadores",
-        tags = {"Doadores"})
+@Operation(summary = "Lista todos as ONGs, podem ser usados filtros.", description = "Retorna uma página de ONGs",
+        tags = {"ONGs"})
 @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ok",
         content = @Content(mediaType = "application/json"))})
-public @interface GetAllDonor {
+public @interface GetAllONGs {
 }
 

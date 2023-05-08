@@ -1,5 +1,8 @@
 package com.tcc.doapet.controller;
 
+import com.tcc.doapet.config.annotations.ONG.*;
+import com.tcc.doapet.config.annotations.ONG.PatchONG;
+import com.tcc.doapet.config.annotations.Orders.*;
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
@@ -8,6 +11,7 @@ import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.service.ONGService;
 import com.tcc.doapet.service.OrderService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,65 +34,94 @@ public class ONGController {
     private final OrderService orderService;
 
     @GetMapping
+    @GetAllONGs
     public ResponseEntity<Page<ONGResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(ongService.getAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ONGResponse> getById(@PathVariable Long id){
+    @GetONGById
+    public ResponseEntity<ONGResponse> getById(@Parameter(description = "ID da ONG requerida para requisição")
+                                                   @PathVariable Long id){
         return ResponseEntity.ok(ongService.getById(id));
     }
 
     @Transactional
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody ONGRequest ongRequest){
+    @PostONG
+    public ResponseEntity<Void> create(@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Requerido para a criação de uma nova ONG")
+                                           @Valid @RequestBody ONGRequest ongRequest){
         return ResponseEntity.created(ongService.create(ongRequest)).build();
     }
 
     @Transactional
     @PatchMapping("/{id}")
-    public ResponseEntity<ONGResponse> updateById(@PathVariable Long id,
+    @PatchONG
+    public ResponseEntity<ONGResponse> updateById(@Parameter(description = "ID da ONG requerida para atualização")
+                                                      @PathVariable Long id,
+                                                  @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                          description = "Requerido para a atualiação de uma ONG")
                                                   @RequestBody ONGRequest ongRequest){
         return ResponseEntity.ok(ongService.updateById(id, ongRequest));
     }
 
     @PostMapping("/{ongId}/orders")
-    public ResponseEntity<OrderResponse> saveOrder(@PathVariable Long ongId,
+    @PostOrder
+    public ResponseEntity<OrderResponse> saveOrder(@Parameter(description = "ID do pedido requerida para criação")
+                                                       @PathVariable Long ongId,
+                                                   @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                           description = "Requerido para a criação de um pedido")
                                                    @Valid @RequestBody OrderRequest orderRequest){
         return ResponseEntity.created(orderService.save(ongId, orderRequest)).build();
     }
 
     @GetMapping("/{ongId}/orders")
-    public ResponseEntity<Page<OrderResponse>> findAllOrders(@PathVariable Long ongId,
+    @GetAllOrders
+    public ResponseEntity<Page<OrderResponse>> findAllOrders(@Parameter(description = "ID da ONG requerida para requisição")
+                                                                 @PathVariable Long ongId,
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(orderService.findAll(ongId, pageable));
     }
 
     @GetMapping("/{ongId}/orders/{orderId}")
-    public ResponseEntity<OrderResponse> findOrderById(@PathVariable Long ongId,
-                                                       @PathVariable Long orderId){
+    @GetOrderById
+    public ResponseEntity<OrderResponse> findOrderById(@Parameter(description = "ID da ONG requerida para requisição")
+                                                           @PathVariable Long ongId,
+                                                       @Parameter(description = "ID do pedido requerido para requisição")
+                                                           @PathVariable Long orderId){
         return ResponseEntity.ok(orderService.findOne(ongId, orderId));
     }
 
     @GetMapping("/priorities_level_status")
+    @GetOrderPrioritiesLevelStatus
     public ResponseEntity<List<PriorityLevelStatus>> getPrioritiesLevelStatus(){
         return ResponseEntity.ok(orderService.getPrioritiesLevelStatus());
     }
 
     @PatchMapping("/{ongId}/orders/{orderId}")
-    public ResponseEntity<OrderResponse> updateOrderById(@PathVariable Long ongId,
+    @PatchOrder
+    public ResponseEntity<OrderResponse> updateOrderById(@Parameter(description = "ID da ONG requerida para atualização")
+                                                             @PathVariable Long ongId,
+                                                         @Parameter(description = "ID do pedido requerido para requisição")
                                                          @PathVariable Long orderId,
-                                                         @RequestBody OrderRequestUpdate orderRequest){
+                                                         @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                                 description = "Requerido para a atualização de um pedido")
+                                                             @RequestBody OrderRequestUpdate orderRequest){
         return ResponseEntity.ok(orderService.update(ongId, orderId, orderRequest));
     }
 
     @PatchMapping("/{id}/status")
+    @PatchONGStatus
     public ResponseEntity<?> updateStatus(@PathVariable Long id){
         return ResponseEntity.ok(ongService.updateStatus(id));
     }
 
     @PatchMapping("{ongId}/orders/{orderId}/cancel")
-    public ResponseEntity<?> cancelOrder(@PathVariable Long ongId,
+    @PatchCancelOrder
+    public ResponseEntity<?> cancelOrder(@Parameter(description = "ID da ONG requerida para atualização")
+                                             @PathVariable Long ongId,
+                                         @Parameter(description = "ID do pedido requerido para requisição")
                                          @PathVariable Long orderId){
         return ResponseEntity.ok(orderService.cancelOrder(ongId, orderId));
     }
