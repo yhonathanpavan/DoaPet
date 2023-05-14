@@ -1,11 +1,9 @@
 package com.tcc.doapet.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.model.dto.response.AssistanceResponse;
-import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Assistance;
-import com.tcc.doapet.model.entity.Product;
+import com.tcc.doapet.model.enums.AssistanceCategory;
 import com.tcc.doapet.repository.AssistanceRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +20,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.tcc.doapet.factory.AssistanceFactory.*;
@@ -64,6 +63,14 @@ class AssistanceServiceImplTest {
         assertEquals(getAssistanceResponse().getId(), actualAssistanceResponse.getId());
         assertEquals(getAssistanceResponse().getName(), actualAssistanceResponse.getName());
         assertEquals(getAssistanceResponse().getAssistanceCategory(), actualAssistanceResponse.getAssistanceCategory());
+    }
+
+    @Test
+    void getAssistanceCategories(){
+        var response = assistanceService.getAssistanceCategories();
+
+        assertNotNull(response);
+        assertEquals(AssistanceCategory.class, response.get(0).getClass());
     }
 
     @Test

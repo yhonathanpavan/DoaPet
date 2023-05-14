@@ -1,7 +1,6 @@
 package com.tcc.doapet.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.tcc.doapet.factory.OrderFactory;
+import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.service.ONGService;
 import com.tcc.doapet.service.OrderService;
 import org.junit.jupiter.api.Test;
@@ -14,9 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import static com.tcc.doapet.factory.DonorFactory.getDonorResponse;
+import java.util.List;
+
 import static com.tcc.doapet.factory.ONGFactory.*;
-import static com.tcc.doapet.factory.OrderFactory.*;
+import static com.tcc.doapet.factory.OrderFactory.getOrderProductResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -62,6 +62,16 @@ class ONGControllerTest {
         assertEquals(HttpStatus.OK, ongActualResponse.getStatusCode());
 
         assertEquals(getONGResponse().getName(), ongActualResponse.getBody().getName());
+    }
+
+    @Test
+    void getPrioritiesLevelStatus(){
+        when(orderService.getPrioritiesLevelStatus()).thenReturn(List.of(PriorityLevelStatus.values()));
+
+        var assistanceActualResponse = ongController.getPrioritiesLevelStatus();
+
+        assertNotNull(assistanceActualResponse.getBody());
+        assertEquals(HttpStatus.OK, assistanceActualResponse.getStatusCode());
     }
 
     @Test

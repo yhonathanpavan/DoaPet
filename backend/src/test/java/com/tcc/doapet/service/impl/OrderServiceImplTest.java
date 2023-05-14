@@ -4,7 +4,9 @@ import com.tcc.doapet.factory.OrderFactory;
 import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.dto.response.ProductResponse;
+import com.tcc.doapet.model.enums.Measures;
 import com.tcc.doapet.model.enums.OrderStatus;
+import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.repository.AssistanceRepository;
 import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.repository.OrderRepository;
@@ -139,6 +141,14 @@ class OrderServiceImplTest {
         assertEquals(getOrderAssistanceResponse().getDonor().getName(), actualOrderResponse.getDonor().getName());
         assertEquals(getOrderAssistanceResponse().getOng().getPresidentName(), actualOrderResponse.getOng().getPresidentName());
         assertEquals(getOrderAssistanceResponse().getOng().getCnpj(), actualOrderResponse.getOng().getCnpj());
+    }
+
+    @Test
+    void getPrioritiesLevelStatus_WhenSendRequest_ExpectedPrioritiesLevelStatus() {
+        var response = orderService.getPrioritiesLevelStatus();
+
+        assertNotNull(response);
+        assertEquals(PriorityLevelStatus.class, response.get(0).getClass());
     }
 
     @Test

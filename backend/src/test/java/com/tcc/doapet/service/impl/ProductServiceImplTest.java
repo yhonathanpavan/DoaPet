@@ -3,6 +3,8 @@ package com.tcc.doapet.service.impl;
 import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Product;
+import com.tcc.doapet.model.enums.Measures;
+import com.tcc.doapet.model.enums.ProductCategory;
 import com.tcc.doapet.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +22,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -76,6 +79,22 @@ class ProductServiceImplTest {
         assertEquals(ProductResponse.class, response.getClass());
         assertEquals(ProductFactory.getProduct().getName(), response.getName());
         assertEquals(Boolean.TRUE, response.getStatus());
+    }
+
+    @Test
+    void getProductCategories_WhenSendRequest_ExpectedListCategories() {
+        var response = productService.getProductCategories();
+
+        assertNotNull(response);
+        assertEquals(ProductCategory.class, response.get(0).getClass());
+    }
+
+    @Test
+    void getProductMeasures_WhenSendRequest_ExpectedListMeasures() {
+        var response = productService.getProductMeasures();
+
+        assertNotNull(response);
+        assertEquals(Measures.class, response.get(0).getClass());
     }
 
     @Test

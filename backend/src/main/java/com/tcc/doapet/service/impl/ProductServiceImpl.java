@@ -3,6 +3,8 @@ package com.tcc.doapet.service.impl;
 import com.tcc.doapet.model.dto.request.ProductRequest;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Product;
+import com.tcc.doapet.model.enums.Measures;
+import com.tcc.doapet.model.enums.ProductCategory;
 import com.tcc.doapet.repository.ProductRepository;
 import com.tcc.doapet.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.ws.rs.NotFoundException;
 import java.net.URI;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +46,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductCategory> getProductCategories() {
+        return List.of(ProductCategory.values());
+    }
+
+    @Override
+    public List<Measures> getProductMeasures() {
+        return List.of(Measures.values());
+    }
+
+    @Override
     public ProductResponse update(Long id, ProductRequest productRequest) {
         Product productEntity = findProductById(id);
         mapper.map(productRequest, productEntity);
@@ -56,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     protected Product findProductById(Long id){
-        return productRepository.findById(id).orElseThrow();
+        return productRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
 }

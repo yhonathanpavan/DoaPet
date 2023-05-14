@@ -76,6 +76,26 @@ class ProductControllerTest {
     }
 
     @Test
+    void getProductCategories_WhenSendRequest_ExpectedResponseListCategories() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/categories")
+                .header("Authorization", token)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(Assertions::assertNotNull)
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void getProductMeasures_WhenSendRequest_ExpectedResponseListMeasures() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/measures")
+                .header("Authorization", token)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(Assertions::assertNotNull)
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
     void update_WhenSendProductRequest_ExpectedResponseEntityProductResponse() throws Exception {
         String productRequest = objectMapper.writeValueAsString(ProductFactory.getProductRequest());
         mockMvc.perform(MockMvcRequestBuilders.patch("/products/{id}", 1L)
