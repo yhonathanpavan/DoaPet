@@ -25,6 +25,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @PostMapping
     @PostProduct
     public ResponseEntity<ProductResponse> save(@io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -47,12 +48,14 @@ public class ProductController {
         return ResponseEntity.ok(productService.findOne(id));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/categories")
     @GetProductCategories
     public ResponseEntity<List<ProductCategory>> getProductCategories(){
         return ResponseEntity.ok(productService.getProductCategories());
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/measures")
     @GetProductMeasures
     public ResponseEntity<List<Measures>> getProductMeasures(){

@@ -8,22 +8,19 @@
   </div>
   <div class="body">
     <div class="card-form">
-      <form action="">
-        <app-input-inside
-        [inputPlaceholder]='namePlaceholder'
-        [inputType]='nameType'
-        [inputStyle]='nameStyle'
-        ></app-input-inside>
-        <select name="category" id="category">
-          <option value="" disabled selected>Selecione a categoria</option>
-        </select>
-        <app-input-inside
-        [inputPlaceholder]='pricePlaceholder'
-        [inputType]='priceType'
-        [inputStyle]='priceStyle'
-        ></app-input-inside>
+      <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        <div class="form-group" id="name-group">
+          <input type="text" name="name" id="name" placeholder="Nome" [(ngModel)]="assistance.name">
+        </div>
+        <div class="form-group" id="info-group">
+          <select name="category" id="category" [(ngModel)]="assistance.assistance_category">
+            <option value="default" selected>Selecione uma categoria</option>
+            <option *ngFor="let category of listCategories" [value]="category">{{ category }}</option>
+          </select>
+          <input type="text" id="price" name="price" placeholder="Valor Unitário" [(ngModel)]="assistance.price">
+        </div>
+        <button type="submit">Incluir</button>
       </form>
-      <button>Incluir</button>
     </div>
   </div>
 </div>

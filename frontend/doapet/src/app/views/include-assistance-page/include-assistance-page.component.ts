@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AssistanceService } from 'src/app/services/assistance.service';
+import { Assistance } from 'src/app/models/assistance';
+
 @Component({
   selector: 'app-include-assistance-page',
   templateUrl: './include-assistance-page.component.html',
@@ -7,27 +10,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IncludeAssistancePageComponent implements OnInit {
 
-  namePlaceholder: string = 'Nome';
-  nameType: string = 'text';
-  nameWidth: string = '100%';
-  nameHeight: string = '40px';
-  nameFont: string = '16px';
-  nameMargin: string = '10px 50px 10px auto';
+  listCategories = [];
 
-  nameStyle = {'width': this.nameWidth, 'height': this.nameHeight, 'fontSize': this.nameFont, 'margin': this.nameMargin};
+  assistance: Assistance = {
+    name: "",
+    assistance_category: "",
+    price: 0
+  }
 
-  pricePlaceholder: string = 'Valor Unitário';
-  priceType: string = 'number';
-  priceWidth: string = '100%';
-  priceHeight: string = '40px';
-  priceFont: string = '16px';
-  priceMargin: string = '10px 0 10px 0';
+  typedValue: any;
 
-  priceStyle = {'width': this.priceWidth, 'height': this.priceHeight, 'fontSize': this.priceFont, 'margin': this.priceMargin};
-
-  constructor() { }
+  constructor(private assistanceService: AssistanceService) { }
 
   ngOnInit() {
+    this.catchCategories();
   }
+
+  catchCategories() {
+    this.assistanceService.getCategories().subscribe(
+      response => {
+        this.listCategories = response;
+        console.log('Lista de Categorias ', this.listCategories);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  handleChange(event: any) {
+    this.typedValue = event.target.value;
+    console.log("Valor Digitado... ", this.typedValue);
+  }
+
+  onSubmit() {
+    // this.assistance.price = this.typedValue;
+    console.log('assistance ', this.assistance);
+    this.assistanceService.createAssistance(this.assistance).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  };
+
+
 
 }

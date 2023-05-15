@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { sha256 } from 'js-sha256';
 
 import { Ong } from 'src/app/models/ong';
-import { DoapetService } from 'src/app/services/doapet.service';
+import { OngService } from 'src/app/services/ong.service';
 
 @Component({
   selector: 'app-ong-perfil-page',
@@ -16,7 +16,7 @@ export class OngPerfilPageComponent implements OnInit {
   imageHash: any;
   imageName: string = '';
 
-  constructor(private doapetService: DoapetService) { }
+  constructor(private ongService: OngService) { }
 
   ngOnInit() {
     this.getOng()
@@ -41,7 +41,7 @@ export class OngPerfilPageComponent implements OnInit {
 
   onSubmit() {
     console.log('ong', this.ong)
-    this.doapetService.createOng(this.ong).subscribe(
+    this.ongService.createOng(this.ong).subscribe(
       response => {
         console.log(response);
       },
@@ -52,7 +52,7 @@ export class OngPerfilPageComponent implements OnInit {
   }
 
   getOng() {
-    this.doapetService.getOngById(1).subscribe(data => {
+    this.ongService.getOngById(1).subscribe(data => {
       this.ong = data;
       console.log('retorno api, ', this.ong)
     })

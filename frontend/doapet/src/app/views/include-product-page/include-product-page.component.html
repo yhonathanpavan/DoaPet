@@ -8,27 +8,23 @@
   </div>
   <div class="body">
     <div class="card-form">
-      <form action="">
-        <app-input-inside
-        [inputPlaceholder]='namePlaceholder'
-        [inputType]='nameType'
-        [inputStyle]='nameStyle'
-        ></app-input-inside>
-        <div class="second-line">
-          <select name="category" id="category">
-            <option value="" disabled selected>Selecione a categoria</option>
-          </select>
-          <select name="unit" id="unit">
-            <option value="" disabled selected>Unidade</option>
-          </select>
-          <app-input-inside
-          [inputPlaceholder]='pricePlaceholder'
-          [inputType]='priceType'
-          [inputStyle]='priceStyle'
-          ></app-input-inside>
+      <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        <div class="form-group" id="name-group">
+          <input type="text" name="name" id="name" placeholder="Nome" [(ngModel)]="product.name">
         </div>
+        <div class="form-group" id="info-group">
+          <select name="category" id="category" [(ngModel)]="product.product_category">
+            <option value="default" selected>Selecione uma categoria</option>
+            <option *ngFor="let category of listCategories" [value]="category">{{ category }}</option>
+          </select>
+          <select name="unit" id="unit" [(ngModel)]="product.measure">
+            <option value="default" selected>Selecione uma medida</option>
+            <option *ngFor="let measure of listMeasurements" [value]="measure">{{ measure }}</option>
+          </select>
+          <input type="text" id="price" placeholder="Valor Unitário" (input)="handleChange($event)">
+        </div>
+        <button type="submit">Incluir</button>
       </form>
-      <button>Incluir</button>
     </div>
   </div>
 </div>

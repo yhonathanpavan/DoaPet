@@ -57,13 +57,24 @@ h1 {
 }
 
 form {
+  width: 80%;
   margin-top: 35px;
 
-  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
 }
 
+.form-group {
+  width: 100%;
+}
+
+input,
 select {
   height: 40px;
+  width: 100%;
 
   background: #F5F5F5;
 
@@ -74,10 +85,8 @@ select {
   font-weight: 700;
 
   padding-left: 10px;
-}
 
-#category {
-  width: 101%;
+  margin-top: 25px;
 }
 
 button {

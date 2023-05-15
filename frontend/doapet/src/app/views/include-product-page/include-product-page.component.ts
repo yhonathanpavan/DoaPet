@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/models/product';
+
 @Component({
   selector: 'app-include-product-page',
   templateUrl: './include-product-page.component.html',
@@ -7,27 +10,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IncludeProductPageComponent implements OnInit {
 
-  namePlaceholder: string = 'Nome';
-  nameType: string = 'text';
-  nameWidth: string = '100%';
-  nameHeight: string = '40px';
-  nameFont: string = '16px';
-  nameMargin: string = '10px 50px 10px auto';
+  listCategories = [];
+  listMeasurements = [];
 
-  nameStyle = {'width': this.nameWidth, 'height': this.nameHeight, 'fontSize': this.nameFont, 'margin': this.nameMargin};
+  product: Product = {
+    name: "",
+    measure: "",
+    product_category: "",
+    price: 0,
+  };
 
-  pricePlaceholder: string = 'Valor Unitário';
-  priceType: string = 'number';
-  priceWidth: string = '100%';
-  priceHeight: string = '40px';
-  priceFont: string = '16px';
-  priceMargin: string = '0px 0 0px 0';
+  typedValue: any;
 
-  priceStyle = {'width': this.priceWidth, 'height': this.priceHeight, 'fontSize': this.priceFont, 'margin': this.priceMargin};
-
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
+    this.catchCategories();
+    this.catchMeasurements();
   }
 
+  catchCategories() {
+    this.productService.getCategories().subscribe(
+      response => {
+        this.listCategories = response;
+        console.log('Lista de Categorias ', this.listCategories);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  catchMeasurements() {
+    this.productService.getMeasurements().subscribe(
+      response => {
+        this.listMeasurements = response;
+        console.log('Lista de Medidas ', this.listMeasurements);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  handleChange(event: any) {
+    this.typedValue = event.target.value;
+    console.log("Valor Digitado... ", this.typedValue);
+  }
+
+  onSubmit() {
+    this.product.price = this.typedValue;
+    console.log('product ', this.product);
+    this.productService.createProduct(this.product).subscribe(
+      response => {
+        console.log(response)
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  };
 }

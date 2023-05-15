@@ -29,7 +29,9 @@ import { HomeOngComponent } from './views/home-ong/home-ong.component';
 import { PerfilPageComponent } from './views/perfil-page/perfil-page.component';
 import { OngPerfilPageComponent } from './views/ong-perfil-page/ong-perfil-page.component';
 
-import { DoapetService } from './services/doapet.service';
+import { OngService } from './services/ong.service';
+import { ProductService } from './services/product.service';
+import { AssistanceService } from './services/assistance.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { DoapetService } from './services/doapet.service';
     FormsModule
   ],
   providers: [
-    DoapetService
+    OngService,
+    ProductService,
+    AssistanceService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

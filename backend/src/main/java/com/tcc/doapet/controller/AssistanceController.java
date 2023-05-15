@@ -25,12 +25,14 @@ public class AssistanceController {
 
     private final AssistanceService assistanceService;
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping
     @GetAllAssistances
     public ResponseEntity<Page<AssistanceResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(assistanceService.getAll(pageable));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/{id}")
     @GetAssistanceById
     public ResponseEntity<AssistanceResponse> getById(@Parameter(description = "ID do serviço requerido para requisição")
@@ -38,12 +40,14 @@ public class AssistanceController {
         return ResponseEntity.ok(assistanceService.getById(id));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/categories")
     @GetAssistanceCategories
     public ResponseEntity<List<AssistanceCategory>> getAssistanceCategories(){
         return ResponseEntity.ok(assistanceService.getAssistanceCategories());
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @Transactional
     @PostMapping
     @PostAssistance
@@ -53,6 +57,7 @@ public class AssistanceController {
         return ResponseEntity.created(assistanceService.create(assistanceRequest)).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @Transactional
     @PatchMapping("/{id}")
     @PatchAssistance
@@ -64,6 +69,7 @@ public class AssistanceController {
         return ResponseEntity.ok(assistanceService.updateById(id, assistanceRequest));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @PatchMapping("/{id}/status")
     @PatchAssistanceStatus
     public ResponseEntity<?> updateStatus(@Parameter(description = "ID requerido para alteração de status")
