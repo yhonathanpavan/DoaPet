@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -51,7 +52,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/ongs").permitAll()
                 .antMatchers(HttpMethod.POST, "/donors").permitAll()
@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             .and().headers().frameOptions().sameOrigin()
             .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(new TokenAuthenticatorFilter(tokenService, ongRepository, donorRepository), UsernamePasswordAuthenticationFilter.class)
+            .and().addFilterBefore(new TokenAuthenticatorFilter(tokenService, ongRepository, donorRepository), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .accessDeniedHandler((request, response, accessDeniedException) -> {
                     Map<String, String> errorResponse = ApiExceptionHandler.createResponse("FORBIDDEN", accessDeniedException.getMessage());
@@ -68,8 +68,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                     response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
                 });
-
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**");
+    }
+
 
     @Override
     @Bean
