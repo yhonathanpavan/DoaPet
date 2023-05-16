@@ -37,6 +37,7 @@ public class DonorController {
             "|| hasRole('ROLE_DONOR')")
     public ResponseEntity<DonorResponse> getById(@Parameter(description = "ID do doador requerido para requisição")
                                                  @PathVariable Long id,
+                                                 @Parameter(hidden = true)
                                                  @RequestHeader("Authorization") String authorization){
 
         TokenValidation.validateToken(id, authorization);
@@ -63,8 +64,10 @@ public class DonorController {
                                                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                                                     description = "Requerido para a atualização de um doador")
                                                     @RequestBody DonorRequest donorRequest,
+                                                    @Parameter(hidden = true)
                                                     @RequestHeader("Authorization") String authorization){
 
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(donorService.updateById(id, donorRequest));
     }
 
@@ -73,6 +76,7 @@ public class DonorController {
     @PreAuthorize("hasRole('ROLE_ADMIN')" +
             "|| hasRole('ROLE_DONOR')")
     public ResponseEntity<?> updateStatus(@PathVariable Long id,
+                                          @Parameter(hidden = true)
                                           @RequestHeader("Authorization") String authorization){
 
         TokenValidation.validateToken(id, authorization);

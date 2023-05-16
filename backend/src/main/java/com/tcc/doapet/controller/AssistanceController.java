@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -27,20 +28,34 @@ public class AssistanceController {
 
     @GetAllAssistances
     @GetMapping
-    public ResponseEntity<Page<AssistanceResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
+    public ResponseEntity<Page<AssistanceResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                                           @Parameter(hidden = true)
+                                                           @RequestHeader("Authorization") String authorization){
+
+        //Validar usuário que fez a ação
+        //findAllOngId
         return ResponseEntity.ok(assistanceService.getAll(pageable));
     }
 
     @GetAssistanceById
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<AssistanceResponse> getById(@Parameter(description = "ID do serviço requerido para requisição")
-                                                      @PathVariable Long id){
+                                                      @PathVariable Long id,
+                                                      @Parameter(hidden = true)
+                                                      @RequestHeader("Authorization") String authorization){
 
+        //Validar usuário que fez a ação
         return ResponseEntity.ok(assistanceService.getById(id));
     }
 
     @GetAssistanceCategories
     @GetMapping("/categories")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<List<AssistanceCategory>> getAssistanceCategories(){
 
         return ResponseEntity.ok(assistanceService.getAssistanceCategories());
@@ -49,30 +64,50 @@ public class AssistanceController {
     @PostAssistance
     @Transactional
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<Void> create(@io.swagger.v3.oas.annotations.parameters.RequestBody(
                                        description = "Requerido para a criação de um novo serviço")
-                                       @Valid @RequestBody AssistanceRequest assistanceRequest){
+                                       @Valid @RequestBody AssistanceRequest assistanceRequest,
+                                       @Parameter(hidden = true)
+                                       @RequestHeader("Authorization") String authorization){
 
+        //Cria o relacionamento resgata id pelo metodo getUserIdFromToken do tokenService
+        //Da um findById no repo da ONG
+        //seta a ong no campo de relacionamento de assistance
         return ResponseEntity.created(assistanceService.create(assistanceRequest)).build();
     }
 
     @PatchAssistance
     @Transactional
     @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<AssistanceResponse> updateById(@Parameter(description = "ID requerido para atualização")
                                                          @PathVariable Long id,
                                                          @io.swagger.v3.oas.annotations.parameters.RequestBody(
                                                          description = "Requerido para a atualização de um novo serviço")
-                                                         @RequestBody AssistanceRequest assistanceRequest){
+                                                         @RequestBody AssistanceRequest assistanceRequest,
+                                                         @Parameter(hidden = true)
+                                                         @RequestHeader("Authorization") String authorization){
 
+        //Validar usuário que fez a ação
+        //Pega o token
+        //resgatar o id pelo sub
+        //findAssistanceByIdAndOngId
         return ResponseEntity.ok(assistanceService.updateById(id, assistanceRequest));
     }
 
     @PatchAssistanceStatus
     @PatchMapping("/{id}/status")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<?> updateStatus(@Parameter(description = "ID requerido para alteração de status")
-                                          @PathVariable Long id){
+                                          @PathVariable Long id,
+                                          @Parameter(hidden = true)
+                                          @RequestHeader("Authorization") String authorization){
 
+        //Validar usuário que fez a ação
         return ResponseEntity.ok(assistanceService.updateStatus(id));
     }
 

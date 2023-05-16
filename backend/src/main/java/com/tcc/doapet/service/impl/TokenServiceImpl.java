@@ -75,8 +75,12 @@ public class TokenServiceImpl implements TokenService {
             return true;
 
         }catch(Exception e){
-            if(!request.getServletPath().contains("/auth"))
+            if((!request.getMethod().equals("POST")
+                && (!request.getServletPath().contains("/ongs")
+                    || !request.getServletPath().contains("/donor")
+                    || !request.getServletPath().contains("/auth")))){
                 log.warn(e.getMessage());
+            }
             return false;
         }
     }

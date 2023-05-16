@@ -1,9 +1,8 @@
 package com.tcc.doapet.controller;
 
-import com.tcc.doapet.helper.TokenValidation;
 import com.tcc.doapet.config.annotations.ONG.*;
-import com.tcc.doapet.config.annotations.ONG.PatchONG;
 import com.tcc.doapet.config.annotations.Orders.*;
+import com.tcc.doapet.helper.TokenValidation;
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
@@ -70,6 +69,7 @@ public class ONGController {
                                                   @io.swagger.v3.oas.annotations.parameters.RequestBody(
                                                   description = "Requerido para a atualiação de uma ONG")
                                                   @RequestBody ONGRequest ongRequest,
+                                                  @Parameter(hidden = true)
                                                   @RequestHeader("Authorization") String authorization){
 
         TokenValidation.validateToken(id, authorization);
@@ -127,6 +127,7 @@ public class ONGController {
                                                          @io.swagger.v3.oas.annotations.parameters.RequestBody(
                                                          description = "Requerido para a atualização de um pedido")
                                                          @RequestBody OrderRequestUpdate orderRequest,
+                                                         @Parameter(hidden = true)
                                                          @RequestHeader("Authorization") String authorization){
 
         TokenValidation.validateToken(ongId, authorization);
@@ -138,6 +139,7 @@ public class ONGController {
     @PreAuthorize("hasRole('ROLE_ADMIN')" +
             "|| hasRole('ROLE_ONG')")
     public ResponseEntity<?> updateStatus(@PathVariable Long id,
+                                          @Parameter(hidden = true)
                                           @RequestHeader("Authorization") String authorization){
 
         TokenValidation.validateToken(id, authorization);
@@ -152,6 +154,7 @@ public class ONGController {
                                          @PathVariable Long ongId,
                                          @Parameter(description = "ID do pedido requerido para requisição")
                                          @PathVariable Long orderId,
+                                         @Parameter(hidden = true)
                                          @RequestHeader("Authorization") String authorization){
 
         TokenValidation.validateToken(ongId, authorization);
