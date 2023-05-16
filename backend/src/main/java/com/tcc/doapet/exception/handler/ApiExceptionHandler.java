@@ -28,7 +28,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(ClientErrorException.class)
-    public ResponseEntity<Object> clientErrorExceptionHandler(NotFoundException ex){
+    public ResponseEntity<Object> clientErrorExceptionHandler(ClientErrorException ex){
         var responseCreated = createResponse("CONFLICT", ex.getMessage() + " Already registered");
         return ResponseEntity.status(HttpStatus.CONFLICT).body(responseCreated);
     }
