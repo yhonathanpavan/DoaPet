@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -31,15 +32,11 @@ public class OrderRequest {
     @JsonProperty("order_status")
     private OrderStatus orderStatus;
 
-    @FutureOrPresent
-    @JsonProperty("start_date_assistance")
-    private LocalDateTime startDateAssistance;
-
-    @FutureOrPresent
-    @JsonProperty("completion_date_assistance")
-    private LocalDateTime completionDateAssistance;
-
     @NotNull
     @JsonProperty("priority_level_status")
     private PriorityLevelStatus priorityLevelStatus;
+
+    @NotNull
+    @JsonProperty("total_price")
+    private BigDecimal totalPrice;
 }
