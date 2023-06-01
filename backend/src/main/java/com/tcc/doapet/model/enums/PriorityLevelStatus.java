@@ -3,24 +3,26 @@ package com.tcc.doapet.model.enums;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public enum PriorityLevelStatus {
     @JsonProperty("Alto")
-    HIGH("high"),
+    HIGH(List.of("high", "Alto")),
     @JsonProperty("Médio")
-    MEDIUM("medium"),
+    MEDIUM(List.of("medium", "Médio")),
     @JsonProperty("Baixo")
-    LOW("low");
+    LOW(List.of("low", "Baixo"));
 
+    private final List<String> values;
 
-    private final String value;
-    PriorityLevelStatus(String value){
-        this.value = value;
+    PriorityLevelStatus(List<String> values){
+        this.values = values;
     }
 
     @JsonCreator
     public static PriorityLevelStatus fromValue(String value){
         for (PriorityLevelStatus priorityLevelStatus: PriorityLevelStatus.values()){
-            if(priorityLevelStatus.value.equalsIgnoreCase(value)){
+            if(priorityLevelStatus.values.contains(value)){
                 return priorityLevelStatus;
             }
         }
