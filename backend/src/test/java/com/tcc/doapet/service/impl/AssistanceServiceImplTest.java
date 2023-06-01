@@ -1,10 +1,13 @@
 package com.tcc.doapet.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.tcc.doapet.factory.ONGFactory;
 import com.tcc.doapet.model.dto.response.AssistanceResponse;
 import com.tcc.doapet.model.entity.Assistance;
 import com.tcc.doapet.model.enums.AssistanceCategory;
 import com.tcc.doapet.repository.AssistanceRepository;
+import com.tcc.doapet.repository.ONGRepository;
+import com.tcc.doapet.service.TokenService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Answers;
@@ -35,17 +38,27 @@ class AssistanceServiceImplTest {
     @InjectMocks
     private AssistanceServiceImpl assistanceService;
 
+    @Mock
+    private TokenService tokenService;
+
+    @Mock(answer = Answers.RETURNS_SMART_NULLS)
+    private ONGRepository ongRepository;
+
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
     private AssistanceRepository assistanceRepository;
 
     @Spy
     private ModelMapper modelMapper;
 
-    @Test
-    void getAll() throws JsonProcessingException {
-        when(assistanceRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(getAssistanceArray()));
+    private final String authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJEb2FQZXQgQXBwbGljYXRpb24iLCJzdWIiOiIxIiwiaWF0IjoxNjgxNjkyOTg2LCJleHAiOjE2ODE2OTY1ODYsImNsYXNzVHlwZSI6IkRPTk9SIn0.xkg_0ZycUof3n6Gbd2zbvM0S4SYToUlA5pmFg1gqyRM";
 
-        var actualAssistanceResponse = assistanceService.getAll(PageRequest.of(0, 10));
+
+    @Test
+    void getAll() {
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
+        when(assistanceRepository.findAllByOngId(any(Pageable.class), anyLong())).thenReturn(new PageImpl<>(getAssistanceArray()));
+
+        var actualAssistanceResponse = assistanceService.getAll(PageRequest.of(0, 10), authorization);
 
         assertNotNull(actualAssistanceResponse.getContent());
         assertEquals(2, actualAssistanceResponse.getContent().size());
@@ -53,10 +66,11 @@ class AssistanceServiceImplTest {
     }
 
     @Test
-    void getById() throws JsonProcessingException{
+    void getById(){
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
         when(assistanceRepository.findById(anyLong())).thenReturn(Optional.of(getAssistance()));
 
-        var actualAssistanceResponse = assistanceService.getById(1L);
+        var actualAssistanceResponse = assistanceService.getById(1L, authorization);
 
         assertNotNull(actualAssistanceResponse);
         assertTrue(actualAssistanceResponse.getStatus());
@@ -74,24 +88,27 @@ class AssistanceServiceImplTest {
     }
 
     @Test
-    void create() throws JsonProcessingException{
+    void create(){
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
+        when(ongRepository.findById(anyLong())).thenReturn(Optional.of(ONGFactory.getONG()));
         when(assistanceRepository.save(any())).thenReturn(getAssistance());
 
-        var actualAssistanceResponse = assistanceService.create(getAssistanceRequest());
+        var actualAssistanceResponse = assistanceService.create(getAssistanceRequest(), authorization);
 
         assertNotNull(actualAssistanceResponse);
         verify(assistanceRepository, times(1)).save(any());
     }
 
     @Test
-    void updateById() throws JsonProcessingException {
+    void updateById() {
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
         when(assistanceRepository.findById(anyLong())).thenReturn(Optional.of(getAssistance()));
         when(assistanceRepository.save(any())).thenReturn(getAssistance());
 
-        var actualAssistanceResponse = assistanceService.updateById(1L, getAssistanceRequest());
+        var actualAssistanceResponse = assistanceService.updateById(1L, getAssistanceRequest(), authorization);
 
         assertNotNull(actualAssistanceResponse);
         verify(assistanceRepository, times(1)).save(any());
@@ -99,10 +116,11 @@ class AssistanceServiceImplTest {
 
     @Test
     void updateStatus_WhenSendAssistancetId_ExpectedAssistanceResponse() {
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
         when(assistanceRepository.findById(anyLong())).thenReturn(Optional.of(getAssistance()));
         when(assistanceRepository.save(any())).thenReturn(getAssistance());
 
-        var response = assistanceService.updateStatus(1L);
+        var response = assistanceService.updateStatus(1L, authorization);
 
         assertNotNull(response);
         assertEquals(AssistanceResponse.class, response.getClass());

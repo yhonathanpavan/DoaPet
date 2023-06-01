@@ -34,9 +34,7 @@ public class AssistanceController {
                                                            @Parameter(hidden = true)
                                                            @RequestHeader("Authorization") String authorization){
 
-        //Validar usuário que fez a ação
-        //findAllOngId
-        return ResponseEntity.ok(assistanceService.getAll(pageable));
+        return ResponseEntity.ok(assistanceService.getAll(pageable, authorization));
     }
 
     @GetAssistanceById
@@ -48,8 +46,7 @@ public class AssistanceController {
                                                       @Parameter(hidden = true)
                                                       @RequestHeader("Authorization") String authorization){
 
-        //Validar usuário que fez a ação
-        return ResponseEntity.ok(assistanceService.getById(id));
+        return ResponseEntity.ok(assistanceService.getById(id, authorization));
     }
 
     @GetAssistanceCategories
@@ -72,10 +69,7 @@ public class AssistanceController {
                                        @Parameter(hidden = true)
                                        @RequestHeader("Authorization") String authorization){
 
-        //Cria o relacionamento resgata id pelo metodo getUserIdFromToken do tokenService
-        //Da um findById no repo da ONG
-        //seta a ong no campo de relacionamento de assistance
-        return ResponseEntity.created(assistanceService.create(assistanceRequest)).build();
+        return ResponseEntity.created(assistanceService.create(assistanceRequest, authorization)).build();
     }
 
     @PatchAssistance
@@ -91,11 +85,7 @@ public class AssistanceController {
                                                          @Parameter(hidden = true)
                                                          @RequestHeader("Authorization") String authorization){
 
-        //Validar usuário que fez a ação
-        //Pega o token
-        //resgatar o id pelo sub
-        //findAssistanceByIdAndOngId
-        return ResponseEntity.ok(assistanceService.updateById(id, assistanceRequest));
+        return ResponseEntity.ok(assistanceService.updateById(id, assistanceRequest, authorization));
     }
 
     @PatchAssistanceStatus
@@ -107,8 +97,7 @@ public class AssistanceController {
                                           @Parameter(hidden = true)
                                           @RequestHeader("Authorization") String authorization){
 
-        //Validar usuário que fez a ação
-        return ResponseEntity.ok(assistanceService.updateStatus(id));
+        return ResponseEntity.ok(assistanceService.updateStatus(id, authorization));
     }
 
 }

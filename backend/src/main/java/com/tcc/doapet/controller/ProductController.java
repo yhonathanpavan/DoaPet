@@ -36,7 +36,7 @@ public class ProductController {
                                                 @Parameter(hidden = true)
                                                 @RequestHeader("Authorization") String authorization){
 
-        return ResponseEntity.created(productService.save(productRequest)).build();
+        return ResponseEntity.created(productService.save(productRequest, authorization)).build();
     }
 
     @GetAllProducts
@@ -48,7 +48,7 @@ public class ProductController {
                                                          @Parameter(hidden = true)
                                                          @RequestHeader("Authorization") String authorization){
 
-        return ResponseEntity.ok(productService.findAll(pageable));
+        return ResponseEntity.ok(productService.findAll(pageable, authorization));
     }
 
     @GetProductById
@@ -60,15 +60,14 @@ public class ProductController {
                                                    @Parameter(hidden = true)
                                                    @RequestHeader("Authorization") String authorization){
 
-        return ResponseEntity.ok(productService.findOne(id));
+        return ResponseEntity.ok(productService.findOne(id, authorization));
     }
 
     @GetProductCategories
     @GetMapping("/categories")
     @PreAuthorize("hasRole('ROLE_ADMIN')" +
             "|| hasRole('ROLE_ONG')")
-    public ResponseEntity<List<ProductCategory>> getProductCategories(@Parameter(hidden = true)
-                                                                      @RequestHeader("Authorization") String authorization){
+    public ResponseEntity<List<ProductCategory>> getProductCategories(){
 
         return ResponseEntity.ok(productService.getProductCategories());
     }
@@ -93,7 +92,7 @@ public class ProductController {
                                                   @Parameter(hidden = true)
                                                   @RequestHeader("Authorization") String authorization){
 
-        return ResponseEntity.ok(productService.update(id, productRequest));
+        return ResponseEntity.ok(productService.update(id, productRequest, authorization));
     }
 
     @PatchProductStatus
@@ -105,6 +104,6 @@ public class ProductController {
                                           @Parameter(hidden = true)
                                           @RequestHeader("Authorization") String authorization){
 
-        return ResponseEntity.ok(productService.updateStatus(id));
+        return ResponseEntity.ok(productService.updateStatus(id, authorization));
     }
 }

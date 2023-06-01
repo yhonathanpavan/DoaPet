@@ -30,12 +30,14 @@ class AssistanceControllerTest {
     @Mock
     private AssistanceService assistanceService;
 
+    private final String authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJEb2FQZXQgQXBwbGljYXRpb24iLCJzdWIiOiIxIiwiaWF0IjoxNjgxNjkyOTg2LCJleHAiOjE2ODE2OTY1ODYsImNsYXNzVHlwZSI6IkRPTk9SIn0.xkg_0ZycUof3n6Gbd2zbvM0S4SYToUlA5pmFg1gqyRM";
+
     @Test
     void getAll(){
-        when(assistanceService.getAll(any(Pageable.class))).thenReturn(getPageableAssistanceResponse());
+        when(assistanceService.getAll(any(Pageable.class), any())).thenReturn(getPageableAssistanceResponse());
 
         Pageable pageable = PageRequest.of(0, 10);
-        var assistanceActualResponse = assistanceController.getAll(pageable);
+        var assistanceActualResponse = assistanceController.getAll(pageable, authorization);
 
         assertNotNull(assistanceActualResponse.getBody());
         assertEquals(HttpStatus.OK, assistanceActualResponse.getStatusCode());
@@ -46,9 +48,9 @@ class AssistanceControllerTest {
 
     @Test
     void getById(){
-        when(assistanceService.getById(anyLong())).thenReturn(getAssistanceResponse());
+        when(assistanceService.getById(anyLong(), any())).thenReturn(getAssistanceResponse());
 
-        var assistanceActualResponse = assistanceController.getById(1L);
+        var assistanceActualResponse = assistanceController.getById(1L, authorization);
 
 
         assertNotNull(assistanceActualResponse.getBody());
@@ -70,9 +72,9 @@ class AssistanceControllerTest {
     @Test
     void create(){
         var uri = ServletUriComponentsBuilder.fromPath("/doapet/v1/assistances/{id}").build(1L);
-        when(assistanceService.create(any())).thenReturn(uri);
+        when(assistanceService.create(any(), any())).thenReturn(uri);
 
-        var assistanceActualResponse = assistanceController.create(getAssistanceRequest());
+        var assistanceActualResponse = assistanceController.create(getAssistanceRequest(), authorization);
 
         assertEquals(HttpStatus.CREATED, assistanceActualResponse.getStatusCode());
         assertNotNull(assistanceActualResponse.getHeaders().getLocation());
@@ -81,9 +83,9 @@ class AssistanceControllerTest {
 
     @Test
     void updateById(){
-        when(assistanceService.updateById(anyLong(), any())).thenReturn(getAssistanceResponse());
+        when(assistanceService.updateById(anyLong(), any(), any())).thenReturn(getAssistanceResponse());
 
-        var assistanceActualResponse = assistanceController.updateById(1L, getAssistanceRequest());
+        var assistanceActualResponse = assistanceController.updateById(1L, getAssistanceRequest(), authorization);
 
         assertEquals(HttpStatus.OK, assistanceActualResponse.getStatusCode());
         assertNotNull(assistanceActualResponse.getBody());
@@ -92,9 +94,9 @@ class AssistanceControllerTest {
 
     @Test
     void updateStatus_WhenSendAssistanceId_ExpectedAssistanceResponse(){
-        when(assistanceService.updateStatus(anyLong())).thenReturn(getAssistanceResponse());
+        when(assistanceService.updateStatus(anyLong(), any())).thenReturn(getAssistanceResponse());
 
-        var assistanceActualResponse = assistanceController.updateStatus(1L);
+        var assistanceActualResponse = assistanceController.updateStatus(1L, authorization);
 
         assertEquals(HttpStatus.OK, assistanceActualResponse.getStatusCode());
     }

@@ -35,4 +35,8 @@ public class Product {
     private BigDecimal price;
 
     private Boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "ONG_ID")
+    private ONG ong;
 }

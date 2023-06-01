@@ -30,6 +30,7 @@ public class ONG extends User {
     private String presidentName;
 
     @JsonProperty("biography")
+    @Column(columnDefinition = "VARCHAR(1000)")
     private String biography;
 
     @ManyToMany(fetch = FetchType.EAGER)

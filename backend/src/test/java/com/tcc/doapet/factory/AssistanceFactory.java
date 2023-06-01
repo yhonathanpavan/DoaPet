@@ -24,6 +24,7 @@ public class AssistanceFactory {
                 .assistanceCategory(AssistanceCategory.HEALTH)
                 .price(BigDecimal.valueOf(150))
                 .status(true)
+                .ong(ONGFactory.getONG())
                 .build();
     }
 
