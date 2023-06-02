@@ -2,9 +2,8 @@ package com.tcc.doapet.service.impl;
 
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
-import com.tcc.doapet.model.dto.response.ONGResponse;
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
 import com.tcc.doapet.model.dto.response.OrderResponse;
-import com.tcc.doapet.model.entity.ONG;
 import com.tcc.doapet.model.entity.Order;
 import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
@@ -15,7 +14,6 @@ import com.tcc.doapet.repository.ProductRepository;
 import com.tcc.doapet.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -86,10 +84,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse cancelOrder(Long ongId, Long orderId) {
+    public OrderResponse updateOrder(Long ongId, Long orderId, OrderStatusUpdate orderStatusUpdate){
         Order order = findOrderByOngId(ongId, orderId);
-        order.setOrderStatus(OrderStatus.CANCELED);
-        return mapper.map(orderRepository.save(order), OrderResponse.class);
+
+        if(order.getOrderStatus() == OrderStatus.PENDING){
+            order.setOrderStatus(orderStatusUpdate.getStatus());
+            return mapper.map(orderRepository.save(order), OrderResponse.class);
+        }
+        throw new BadRequestException();
     }
 
     public Order findOrderByOngId(Long ongId, Long orderId){

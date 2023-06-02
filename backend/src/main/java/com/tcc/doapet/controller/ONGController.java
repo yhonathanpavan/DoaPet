@@ -6,6 +6,7 @@ import com.tcc.doapet.helper.TokenValidation;
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
 import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
@@ -146,19 +147,20 @@ public class ONGController {
         return ResponseEntity.ok(ongService.updateStatus(id));
     }
 
-    @PatchCancelOrder
-    @PatchMapping("{ongId}/orders/{orderId}/cancel")
+    @PatchStatusOrder
+    @PatchMapping("{ongId}/orders/{orderId}/status")
     @PreAuthorize("hasRole('ROLE_ADMIN')" +
             "|| hasRole('ROLE_ONG')")
-    public ResponseEntity<?> cancelOrder(@Parameter(description = "ID da ONG requerida para atualização")
-                                         @PathVariable Long ongId,
-                                         @Parameter(description = "ID do pedido requerido para requisição")
-                                         @PathVariable Long orderId,
-                                         @Parameter(hidden = true)
-                                         @RequestHeader("Authorization") String authorization){
+    public ResponseEntity<?> updateOrderStatus(@Parameter(description = "ID da ONG requerida para atualização")
+                                               @PathVariable Long ongId,
+                                               @Parameter(description = "ID do pedido requerido para requisição")
+                                               @PathVariable Long orderId,
+                                               @Parameter(hidden = true)
+                                               @RequestHeader("Authorization") String authorization,
+                                               @Valid @RequestBody OrderStatusUpdate orderStatusUpdate) {
 
         TokenValidation.validateToken(ongId, authorization);
-        return ResponseEntity.ok(orderService.cancelOrder(ongId, orderId));
+        return ResponseEntity.ok(orderService.updateOrder(ongId, orderId, orderStatusUpdate));
     }
 
 }

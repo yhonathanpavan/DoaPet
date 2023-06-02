@@ -2,6 +2,7 @@ package com.tcc.doapet.service;
 
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,6 @@ public interface OrderService {
 
     OrderResponse update(Long ongId, Long orderId, OrderRequestUpdate orderRequest);
 
-    OrderResponse cancelOrder(Long ongId, Long orderId);
+    OrderResponse updateOrder(Long ongId, Long orderId, OrderStatusUpdate orderStatusUpdate);
 
 }

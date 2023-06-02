@@ -1,5 +1,7 @@
 package com.tcc.doapet.controller;
 
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
+import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.service.ONGService;
 import com.tcc.doapet.service.OrderService;
@@ -109,10 +111,10 @@ class ONGControllerTest {
 
     @Test
     void cancelOrder_WhenSendONGIdAndOrderId_ExpectedOK() {
-        when(orderService.cancelOrder(anyLong(), anyLong())).thenReturn(getOrderProductResponse());
-
-        var response = ongController.cancelOrder(1L, 1L, authorization);
-
+        when(orderService.updateOrder(anyLong(), anyLong(), any())).thenReturn(getOrderProductResponse());
+        var orderStatusUpdate = new OrderStatusUpdate();
+        orderStatusUpdate.setStatus(OrderStatus.FINALIZED);
+        var response = ongController.updateOrderStatus(1L, 1L, authorization, orderStatusUpdate);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
     }
