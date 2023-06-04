@@ -22,8 +22,27 @@
       </div>
     </div>
   </div>
-  <div class="btn-area">
+  <div class="btn-area" *ngIf="userType != 'ong'">
     <app-priority></app-priority>
-    <button id="donation-button">Doar</button>
+    <button id="donation-button" onclick="openModal()">Doar</button>
+  </div>
+  <div class="btn-area" *ngIf="userType != 'donor'">
+    <app-priority></app-priority>
+    <select name="status" id="status">
+      <option value="finalized">Finalizado</option>
+      <option value="canceled">Cancelado</option>
+      <option value="pending" selected>Pendente</option>
+    </select>
+    <div class="action-buttons">
+      <button id="btn-action">
+        <img src="../../../assets/icons/pencil.svg" alt="Editar">
+      </button>
+      <button id="btn-action">
+        <img src="../../../assets/icons/check.svg" alt="Finalizar">
+      </button>
+      <button id="btn-action">
+        <img src="../../../assets/icons/trash.svg" alt="Cancelar">
+      </button>
+    </div>
   </div>
 </div>

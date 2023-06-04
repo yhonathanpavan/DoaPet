@@ -8,7 +8,7 @@
 
 .donor-logo-area {
   width: 30%;
-  height: 750px;
+  height: 712px;
 
   background: #FFF1B6;
 
@@ -72,6 +72,7 @@ form {
 
 #name-group,
 #cnpj-group,
+#cpf-group,
 #pix-group {
   width: 100%;
 
@@ -84,6 +85,7 @@ form {
 
 #email-group,
 #president-group,
+#birthdate-group,
 #street-group,
 #neighborhood-group,
 #state-group {
@@ -108,12 +110,14 @@ form {
 
 #name,
 #cnpj,
+#cpf,
 #pix {
   width: 100%;
 }
 
 #email,
 #president_name,
+#birthdate,
 #street,
 #neighborhood,
 #state {

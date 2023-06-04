@@ -28,10 +28,13 @@ import { HomeDonorComponent } from './views/home-donor/home-donor.component';
 import { HomeOngComponent } from './views/home-ong/home-ong.component';
 import { PerfilPageComponent } from './views/perfil-page/perfil-page.component';
 import { OngPerfilPageComponent } from './views/ong-perfil-page/ong-perfil-page.component';
+import { HistoricPageComponent } from './views/historic-page/historic-page.component';
 
+// Import Services
 import { OngService } from './services/ong.service';
 import { ProductService } from './services/product.service';
 import { AssistanceService } from './services/assistance.service';
+import { DonorService } from './services/donor.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { AssistanceService } from './services/assistance.service';
     HomeDonorComponent,
     HomeOngComponent,
     PerfilPageComponent,
-    OngPerfilPageComponent
+    OngPerfilPageComponent,
+    HistoricPageComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,8 @@ import { AssistanceService } from './services/assistance.service';
   providers: [
     OngService,
     ProductService,
-    AssistanceService
+    AssistanceService,
+    DonorService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

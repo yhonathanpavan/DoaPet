@@ -96,3 +96,32 @@ button {
 
   cursor: pointer;
 }
+
+select {
+  width: 52%;
+  height: 25px;
+
+  border: solid 2px #EF6611;
+  border-radius: 5px;
+
+  margin-top: 10px;
+}
+
+.action-buttons {
+  width: 55%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#btn-action {
+  width: 35px;
+  height: 35px;
+}
+
+img {
+  width: 20px;
+
+  padding: auto;
+}

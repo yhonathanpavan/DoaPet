@@ -26,4 +26,8 @@ export class ProductService {
       })
     )
   };
+
+  getAllProducts(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/products`)
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card-donations',
@@ -14,9 +14,14 @@ export class CardDonationsComponent implements OnInit {
   @Input() price: string = '150,00';
   @Input() totalPrice: string = '1.500,00';
 
+  userType: string | null = '';
+  showModal = false;
+
   constructor() { }
 
   ngOnInit() {
+    // this.userType = localStorage.getItem('userType');
+    this.userType = 'donor';
+    console.log("userType ", this.userType);
   }
-
 }

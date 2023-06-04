@@ -9,30 +9,30 @@
   <div class="body">
     <div class="card">
       <div class="form-header">
-        <select name="goalRequest" id="goalRequest">
+        <select name="goalRequest" id="goalRequest" [(ngModel)]="opcaoSelecionada" (ngModelChange)="selecionarOpcao()" [ngModelOptions]="{ standalone: true }">
           <option value="">Selecione uma opção</option>
           <option *ngFor="let goal of goalList" value="{{ goal.value }}">{{ goal.option }}</option>
         </select>
         <img src="../../../assets/images/doaPet-logo.svg" alt="Logo DoaPet">
       </div>
       <div class="form">
-        <form action="">
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
           <div class="first-line">
             <label id="labelName" for="name">Nome</label>
-            <select id="name">
+            <select id="name" [(ngModel)]="nameSelected" (ngModelChange)="selectedName()" [ngModelOptions]="{ standalone: true }">
               <option value="">Selecione uma opção</option>
+              <option *ngFor="let name of listNames" [value]="name.id">{{ name.name }}</option>
             </select>
           </div>
           <div class="second-line">
             <div class="unit">
               <label for="unit">Unidade</label>
-              <p id="unit">{{ itemUnit }}</p>
+              <p id="unit">{{ listSelected.measure }}</p>
             </div>
-            <app-input-top
-            [inputLabel]='quantityLabel'
-            [inputType]='quantityType'
-            [inputStyle]='quantityStyle'
-            ></app-input-top>
+            <div class="quantity">
+              <label for="quantity">Quantidade</label>
+              <input type="number" id="quantity" name="quantity" [(ngModel)]="typedValue" (input)="catchTypedValue()">
+            </div>
             <div class="priority">
               <label for="priority" id="labelPriority">Prioridade</label>
               <select name="priority" id="priority">
@@ -47,16 +47,16 @@
           <div class="third-line">
             <div class="price">
               <label for="price">Valor Unitário</label>
-              <p id="price">R$ {{ itemPrice }}</p>
+              <p id="price">R$ {{ listSelected.price }}</p>
             </div>
             <div class="totalPrice">
               <label for="totalPrice">Valor Total</label>
-              <p id="totalPrice">R$ {{ itemTotalPrice }}</p>
+              <p id="totalPrice">R$ {{ this.typedValue * this.realValue }}</p>
             </div>
           </div>
+          <button type="submit">Incluir</button>
         </form>
       </div>
-      <button>Incluir</button>
     </div>
   </div>
 </div>

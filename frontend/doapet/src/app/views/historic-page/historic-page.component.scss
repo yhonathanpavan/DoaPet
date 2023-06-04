@@ -1,0 +1,64 @@
+.ong-area {
+  width: 68vw;
+  height: 120px;
+
+  border: solid 1px #EF6611;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: auto;
+  margin-top: 5vh;
+
+  padding: 0 20px 0 20px;
+}
+
+.header {
+  margin-top: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 70%;
+
+  margin: auto;
+  margin-top: 30px;
+}
+
+.title {
+  width: 70vw;
+
+  margin: auto;
+  margin-top: 70px;
+}
+
+.filter {
+  width: 70vw;
+
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+select {
+  width: 200px;
+  height: 25px;
+
+  border: solid 2px #EF6611;
+  border-radius: 5px;
+
+  margin-top: 10px;
+}
+
+.cards-donation {
+  width: 100%;
+
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

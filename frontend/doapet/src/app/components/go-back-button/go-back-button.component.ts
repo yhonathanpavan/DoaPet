@@ -12,4 +12,8 @@ export class GoBackButtonComponent implements OnInit {
   ngOnInit() {
   }
 
+  voltarTelaAnterior(): void {
+    window.history.back();
+  }
+
 }

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DonationsModel } from 'src/app/mocks/donations.model';
 
 @Component({
-  selector: 'app-view-donations-page',
-  templateUrl: './view-donations-page.component.html',
-  styleUrls: ['./view-donations-page.component.scss']
+  selector: 'app-historic-page',
+  templateUrl: './historic-page.component.html',
+  styleUrls: ['./historic-page.component.scss']
 })
-export class ViewDonationsPageComponent implements OnInit {
+export class HistoricPageComponent implements OnInit {
 
   btnText: string = 'Ver Perfil';
   btnWidth: string = '150px';
@@ -42,14 +42,9 @@ export class ViewDonationsPageComponent implements OnInit {
     },
   ];
 
-  flagModal = false;
-
   constructor() { }
 
   ngOnInit() {
-    this.flagModal = true;
   }
-
-
 
 }

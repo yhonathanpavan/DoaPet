@@ -1,0 +1,27 @@
+<div class="container">
+  <app-menu-bar></app-menu-bar>
+  <div class="header">
+    <app-go-back-button></app-go-back-button>
+  </div>
+  <div class="title">
+    <h1>Histórico de Solicitações</h1>
+  </div>
+  <div class="filter">
+    <select>
+      <option value="all">Todos</option>
+      <option value="finalized">Finalizado</option>
+      <option value="canceled">Cancelado</option>
+      <option value="pending">Pendente</option>
+    </select>
+  </div>
+  <div class="cards-donation">
+    <app-card-donations
+    *ngFor="let request of listDonationsRequest"
+    [name]="request.name"
+    [unit]="request.unit"
+    [quantity]="request.quantity"
+    [price]="request.price"
+    [totalPrice]="request.totalPrice"
+    ></app-card-donations>
+  </div>
+</div>

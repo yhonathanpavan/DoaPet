@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
+import axios from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { Ong } from '../models/ong';
 
@@ -26,4 +28,8 @@ export class OngService {
       })
     )
   };
+
+  updateOng(url: string, ong: Ong) {
+    return this.http.patch(url, ong);
+  }
 }

@@ -23,12 +23,14 @@ public class DonorController {
 
     private final DonorService donorService;
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping
     @GetAllDonors
     public ResponseEntity<Page<DonorResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.ok(donorService.getAll(pageable));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/{id}")
     @GetDonorById
     public ResponseEntity<DonorResponse> getById(@Parameter(description = "ID do doador requerido para requisição")
@@ -36,6 +38,7 @@ public class DonorController {
         return ResponseEntity.ok(donorService.getById(id));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @Transactional
     @PostMapping
     @PostDonor

@@ -57,3 +57,12 @@ img {
   width: 220px;
   height: 220px;
 }
+
+#btn-ong,
+#btn-donor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}

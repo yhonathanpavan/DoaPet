@@ -44,7 +44,7 @@ export class IncludeAssistancePageComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.assistance.price = this.typedValue;
+    this.assistance.price = this.typedValue;
     console.log('assistance ', this.assistance);
     this.assistanceService.createAssistance(this.assistance).subscribe(
       response => {

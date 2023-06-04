@@ -1,7 +1,10 @@
 <div class="container">
   <app-menu-bar></app-menu-bar>
   <div class="ong-area">
-    <img src="../../../assets/images/ong-example.svg" alt="Logo Ong">
+    <div class="info">
+      <p id="name_title">Focinhos Carinhosos</p>
+      <p id="email">Campinas, São Paulo</p>
+    </div>
     <app-light-orange-button
     [btnText]='btnText'
     [buttonLightStyle]='buttonLightStyle'
@@ -16,5 +19,20 @@
     [price]="request.price"
     [totalPrice]="request.totalPrice"
     ></app-card-donations>
+  </div>
+</div>
+
+<div class="modal-overlay active">
+  <div class="modal">
+    <div class="modal-header">
+      <button>X</button>
+    </div>
+    <div class="modal-content">
+      <p id="name_ong">Focinhos Carinhosos</p>
+      <p id="pix_ong">Chave Pix: focinhoscarinhosospix@gmail.com</p>
+    </div>
+    <div class="modal-footer">
+      <p>Envie o comprovante da transferência para o email: focinhoscarinhosos@gmail.com</p>
+    </div>
   </div>
 </div>

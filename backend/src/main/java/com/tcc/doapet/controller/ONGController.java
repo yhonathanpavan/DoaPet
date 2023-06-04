@@ -48,6 +48,7 @@ public class ONGController {
         return ResponseEntity.ok(ongService.getById(id));
     }
 
+
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @Transactional
     @PostMapping
@@ -58,6 +59,7 @@ public class ONGController {
         return ResponseEntity.created(ongService.create(ongRequest)).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH})
     @Transactional
     @PatchMapping("/{id}")
     @PatchONG

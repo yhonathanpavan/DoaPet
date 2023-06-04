@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -23,11 +24,16 @@ export class LoginPageComponent implements OnInit {
 
   lightBtnStyle = {'width': this.lightBtnWidth, 'height': this.lightBtnHeight, 'font-size': this.lightBtnFontSize};
 
-  userType = 'ong';
+  userType: string | null = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.userType = localStorage.getItem('userType');
   }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  };
 
 }

@@ -16,10 +16,16 @@ export class OngPerfilPageComponent implements OnInit {
   imageHash: any;
   imageName: string = '';
 
+  userType: string | null = '';
+
+  ongId = '5';
+  url = `http://localhost:8080/doapet/v1/ongs/${this.ongId}`;
+
   constructor(private ongService: OngService) { }
 
   ngOnInit() {
     this.getOng()
+    this.userType = 'ong'
   }
 
   onFileSelected(event:any): void {
@@ -52,12 +58,20 @@ export class OngPerfilPageComponent implements OnInit {
   }
 
   getOng() {
-    this.ongService.getOngById(1).subscribe(data => {
+    this.ongService.getOngById(5).subscribe(data => {
       this.ong = data;
       console.log('retorno api, ', this.ong)
     })
   }
 
-
-
+  updateOng() {
+    this.ongService.updateOng(this.url, this.ong).subscribe(
+      response => {
+        console.log(response)
+      },
+      error => {
+        console.log('ERROR ', error);
+      }
+    )
+  }
 }

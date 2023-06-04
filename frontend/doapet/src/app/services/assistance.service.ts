@@ -23,4 +23,8 @@ export class AssistanceService {
     )
   };
 
+  getAllAssistance(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/assistances`)
+  }
+
 }

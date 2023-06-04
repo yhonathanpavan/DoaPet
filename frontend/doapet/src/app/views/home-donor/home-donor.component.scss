@@ -34,6 +34,17 @@ input {
   padding-left: 10px;
 }
 
+#name_title {
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #EF6611;
+}
+
+#location {
+  font-size: 14px;
+}
+
 .ongs-list {
   width: 75%;
 
@@ -61,6 +72,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  flex-direction: column;
 }
 
 #see-detail-btn {

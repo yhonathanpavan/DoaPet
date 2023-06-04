@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pre-login-page',
@@ -7,17 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreLoginPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   goToOng() {
     localStorage.setItem('userType', 'ong');
+    this.router.navigate(['/login'])
   }
 
   goToDonor() {
     localStorage.setItem('userType', 'donor');
+    this.router.navigate(['/login'])
   }
 
 }

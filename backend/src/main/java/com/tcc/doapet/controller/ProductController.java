@@ -34,6 +34,7 @@ public class ProductController {
         return ResponseEntity.created(productService.save(productRequest)).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping
     @GetAllProducts
     public ResponseEntity<Page<ProductResponse>> findAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC)
@@ -41,6 +42,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAll(pageable));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/{id}")
     @GetProductById
     public ResponseEntity<ProductResponse> findOne(@Parameter(description = "ID do produto requerido para requisição")
