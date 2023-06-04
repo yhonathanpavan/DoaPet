@@ -6,6 +6,7 @@ import com.tcc.doapet.config.annotations.Orders.*;
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
 import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
@@ -122,13 +123,15 @@ public class ONGController {
         return ResponseEntity.ok(ongService.updateStatus(id));
     }
 
-    @PatchMapping("{ongId}/orders/{orderId}/cancel")
-    @PatchCancelOrder
-    public ResponseEntity<?> cancelOrder(@Parameter(description = "ID da ONG requerida para atualização")
-                                             @PathVariable Long ongId,
-                                         @Parameter(description = "ID do pedido requerido para requisição")
-                                         @PathVariable Long orderId){
-        return ResponseEntity.ok(orderService.cancelOrder(ongId, orderId));
+    @PatchMapping("{ongId}/orders/{orderId}/status")
+    @PatchStatusOrder
+    public ResponseEntity<?> updateOrderStatus(@Parameter(description = "ID da ONG requerida para atualização")
+                                               @PathVariable Long ongId,
+                                               @Parameter(description = "ID do pedido requerido para requisição")
+                                               @PathVariable Long orderId,
+                                               @Valid @RequestBody OrderStatusUpdate orderStatusUpdate){
+
+        return ResponseEntity.ok(orderService.cancelOrder(ongId, orderId, orderStatusUpdate));
     }
 
 }

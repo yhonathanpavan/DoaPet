@@ -42,26 +42,11 @@ public class OrderResponse {
     @JsonProperty("date")
     private LocalDate date;
 
-    @JsonProperty("start_date_assistance")
-    private LocalDateTime startDateAssistance;
-
-    @JsonProperty("completion_date_assistance")
-    private LocalDateTime completionDateAssistance;
-
     @JsonProperty("priority_level_status")
     private PriorityLevelStatus priorityLevelStatus;
 
     @JsonProperty("quantity")
     private Integer quantity;
-
-    @JsonProperty("remaining_quantity")
-    private Integer remainingQuantity;
-
-    @JsonProperty("intentions_quantity")
-    private Integer intentionsQuantity;
-
-    @JsonProperty("delivered_quantity")
-    private Integer deliveredQuantity;
 
     @JsonProperty("total_price")
     private BigDecimal totalPrice;

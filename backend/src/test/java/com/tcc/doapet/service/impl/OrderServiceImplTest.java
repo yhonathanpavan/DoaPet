@@ -1,10 +1,6 @@
 package com.tcc.doapet.service.impl;
 
-import com.tcc.doapet.factory.OrderFactory;
-import com.tcc.doapet.factory.ProductFactory;
-import com.tcc.doapet.model.dto.response.OrderResponse;
-import com.tcc.doapet.model.dto.response.ProductResponse;
-import com.tcc.doapet.model.enums.Measures;
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
 import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.repository.AssistanceRepository;
@@ -33,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.tcc.doapet.factory.AssistanceFactory.getAssistance;
-import static com.tcc.doapet.factory.ONGFactory.*;
+import static com.tcc.doapet.factory.ONGFactory.getONG;
 import static com.tcc.doapet.factory.OrderFactory.*;
 import static com.tcc.doapet.factory.ProductFactory.getProduct;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -166,8 +162,10 @@ class OrderServiceImplTest {
     void cancelOrder_WhenSendONGIdAndOrderId_ExpectedSuccess() {
         when(orderRepository.findByIdAndOngId(anyLong(), anyLong())).thenReturn(Optional.ofNullable(getAssistanceOrder()));
         when(orderRepository.save(any())).thenReturn(getAssistanceOrder());
+        var orderStatusUpdate = new OrderStatusUpdate();
+        orderStatusUpdate.setStatus(OrderStatus.FINALIZED);
 
-        var response = orderService.cancelOrder(1L, 1L);
+        var response = orderService.cancelOrder(1L, 1L, orderStatusUpdate);
 
         assertNotNull(response);
         verify(orderRepository, times(1)).save(any());

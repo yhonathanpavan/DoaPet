@@ -1,8 +1,8 @@
 package com.tcc.doapet.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.tcc.doapet.factory.OrderFactory;
-import com.tcc.doapet.model.enums.AssistanceCategory;
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
+import com.tcc.doapet.model.enums.OrderStatus;
 import com.tcc.doapet.model.enums.PriorityLevelStatus;
 import com.tcc.doapet.service.ONGService;
 import com.tcc.doapet.service.OrderService;
@@ -18,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
-import static com.tcc.doapet.factory.DonorFactory.getDonorResponse;
 import static com.tcc.doapet.factory.ONGFactory.*;
 import static com.tcc.doapet.factory.OrderFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -111,9 +110,10 @@ class ONGControllerTest {
 
     @Test
     void cancelOrder_WhenSendONGIdAndOrderId_ExpectedOK() {
-        when(orderService.cancelOrder(anyLong(), anyLong())).thenReturn(getOrderProductResponse());
-
-        var response = ongController.cancelOrder(1L, 1L);
+        when(orderService.cancelOrder(anyLong(), anyLong(), any())).thenReturn(getOrderProductResponse());
+        var orderStatusUpdate = new OrderStatusUpdate();
+        orderStatusUpdate.setStatus(OrderStatus.FINALIZED);
+        var response = ongController.updateOrderStatus(1L, 1L, orderStatusUpdate);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());

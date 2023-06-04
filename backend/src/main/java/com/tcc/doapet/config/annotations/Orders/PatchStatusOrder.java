@@ -14,10 +14,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Operation(summary = "Cancela um pedido.", description = "Atualiza o status do pedido para cancelado",
+@Operation(summary = "Altera o status de um pedido.", description = "Atualiza o status do pedido para cancelado ou finalizado",
         tags = {"Pedidos"})
 @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ok", content = @Content(mediaType = "application/json")),
         @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ApiExceptionHandler.class), mediaType = "application/json"))} )
-public @interface PatchCancelOrder {
+public @interface PatchStatusOrder {
 }
 

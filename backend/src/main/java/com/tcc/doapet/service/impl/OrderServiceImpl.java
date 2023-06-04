@@ -2,6 +2,7 @@ package com.tcc.doapet.service.impl;
 
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
+import com.tcc.doapet.model.dto.request.OrderStatusUpdate;
 import com.tcc.doapet.model.dto.response.ONGResponse;
 import com.tcc.doapet.model.dto.response.OrderResponse;
 import com.tcc.doapet.model.entity.ONG;
@@ -86,10 +87,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse cancelOrder(Long ongId, Long orderId) {
+    public OrderResponse cancelOrder(Long ongId, Long orderId, OrderStatusUpdate orderStatusUpdate){
         Order order = findOrderByOngId(ongId, orderId);
-        order.setOrderStatus(OrderStatus.CANCELED);
-        return mapper.map(orderRepository.save(order), OrderResponse.class);
+
+        if(order.getOrderStatus() == OrderStatus.PENDING){
+            order.setOrderStatus(orderStatusUpdate.getStatus());
+            return mapper.map(orderRepository.save(order), OrderResponse.class);
+        }
+        throw new BadRequestException();
     }
 
     public Order findOrderByOngId(Long ongId, Long orderId){
