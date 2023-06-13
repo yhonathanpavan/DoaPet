@@ -1,5 +1,6 @@
 package com.tcc.doapet.model.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -50,6 +51,7 @@ public class ONGResponse {
     private String biography;
 
     @JsonProperty("profile_picture")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String profilePicture;
 
     @JsonProperty("status")

@@ -30,10 +30,6 @@ public class Order {
     private ONG ong;
 
     @ManyToOne
-    @JoinColumn(name = "DONOR_ID")
-    private Donor donor;
-
-    @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
