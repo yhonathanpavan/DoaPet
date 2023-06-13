@@ -25,9 +25,6 @@ public class OrderResponse {
     @JsonProperty("ong")
     private ONGResponse ong;
 
-    @JsonProperty("donor")
-    private DonorResponse donor;
-
     @JsonProperty("product")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private ProductResponse product;

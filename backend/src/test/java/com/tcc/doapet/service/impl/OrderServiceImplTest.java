@@ -119,7 +119,6 @@ class OrderServiceImplTest {
         assertEquals(2, actualOrderResponse.getContent().size());
         assertEquals(getAssistanceOrder().getId(), actualOrderResponse.getContent().get(0).getId());
         assertEquals(getAssistanceOrder().getOng().getId(), actualOrderResponse.getContent().get(0).getOng().getId());
-        assertEquals(getAssistanceOrder().getDonor().getId(), actualOrderResponse.getContent().get(0).getDonor().getId());
         assertEquals(getAssistanceOrder().getAssistance().getId(), actualOrderResponse.getContent().get(0).getAssistance().getId());
         assertEquals(getProductOrder().getProduct().getId(), actualOrderResponse.getContent().get(1).getProduct().getId());
         assertEquals(getAssistanceOrder().getOrderStatus(), actualOrderResponse.getContent().get(0).getOrderStatus());
@@ -133,8 +132,6 @@ class OrderServiceImplTest {
 
         assertNotNull(actualOrderResponse);
         assertEquals(getOrderAssistanceResponse().getId(), actualOrderResponse.getId());
-        assertEquals(getOrderAssistanceResponse().getDonor().getCpf(), actualOrderResponse.getDonor().getCpf());
-        assertEquals(getOrderAssistanceResponse().getDonor().getName(), actualOrderResponse.getDonor().getName());
         assertEquals(getOrderAssistanceResponse().getOng().getPresidentName(), actualOrderResponse.getOng().getPresidentName());
         assertEquals(getOrderAssistanceResponse().getOng().getCnpj(), actualOrderResponse.getOng().getCnpj());
     }
