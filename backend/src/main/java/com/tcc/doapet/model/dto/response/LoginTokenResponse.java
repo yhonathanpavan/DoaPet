@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Getter
@@ -12,8 +11,10 @@ import org.springframework.stereotype.Service;
 @Builder
 public class LoginTokenResponse {
 
-
     private String token;
 
     private String type;
+
+    private Long authenticatedUserId;
+
 }

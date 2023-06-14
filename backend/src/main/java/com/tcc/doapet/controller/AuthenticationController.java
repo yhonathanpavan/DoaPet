@@ -33,8 +33,13 @@ public class AuthenticationController {
         var authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         var token = tokenService.generateToken(authentication);
+        var userId = tokenService.getUserIdFromToken(token);
 
-        return ResponseEntity.ok(LoginTokenResponse.builder().type("Bearer").token(token).build());
+        return ResponseEntity.ok(LoginTokenResponse.builder()
+                .authenticatedUserId(userId)
+                .type("Bearer")
+                .token(token)
+                .build());
     }
 
 
