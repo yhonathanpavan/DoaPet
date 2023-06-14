@@ -50,7 +50,7 @@
             </div>
             <div class="totalPrice">
               <label for="totalPrice">Valor Total</label>
-              <p id="totalPrice" [(ngModel)]="order.total_price" [ngModelOptions]="{ standalone: true }">R$ {{ this.typedValue * this.realValue }}</p>
+              <p id="totalPrice" [(ngModel)]="order.total_price" [ngModelOptions]="{ standalone: true }">R$ {{ (this.typedValue * this.realValue).toFixed(2) }}</p>
             </div>
           </div>
           <button type="submit">Incluir</button>

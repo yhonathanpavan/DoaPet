@@ -25,7 +25,7 @@ export class OngPerfilPageComponent implements OnInit {
   ngOnInit() {
     this.ongId = localStorage.getItem('savedOng')
     this.getOng()
-    this.userType = 'ong'
+    this.userType = localStorage.getItem('userType')
   }
 
   onFileSelected(event:any): void {

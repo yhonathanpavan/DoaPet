@@ -10,7 +10,7 @@
         <p id="email">{{ ong.city }}, {{ ong.state }}</p>
       </div>
     </div>
-    <div class="edit-area">
+    <div class="edit-area" *ngIf="userType === 'ong'">
       <form (ngSubmit)="updateOng()" #myForm="ngForm">
         <div class="form-group" id="name-group">
           <label for="name">Nome</label>
@@ -91,7 +91,7 @@
         </div>
       </form>
     </div>
-    <div class="edit-area" *ngIf="userType != 'ong'">
+    <div class="edit-area" *ngIf="userType === 'donor'">
       <form #myForm="ngForm">
         <div class="form-group" id="name-group">
           <label for="name">Nome</label>
