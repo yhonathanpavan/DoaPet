@@ -18,12 +18,12 @@ export class OngPerfilPageComponent implements OnInit {
 
   userType: string | null = '';
 
-  ongId = '5';
-  url = `http://localhost:8080/doapet/v1/ongs/${this.ongId}`;
+  ongId: any;
 
   constructor(private ongService: OngService) { }
 
   ngOnInit() {
+    this.ongId = localStorage.getItem('savedOng')
     this.getOng()
     this.userType = 'ong'
   }
@@ -58,14 +58,15 @@ export class OngPerfilPageComponent implements OnInit {
   }
 
   getOng() {
-    this.ongService.getOngById(5).subscribe(data => {
+    this.ongService.getOngById(this.ongId).subscribe(data => {
       this.ong = data;
       console.log('retorno api, ', this.ong)
     })
   }
 
   updateOng() {
-    this.ongService.updateOng(this.url, this.ong).subscribe(
+    let url = `http://localhost:8080/doapet/v1/ongs/${this.ongId}`;
+    this.ongService.updateOng(url, this.ong).subscribe(
       response => {
         console.log(response)
       },

@@ -31,16 +31,15 @@
             </div>
             <div class="quantity">
               <label for="quantity">Quantidade</label>
-              <input type="number" id="quantity" name="quantity" [(ngModel)]="typedValue" (input)="catchTypedValue()">
+              <input type="number" id="quantity" name="quantity" [(ngModel)]="typedValue" (input)="catchTypedValue()" [ngModelOptions]="{ standalone: true }">
             </div>
             <div class="priority">
               <label for="priority" id="labelPriority">Prioridade</label>
-              <select name="priority" id="priority">
+              <select name="priority" id="priority" [(ngModel)]="order.priority_level_status">
                 <option value="">Selecione uma opção</option>
-                <option value="Low">Baixa</option>
-                <option value="medium">Média</option>
-                <option value="high">Alta</option>
-                <option value="urgent">Urgente</option>
+                <option value="Baixo">Baixa</option>
+                <option value="Medio">Média</option>
+                <option value="Alto">Alta</option>
               </select>
             </div>
           </div>
@@ -51,7 +50,7 @@
             </div>
             <div class="totalPrice">
               <label for="totalPrice">Valor Total</label>
-              <p id="totalPrice">R$ {{ this.typedValue * this.realValue }}</p>
+              <p id="totalPrice" [(ngModel)]="order.total_price" [ngModelOptions]="{ standalone: true }">R$ {{ this.typedValue * this.realValue }}</p>
             </div>
           </div>
           <button type="submit">Incluir</button>

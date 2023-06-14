@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DonationsModel } from 'src/app/mocks/donations.model';
+import { Router } from '@angular/router';
+
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-view-donations-page',
@@ -13,43 +16,49 @@ export class ViewDonationsPageComponent implements OnInit {
   btnHeight: string = '50px';
   btnFont: string = '16px';
 
-  buttonLightStyle = {'width': this.btnWidth, 'height': this.btnHeight, 'font-size': this.btnFont}
+  buttonLightStyle = {'width': this.btnWidth, 'height': this.btnHeight, 'font-size': this.btnFont};
 
-  listDonationsRequest: DonationsModel[] = [
-    {
-      name: 'Saco Ração Seca Origens para Cães Adultos',
-      weight: '10',
-      unit: 'kg',
-      quantity: '10',
-      price: '150,00',
-      totalPrice: '1500,00'
-    },
-    {
-      name: 'Saco Ração Seca Origens para Gatos Filhotes',
-      weight: '5',
-      unit: 'kg',
-      quantity: '10',
-      price: '70,00',
-      totalPrice: '700,00'
-    },
-    {
-      name: 'Castração de Cachorros Machos',
-      weight: '',
-      unit: '',
-      quantity: '5',
-      price: '300,00',
-      totalPrice: '1.500,00'
-    },
-  ];
+  savedOngId: any;
+
+  listDonationsRequest = [];
 
   flagModal = false;
 
-  constructor() { }
+  order: any;
+  variavelCompartilhada: boolean = false;
+
+  constructor(
+    private orderService: OrderService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.flagModal = true;
+    this.savedOngId = localStorage.getItem('savedOng');
+    console.log('savedOng ', this.savedOngId);
+    this.getOrders();
   }
 
+  getOrders() {
+    this.orderService.getById(this.savedOngId).subscribe((data: any) => {
+      this.listDonationsRequest = data.content;
+      console.log(this.listDonationsRequest)
+    })
+  }
 
+  receberVariavelCompartilhada(valor: any) {
+    this.variavelCompartilhada = valor;
+  }
 
+  goToPerfilOng() {
+    this.router.navigate(['/ong_perfil']);
+  }
+
+  handleBoolean(value: boolean) {
+    this.flagModal = value;
+    console.log('flagModal ', this.flagModal);
+  }
+
+  closeModal() {
+    this.flagModal = false
+  }
 }

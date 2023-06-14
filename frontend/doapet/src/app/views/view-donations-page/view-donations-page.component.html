@@ -2,37 +2,40 @@
   <app-menu-bar></app-menu-bar>
   <div class="ong-area">
     <div class="info">
-      <p id="name_title">Focinhos Carinhosos</p>
-      <p id="email">Campinas, São Paulo</p>
+      <p id="name_title">{{ this.listDonationsRequest[0]['ong']['name'] }}</p>
+      <p id="email">{{ this.listDonationsRequest[0]['ong']['city'] }}, {{ this.listDonationsRequest[0]['ong']['state'] }}</p>
     </div>
     <app-light-orange-button
     [btnText]='btnText'
     [buttonLightStyle]='buttonLightStyle'
+    (click)="goToPerfilOng()"
     ></app-light-orange-button>
   </div>
   <div class="cards-donation">
     <app-card-donations
     *ngFor="let request of listDonationsRequest"
-    [name]="request.name"
-    [unit]="request.unit"
-    [quantity]="request.quantity"
-    [price]="request.price"
-    [totalPrice]="request.totalPrice"
+    [name]="request['product']['name']"
+    [unit]="request['product']['measure']"
+    [quantity]="request['quantity']"
+    [price]="request['product']['price']"
+    [totalPrice]="request['total_price']"
+    [priority_order]="request['priority_level_status']"
+    (booleanOutput)="handleBoolean($event)"
     ></app-card-donations>
   </div>
 </div>
 
-<div class="modal-overlay active">
+<div class="modal-overlay" *ngIf="this.flagModal == true">
   <div class="modal">
     <div class="modal-header">
-      <button>X</button>
+      <button id="closeButton" (click)="closeModal()">X</button>
     </div>
     <div class="modal-content">
-      <p id="name_ong">Focinhos Carinhosos</p>
-      <p id="pix_ong">Chave Pix: focinhoscarinhosospix@gmail.com</p>
+      <p id="name_ong">{{ this.listDonationsRequest[0]['ong']['name'] }}</p>
+      <p id="pix_ong">Chave Pix: {{ this.listDonationsRequest[0]['ong']['pix'] }}</p>
     </div>
     <div class="modal-footer">
-      <p>Envie o comprovante da transferência para o email: focinhoscarinhosos@gmail.com</p>
+      <p>Envie o comprovante da transferência para o email: {{ this.listDonationsRequest[0]['ong']['email'] }}</p>
     </div>
   </div>
 </div>

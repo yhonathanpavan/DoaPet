@@ -72,6 +72,7 @@ public class ONGController {
         return ResponseEntity.ok(ongService.updateById(id, ongRequest));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @PostMapping("/{ongId}/orders")
     @PostOrder
     public ResponseEntity<OrderResponse> saveOrder(@Parameter(description = "ID do pedido requerida para criação")
@@ -82,6 +83,7 @@ public class ONGController {
         return ResponseEntity.created(orderService.save(ongId, orderRequest)).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/{ongId}/orders")
     @GetAllOrders
     public ResponseEntity<Page<OrderResponse>> findAllOrders(@Parameter(description = "ID da ONG requerida para requisição")
@@ -90,6 +92,7 @@ public class ONGController {
         return ResponseEntity.ok(orderService.findAll(ongId, pageable));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/{ongId}/orders/{orderId}")
     @GetOrderById
     public ResponseEntity<OrderResponse> findOrderById(@Parameter(description = "ID da ONG requerida para requisição")
@@ -99,6 +102,7 @@ public class ONGController {
         return ResponseEntity.ok(orderService.findOne(ongId, orderId));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/priorities_level_status")
     @GetOrderPrioritiesLevelStatus
     public ResponseEntity<List<PriorityLevelStatus>> getPrioritiesLevelStatus(){

@@ -48,6 +48,7 @@ public class DonorController {
         return ResponseEntity.created(donorService.create(donorRequest)).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH})
     @Transactional
     @PatchMapping("/{id}")
     @PatchDonor
@@ -59,6 +60,7 @@ public class DonorController {
         return ResponseEntity.ok(donorService.updateById(id, donorRequest));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH})
     @PatchMapping("/{id}/status")
     @PatchDonorStatus
     public ResponseEntity<?> updateStatus(@PathVariable Long id){

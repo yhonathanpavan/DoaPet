@@ -7,4 +7,5 @@ export class Order {
   quantity: number = 0;
   order_status: string = '';
   priority_level_status: string = '';
+  total_price: number = 0;
 }

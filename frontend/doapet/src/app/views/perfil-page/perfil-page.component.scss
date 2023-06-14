@@ -52,23 +52,72 @@ img {
   justify-content: center;
 
   flex-direction: column;
+
+  margin-top: 20px;
 }
 
-#first-line {
-  width: 100%;
-
-  margin-top: 30px;
-}
-
-#second-line,
-#third-line {
+.form-group {
   width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
 
-  margin-top: 15px;
+#name-group {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+#email-group,
+#phone-group {
+  width: 60%;
+}
+
+#password-group,
+#born-group {
+  width: 40%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  flex-direction: column;
+
+  margin-left: 20px;
+}
+
+#name_input,
+#email,
+#password,
+#phone_number,
+#born_date {
+  width: 100%;
+}
+
+input {
+  height: 40px;
+
+  background: #FFF;
+
+  border: 3px solid #D5D5D5;
+  border-radius: 10px;
+
+  padding-left: 10px;
+}
+
+label, p {
+  font-weight: 700;
+  font-size: 14px;
+
+  color: rgba(0, 0, 0, 0.48);
+
+  margin-top: 5px;
 }
 
 .button-area {

@@ -36,4 +36,12 @@ export class LoginPageComponent implements OnInit {
     this.router.navigate(['/register']);
   };
 
+  goToHome() {
+    if(this.userType === 'donor') {
+      this.router.navigate(['/home_donor'])
+    } else {
+      this.router.navigate(['/home_ong'])
+    }
+  }
+
 }

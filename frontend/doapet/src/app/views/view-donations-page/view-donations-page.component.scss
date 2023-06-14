@@ -43,8 +43,8 @@
   align-items: center;
   justify-content: center;
 
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
 
   z-index: 999;
 }
@@ -98,5 +98,9 @@ button {
 
   font-size: 12px;
   text-align: center;
+}
+
+#closeButton {
+  cursor: pointer;
 }
 

@@ -10,6 +10,10 @@ export class DonorService {
 
   constructor(private http: HttpClient) { }
 
+  getOngById(ongId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/donors/${ongId}`)
+  }
+
   createDonor(donor: Donor): Observable<any> {
     return this.http.post<Donor>(`${this.baseUrl}/donors`, donor).pipe(
       catchError(error => {
@@ -17,6 +21,10 @@ export class DonorService {
         return of(null);
       })
     )
+  }
+
+  updateDonor(url: string, donor: Donor) {
+    return this.http.patch(url, donor)
   }
 
 }

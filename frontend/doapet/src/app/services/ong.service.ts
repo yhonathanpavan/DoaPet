@@ -16,7 +16,7 @@ export class OngService {
     return this.http.get<any>(`${this.baseUrl}/ongs`);
   };
 
-  getOngById(ongId: number) {
+  getOngById(ongId: number): Observable<any>{
     return this.http.get(`${this.baseUrl}/ongs/${ongId}`)
   };
 

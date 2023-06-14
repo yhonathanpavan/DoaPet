@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuBarComponent implements OnInit {
 
-  constructor() { }
+  userType: string | null = '';
+  link = '';
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.userType = localStorage.getItem('userType');
+    this.goToPerfil();
+  }
+
+  goToPerfil() {
+    if(this.userType === 'donor') {
+      this.link = '/donor_perfil'
+    } else {
+      this.link = '/ong_perfil'
+    }
   }
 
 }

@@ -23,8 +23,9 @@
     </div>
   </div>
   <div class="btn-area" *ngIf="userType != 'ong'">
-    <app-priority></app-priority>
-    <button id="donation-button" onclick="openModal()">Doar</button>
+    <label for="priority_order" id="priority_order">Prioridade: </label>
+    <p id="priority_order">{{ priority_order }}</p>
+    <button id="donation-button" (click)="openModal()">Doar</button>
   </div>
   <div class="btn-area" *ngIf="userType != 'donor'">
     <app-priority></app-priority>

@@ -6,47 +6,40 @@
   <div class="perfil-content">
     <div class="information-area">
       <div class="info">
-        <p id="name">João Silva</p>
-        <p id="email">joao_silva@gmail.com</p>
+        <p id="name">{{ donor.name }}</p>
+        <p id="email">{{ donor.email }}</p>
       </div>
     </div>
     <div class="edit-area">
       <form action="">
-        <div id="first-line">
-          <app-input-top
-          [inputLabel]="nameLabel"
-          [inputType]="nameType"
-          [inputStyle]="nameStyle"
-          ></app-input-top>
+        <div class="form-group" id="name-group">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name_input" name="name" [(ngModel)]="donor.name" required>
         </div>
-        <div id="second-line">
-          <app-input-top
-          [inputLabel]="emailLabel"
-          [inputType]="emailType"
-          [inputStyle]="emailStyle"
-          ></app-input-top>
-          <app-input-top
-          [inputLabel]="passLabel"
-          [inputType]="passType"
-          [inputStyle]="passStyle"
-          ></app-input-top>
+        <div class="form-group">
+          <div id="email-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="donor.email" required>
+          </div>
+          <div id="password-group">
+            <label for="name">Senha</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="donor.password" required>
+          </div>
         </div>
-        <div id="third-line">
-          <app-input-top
-          [inputLabel]="phoneLabel"
-          [inputType]="phoneType"
-          [inputStyle]="phoneStyle"
-          ></app-input-top>
-          <app-input-top
-          [inputLabel]="bornLabel"
-          [inputType]="bornType"
-          [inputStyle]="bornStyle"
-          ></app-input-top>
+        <div class="form-group">
+          <div id="phone-group">
+            <label for="phone_number">Telefone</label>
+            <input type="tel" class="form-control" id="phone_number" name="phone_number" [(ngModel)]="donor.phone_number" required>
+          </div>
+          <div id="born-group">
+            <label for="born_date">Data de Nascimento</label>
+            <input type="date" class="form-control" id="born_date" name="born_date" [(ngModel)]="donor.birthdate" required>
+          </div>
         </div>
       </form>
     </div>
     <div class="button-area">
-      <button id="save-btn">Salvar Alterações</button>
+      <button id="save-btn" (click)="updateDonor()">Salvar Alterações</button>
     </div>
   </div>
 </div>

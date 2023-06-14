@@ -5,6 +5,7 @@ import { AssistanceService } from 'src/app/services/assistance.service';
 import { OrderService } from 'src/app/services/order.service';
 
 import { Order } from 'src/app/models/order';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-include-request-page',
@@ -49,8 +50,9 @@ export class IncludeRequestPageComponent implements OnInit {
     product_id: 0,
     assistance_id: 0,
     quantity: 0,
-    order_status: "",
-    priority_level_status: ""
+    order_status: "Pendente",
+    priority_level_status: "",
+    total_price: 0
   }
 
   constructor(
@@ -110,6 +112,7 @@ export class IncludeRequestPageComponent implements OnInit {
       this.order.product_id = this.nameSelected;
     } else {
       this.order.assistance_id = this.nameSelected;
+      console.log('assistance ', this.order.assistance_id)
     }
 
     console.log('nameSelected ', this.nameSelected);
@@ -132,9 +135,17 @@ export class IncludeRequestPageComponent implements OnInit {
   catchTypedValue() {
     console.log('Valor digitado:', this.typedValue);
     console.log(this.typedValue * this.realValue)
+    this.order.total_price = this.typedValue * this.realValue;
   }
 
   onSubmit() {
+    if(this.opcaoSelecionada === 'product') {
+      this.order.product_id = this.nameSelected;
+    } else {
+      this.order.assistance_id = this.nameSelected;
+    }
+    this.order.quantity = this.typedValue;
+    console.log('order', this.order)
     this.orderService.createOrder(this.order).subscribe(
       response => {
         console.log(response);
@@ -143,5 +154,6 @@ export class IncludeRequestPageComponent implements OnInit {
         console.log(error);
       }
     )
+    location.reload();
   }
 }

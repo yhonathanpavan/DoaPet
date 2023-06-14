@@ -13,9 +13,12 @@ export class CardDonationsComponent implements OnInit {
   @Input() quantity: string = '10';
   @Input() price: string = '150,00';
   @Input() totalPrice: string = '1.500,00';
+  @Input() priority_order: string = 'Alta';
 
   userType: string | null = '';
   showModal = false;
+
+  @Output() booleanOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -24,4 +27,9 @@ export class CardDonationsComponent implements OnInit {
     this.userType = 'donor';
     console.log("userType ", this.userType);
   }
+
+  openModal() {
+    this.booleanOutput.emit(true);
+  }
+
 }

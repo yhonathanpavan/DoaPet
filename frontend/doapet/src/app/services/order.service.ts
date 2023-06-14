@@ -13,12 +13,16 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   createOrder(order: Order): Observable<any> {
-    return this.http.post<Order>(`${this.baseUrl}/1/orders`, order).pipe(
+    return this.http.post<Order>(`${this.baseUrl}/ongs/1/orders`, order).pipe(
       catchError(error => {
         console.log('ERROR: ', error);
         return of (null)
       })
     )
+  }
+
+  getById(ongId: number) {
+    return this.http.get(`${this.baseUrl}/ongs/${ongId}/orders`)
   }
 
 }
