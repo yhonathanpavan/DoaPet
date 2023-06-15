@@ -23,6 +23,6 @@ public interface OrderService {
 
     OrderResponse update(Long ongId, Long orderId, OrderRequestUpdate orderRequest);
 
-    OrderResponse cancelOrder(Long ongId, Long orderId, OrderStatusUpdate orderStatusUpdate);
+    OrderResponse updateOrder(Long ongId, Long orderId, OrderStatusUpdate orderStatusUpdate);
 
 }

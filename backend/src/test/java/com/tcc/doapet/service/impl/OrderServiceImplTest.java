@@ -162,7 +162,7 @@ class OrderServiceImplTest {
         var orderStatusUpdate = new OrderStatusUpdate();
         orderStatusUpdate.setStatus(OrderStatus.FINALIZED);
 
-        var response = orderService.cancelOrder(1L, 1L, orderStatusUpdate);
+        var response = orderService.updateOrder(1L, 1L, orderStatusUpdate);
 
         assertNotNull(response);
         verify(orderRepository, times(1)).save(any());

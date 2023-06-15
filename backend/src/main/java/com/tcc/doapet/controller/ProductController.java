@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,57 +27,88 @@ public class ProductController {
     private final ProductService productService;
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @PostMapping
     @PostProduct
+    @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<ProductResponse> save(@io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Requerido para a criação de um novo produto")
-                                                    @Valid @RequestBody ProductRequest productRequest){
-        return ResponseEntity.created(productService.save(productRequest)).build();
+                                                description = "Requerido para a criação de um novo produto")
+                                                @Valid @RequestBody ProductRequest productRequest,
+                                                @Parameter(hidden = true)
+                                                @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.created(productService.save(productRequest, authorization)).build();
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping
     @GetAllProducts
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<Page<ProductResponse>> findAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC)
-                                                         Pageable pageable){
-        return ResponseEntity.ok(productService.findAll(pageable));
+                                                         Pageable pageable,
+                                                         @Parameter(hidden = true)
+                                                         @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(productService.findAll(pageable, authorization));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/{id}")
     @GetProductById
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<ProductResponse> findOne(@Parameter(description = "ID do produto requerido para requisição")
-                                                       @PathVariable Long id){
-        return ResponseEntity.ok(productService.findOne(id));
+                                                   @PathVariable Long id,
+                                                   @Parameter(hidden = true)
+                                                   @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(productService.findOne(id, authorization));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/categories")
     @GetProductCategories
+    @GetMapping("/categories")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<List<ProductCategory>> getProductCategories(){
+
         return ResponseEntity.ok(productService.getProductCategories());
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/measures")
     @GetProductMeasures
+    @GetMapping("/measures")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<List<Measures>> getProductMeasures(){
+
         return ResponseEntity.ok(productService.getProductMeasures());
     }
 
-    @PatchMapping("/{id}")
     @PatchProduct
+    @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<ProductResponse> update(@Parameter(description = "ID requerido para atualização")
-                                                      @PathVariable Long id,
+                                                  @PathVariable Long id,
                                                   @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                                                          description = "Requerido para a atualização de um novo produto")@RequestBody ProductRequest productRequest){
-        return ResponseEntity.ok(productService.update(id, productRequest));
+                                                  description = "Requerido para a atualização de um novo produto")@RequestBody ProductRequest productRequest,
+                                                  @Parameter(hidden = true)
+                                                  @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(productService.update(id, productRequest, authorization));
     }
 
-    @PatchMapping("/{id}/status")
     @PatchProductStatus
+    @PatchMapping("/{id}/status")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<?> updateStatus(@Parameter(description = "ID requerido para alteração de status")
-                                              @PathVariable Long id){
-        return ResponseEntity.ok(productService.updateStatus(id));
+                                          @PathVariable Long id,
+                                          @Parameter(hidden = true)
+                                          @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(productService.updateStatus(id, authorization));
     }
 }

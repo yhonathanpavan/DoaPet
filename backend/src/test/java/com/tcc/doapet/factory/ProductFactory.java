@@ -33,6 +33,7 @@ public class ProductFactory {
                 .productCategory(PRODUCT_CATEGORY)
                 .price(PRICE)
                 .status(ACTIVE)
+                .ong(ONGFactory.getONG())
                 .build();
     }
 

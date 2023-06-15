@@ -1,8 +1,8 @@
 package com.tcc.doapet.controller;
 
 import com.tcc.doapet.config.annotations.ONG.*;
-import com.tcc.doapet.config.annotations.ONG.PatchONG;
 import com.tcc.doapet.config.annotations.Orders.*;
+import com.tcc.doapet.helper.TokenValidation;
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.request.OrderRequest;
 import com.tcc.doapet.model.dto.request.OrderRequestUpdate;
@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -35,107 +36,140 @@ public class ONGController {
     private final OrderService orderService;
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping
     @GetAllONGs
+    @GetMapping
     public ResponseEntity<Page<ONGResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+
         return ResponseEntity.ok(ongService.getAll(pageable));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/{id}")
     @GetONGById
+    @GetMapping("/{id}")
     public ResponseEntity<ONGResponse> getById(@Parameter(description = "ID da ONG requerida para requisição")
-                                                   @PathVariable Long id){
+                                               @PathVariable Long id){
+
         return ResponseEntity.ok(ongService.getById(id));
     }
 
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
+    @PostONG
     @Transactional
     @PostMapping
-    @PostONG
     public ResponseEntity<Void> create(@io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Requerido para a criação de uma nova ONG")
-                                           @Valid @RequestBody ONGRequest ongRequest){
+                                        description = "Requerido para a criação de uma nova ONG")
+                                       @Valid @RequestBody ONGRequest ongRequest){
+
         return ResponseEntity.created(ongService.create(ongRequest)).build();
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH})
+    @PatchONG
     @Transactional
     @PatchMapping("/{id}")
-    @PatchONG
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<ONGResponse> updateById(@Parameter(description = "ID da ONG requerida para atualização")
-                                                      @PathVariable Long id,
+                                                  @PathVariable Long id,
                                                   @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                                                          description = "Requerido para a atualiação de uma ONG")
-                                                  @RequestBody ONGRequest ongRequest){
+                                                  description = "Requerido para a atualiação de uma ONG")
+                                                  @RequestBody ONGRequest ongRequest,
+                                                  @Parameter(hidden = true)
+                                                  @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(ongService.updateById(id, ongRequest));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @PostMapping("/{ongId}/orders")
     @PostOrder
+    @PostMapping("/{ongId}/orders")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<OrderResponse> saveOrder(@Parameter(description = "ID do pedido requerida para criação")
-                                                       @PathVariable Long ongId,
+                                                   @PathVariable Long ongId,
                                                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                                                           description = "Requerido para a criação de um pedido")
+                                                   description = "Requerido para a criação de um pedido")
                                                    @Valid @RequestBody OrderRequest orderRequest){
+
         return ResponseEntity.created(orderService.save(ongId, orderRequest)).build();
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/{ongId}/orders")
     @GetAllOrders
+    @GetMapping("/{ongId}/orders")
     public ResponseEntity<Page<OrderResponse>> findAllOrders(@Parameter(description = "ID da ONG requerida para requisição")
-                                                                 @PathVariable Long ongId,
-            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+                                                             @PathVariable Long ongId,
+                                                             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+
         return ResponseEntity.ok(orderService.findAll(ongId, pageable));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/{ongId}/orders/{orderId}")
     @GetOrderById
+    @GetMapping("/{ongId}/orders/{orderId}")
     public ResponseEntity<OrderResponse> findOrderById(@Parameter(description = "ID da ONG requerida para requisição")
-                                                           @PathVariable Long ongId,
+                                                       @PathVariable Long ongId,
                                                        @Parameter(description = "ID do pedido requerido para requisição")
-                                                           @PathVariable Long orderId){
+                                                       @PathVariable Long orderId){
+
         return ResponseEntity.ok(orderService.findOne(ongId, orderId));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/priorities_level_status")
     @GetOrderPrioritiesLevelStatus
+    @GetMapping("/priorities_level_status")
     public ResponseEntity<List<PriorityLevelStatus>> getPrioritiesLevelStatus(){
+
         return ResponseEntity.ok(orderService.getPrioritiesLevelStatus());
     }
 
-    @PatchMapping("/{ongId}/orders/{orderId}")
+
     @PatchOrder
+    @PatchMapping("/{ongId}/orders/{orderId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<OrderResponse> updateOrderById(@Parameter(description = "ID da ONG requerida para atualização")
-                                                             @PathVariable Long ongId,
+                                                         @PathVariable Long ongId,
                                                          @Parameter(description = "ID do pedido requerido para requisição")
                                                          @PathVariable Long orderId,
                                                          @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                                                                 description = "Requerido para a atualização de um pedido")
-                                                             @RequestBody OrderRequestUpdate orderRequest){
+                                                         description = "Requerido para a atualização de um pedido")
+                                                         @RequestBody OrderRequestUpdate orderRequest,
+                                                         @Parameter(hidden = true)
+                                                         @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(ongId, authorization);
         return ResponseEntity.ok(orderService.update(ongId, orderId, orderRequest));
     }
 
-    @PatchMapping("/{id}/status")
     @PatchONGStatus
-    public ResponseEntity<?> updateStatus(@PathVariable Long id){
+    @PatchMapping("/{id}/status")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id,
+                                          @Parameter(hidden = true)
+                                          @RequestHeader("Authorization") String authorization){
+
+        TokenValidation.validateToken(id, authorization);
         return ResponseEntity.ok(ongService.updateStatus(id));
     }
 
-    @PatchMapping("{ongId}/orders/{orderId}/status")
     @PatchStatusOrder
+    @PatchMapping("{ongId}/orders/{orderId}/status")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<?> updateOrderStatus(@Parameter(description = "ID da ONG requerida para atualização")
                                                @PathVariable Long ongId,
                                                @Parameter(description = "ID do pedido requerido para requisição")
                                                @PathVariable Long orderId,
-                                               @Valid @RequestBody OrderStatusUpdate orderStatusUpdate){
+                                               @Parameter(hidden = true)
+                                               @RequestHeader("Authorization") String authorization,
+                                               @Valid @RequestBody OrderStatusUpdate orderStatusUpdate) {
 
-        return ResponseEntity.ok(orderService.cancelOrder(ongId, orderId, orderStatusUpdate));
+        TokenValidation.validateToken(ongId, authorization);
+        return ResponseEntity.ok(orderService.updateOrder(ongId, orderId, orderStatusUpdate));
     }
 
 }

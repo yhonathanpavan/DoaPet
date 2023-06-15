@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -26,55 +27,83 @@ public class AssistanceController {
     private final AssistanceService assistanceService;
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping
     @GetAllAssistances
-    public ResponseEntity<Page<AssistanceResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        return ResponseEntity.ok(assistanceService.getAll(pageable));
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
+    public ResponseEntity<Page<AssistanceResponse>> getAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                                           @Parameter(hidden = true)
+                                                           @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(assistanceService.getAll(pageable, authorization));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/{id}")
     @GetAssistanceById
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<AssistanceResponse> getById(@Parameter(description = "ID do serviço requerido para requisição")
-                                                          @PathVariable Long id){
-        return ResponseEntity.ok(assistanceService.getById(id));
+                                                      @PathVariable Long id,
+                                                      @Parameter(hidden = true)
+                                                      @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(assistanceService.getById(id, authorization));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping("/categories")
     @GetAssistanceCategories
+    @GetMapping("/categories")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<List<AssistanceCategory>> getAssistanceCategories(){
+
         return ResponseEntity.ok(assistanceService.getAssistanceCategories());
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
+    @PostAssistance
     @Transactional
     @PostMapping
-    @PostAssistance
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<Void> create(@io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Requerido para a criação de um novo serviço")
-                                           @Valid @RequestBody AssistanceRequest assistanceRequest){
-        return ResponseEntity.created(assistanceService.create(assistanceRequest)).build();
+                                       description = "Requerido para a criação de um novo serviço")
+                                       @Valid @RequestBody AssistanceRequest assistanceRequest,
+                                       @Parameter(hidden = true)
+                                       @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.created(assistanceService.create(assistanceRequest, authorization)).build();
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
+    @PatchAssistance
     @Transactional
     @PatchMapping("/{id}")
-    @PatchAssistance
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<AssistanceResponse> updateById(@Parameter(description = "ID requerido para atualização")
-                                                             @PathVariable Long id,
+                                                         @PathVariable Long id,
                                                          @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                                                                 description = "Requerido para a atualização de um novo serviço")
-                                                         @RequestBody AssistanceRequest assistanceRequest){
-        return ResponseEntity.ok(assistanceService.updateById(id, assistanceRequest));
+                                                         description = "Requerido para a atualização de um novo serviço")
+                                                         @RequestBody AssistanceRequest assistanceRequest,
+                                                         @Parameter(hidden = true)
+                                                         @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(assistanceService.updateById(id, assistanceRequest, authorization));
     }
 
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
-    @PatchMapping("/{id}/status")
     @PatchAssistanceStatus
+    @PatchMapping("/{id}/status")
+    @PreAuthorize("hasRole('ROLE_ADMIN')" +
+            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<?> updateStatus(@Parameter(description = "ID requerido para alteração de status")
-                                              @PathVariable Long id){
-        return ResponseEntity.ok(assistanceService.updateStatus(id));
+                                          @PathVariable Long id,
+                                          @Parameter(hidden = true)
+                                          @RequestHeader("Authorization") String authorization){
+
+        return ResponseEntity.ok(assistanceService.updateStatus(id, authorization));
     }
 
 }

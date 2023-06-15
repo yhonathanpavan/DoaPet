@@ -1,12 +1,14 @@
 package com.tcc.doapet.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.tcc.doapet.factory.ONGFactory;
 import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.model.dto.response.DonorResponse;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Donor;
 import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.repository.DonorRepository;
+import com.tcc.doapet.repository.ONGRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Answers;
@@ -18,10 +20,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.ws.rs.WebApplicationException;
 import java.util.Optional;
 
 import static com.tcc.doapet.factory.DonorFactory.*;
@@ -39,8 +44,14 @@ class DonorServiceImplTest {
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
     private DonorRepository donorRepository;
 
+    @Mock(answer = Answers.RETURNS_SMART_NULLS)
+    private ONGRepository ongRepository;
+
     @Spy
     private ModelMapper modelMapper;
+
+    @Spy
+    private PasswordEncoder passwordEncoder;
 
     @Test
     void getAll(){
@@ -73,6 +84,7 @@ class DonorServiceImplTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         when(donorRepository.save(any())).thenReturn(getDonor());
+        when(ongRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
         var actualDonorResponse = donorService.create(getDonorRequest());
 
@@ -81,9 +93,27 @@ class DonorServiceImplTest {
     }
 
     @Test
+    void whenCreateAndEmailAlreadyRegisteredThrowAConflictException(){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        var webApplicationException = new WebApplicationException();
+
+        when(ongRepository.findByEmail(anyString())).thenReturn(Optional.of(ONGFactory.getONG()));
+
+        try {
+            var actualDonorResponse = donorService.create(getDonorRequest());
+        }catch(WebApplicationException ex){
+            webApplicationException = ex;
+        }
+
+        assertEquals(HttpStatus.CONFLICT.value(), webApplicationException.getResponse().getStatus());
+    }
+
+    @Test
     void updateById(){
         when(donorRepository.findById(anyLong())).thenReturn(Optional.of(getDonor()));
         when(donorRepository.save(any())).thenReturn(getDonor());
+        when(ongRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
         var actualDonorResponse = donorService.updateById(1L, getDonorRequest());
 

@@ -1,11 +1,14 @@
 package com.tcc.doapet.service.impl;
 
+import com.tcc.doapet.factory.ONGFactory;
 import com.tcc.doapet.factory.ProductFactory;
 import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.Product;
 import com.tcc.doapet.model.enums.Measures;
 import com.tcc.doapet.model.enums.ProductCategory;
+import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.repository.ProductRepository;
+import com.tcc.doapet.service.TokenService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Answers;
@@ -35,11 +38,19 @@ class ProductServiceImplTest {
     @InjectMocks
     ProductServiceImpl productService;
 
+    @Mock
+    private TokenService tokenService;
+
+    @Mock(answer = Answers.RETURNS_SMART_NULLS)
+    private ONGRepository ongRepository;
+
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
     ProductRepository productRepository;
 
     @Spy
     ModelMapper mapper;
+
+    private final String authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJEb2FQZXQgQXBwbGljYXRpb24iLCJzdWIiOiIxIiwiaWF0IjoxNjgxNjkyOTg2LCJleHAiOjE2ODE2OTY1ODYsImNsYXNzVHlwZSI6IkRPTk9SIn0.xkg_0ZycUof3n6Gbd2zbvM0S4SYToUlA5pmFg1gqyRM";
 
     private static final Long ID = 1L;
 
@@ -47,9 +58,11 @@ class ProductServiceImplTest {
     void save_WhenSendProductRequest_ExpectedURI() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
+        when(ongRepository.findById(anyLong())).thenReturn(Optional.of(ONGFactory.getONG()));
         when(productRepository.save(any())).thenReturn(ProductFactory.getProduct());
 
-        var response = productService.save(ProductFactory.getProductRequest());
+        var response = productService.save(ProductFactory.getProductRequest(), authorization);
 
         assertNotNull(response);
         assertEquals(URI.class, response.getClass());
@@ -58,10 +71,11 @@ class ProductServiceImplTest {
 
     @Test
     void findAll_WhenSendPageable_ExpectedPageProductResponse() {
-        when(productRepository.findAll((Pageable) any())).thenReturn(ProductFactory.getProductPageable());
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
+        when(productRepository.findAllByOngId((Pageable) any(), anyLong())).thenReturn(ProductFactory.getProductPageable());
 
         Pageable page = PageRequest.of(0,10);
-        var response = productService.findAll(page);
+        var response = productService.findAll(page, authorization);
 
         assertNotNull(response.getContent());
         assertEquals(PageImpl.class, response.getClass());
@@ -71,9 +85,10 @@ class ProductServiceImplTest {
 
     @Test
     void findOne_WhenSendProductId_ExpectedProductResponse() {
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
         when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
 
-        var response = productService.findOne(ID);
+        var response = productService.findOne(ID, authorization);
 
         assertNotNull(response);
         assertEquals(ProductResponse.class, response.getClass());
@@ -99,10 +114,11 @@ class ProductServiceImplTest {
 
     @Test
     void update_WhenSendProductRequestAndProductId_ExpectedProductResponse() {
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
         when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
         when(productRepository.save(any())).thenReturn(ProductFactory.getProduct());
 
-        var response = productService.update(ID, ProductFactory.getProductRequest());
+        var response = productService.update(ID, ProductFactory.getProductRequest(), authorization);
 
         assertNotNull(response);
         assertEquals(ProductResponse.class, response.getClass());
@@ -112,10 +128,11 @@ class ProductServiceImplTest {
 
     @Test
     void updateStatus_WhenSendProductId_ExpectedProductResponse() {
+        when(tokenService.getUserIdFromToken(anyString())).thenReturn(1L);
         when(productRepository.findById(anyLong())).thenReturn(Optional.ofNullable(ProductFactory.getProduct()));
         when(productRepository.save(any())).thenReturn(ProductFactory.getProduct());
 
-        var response = productService.updateStatus(ID);
+        var response = productService.updateStatus(ID, authorization);
 
         assertNotNull(response);
         assertEquals(ProductResponse.class, response.getClass());

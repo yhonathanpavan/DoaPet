@@ -11,16 +11,16 @@ import java.util.List;
 
 public interface AssistanceService {
 
-    Page<AssistanceResponse> getAll(Pageable pageable);
+    Page<AssistanceResponse> getAll(Pageable pageable, String authorization);
 
-    AssistanceResponse getById(Long id);
+    AssistanceResponse getById(Long id, String authorization);
 
     List<AssistanceCategory> getAssistanceCategories();
 
-    URI create(AssistanceRequest assistanceRequest);
+    URI create(AssistanceRequest assistanceRequest, String authorization);
 
-    AssistanceResponse updateById(Long id, AssistanceRequest assistanceRequest);
+    AssistanceResponse updateById(Long id, AssistanceRequest assistanceRequest, String authorization);
 
-    AssistanceResponse updateStatus(Long id);
+    AssistanceResponse updateStatus(Long id, String authorization);
 
 }

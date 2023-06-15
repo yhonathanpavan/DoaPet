@@ -2,18 +2,20 @@ package com.tcc.doapet.service.impl;
 
 import com.tcc.doapet.model.dto.request.ONGRequest;
 import com.tcc.doapet.model.dto.response.ONGResponse;
-import com.tcc.doapet.model.dto.response.ProductResponse;
 import com.tcc.doapet.model.entity.ONG;
-import com.tcc.doapet.model.entity.Product;
+import com.tcc.doapet.repository.DonorRepository;
 import com.tcc.doapet.repository.ONGRepository;
 import com.tcc.doapet.service.ONGService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.NotFoundException;
 import java.net.URI;
 
@@ -24,6 +26,10 @@ public class ONGServiceImpl implements ONGService {
     private final ModelMapper modelMapper;
 
     private final ONGRepository ongRepository;
+
+    private final DonorRepository donorRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Page<ONGResponse> getAll(Pageable pageable) {
@@ -40,7 +46,8 @@ public class ONGServiceImpl implements ONGService {
     @Override
     public URI create(ONGRequest ongRequest) {
         var ongEntity = modelMapper.map(ongRequest, ONG.class);
-        ongEntity.setStatus(Boolean.TRUE);
+        validateEmail(ongEntity.getEmail());
+        ongEntity.setPassword(passwordEncoder.encode(ongEntity.getPassword()));
         ongRepository.save(ongEntity);
 
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(ongEntity.getId());
@@ -50,6 +57,9 @@ public class ONGServiceImpl implements ONGService {
     public ONGResponse updateById(Long id, ONGRequest ongRequest) {
         var ongEntity = findOngById(id);
         modelMapper.map(ongRequest, ongEntity);
+        validateEmail(ongEntity.getEmail());
+        ongEntity.setPassword(passwordEncoder.encode(ongEntity.getPassword()));
+
         ongRepository.save(ongEntity);
 
         return modelMapper.map(ongEntity, ONGResponse.class);
@@ -64,5 +74,11 @@ public class ONGServiceImpl implements ONGService {
 
     protected ONG findOngById(Long id){
         return ongRepository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    protected void validateEmail(String email){
+        if(donorRepository.findByEmail(email).isPresent()){
+            throw new ClientErrorException(email, HttpStatus.CONFLICT.value());
+        }
     }
 }
