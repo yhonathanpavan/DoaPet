@@ -2,14 +2,14 @@
   <div class="data-area">
     <img id="logo" src="../../../assets/images/doaPet-logo.svg" alt="Lodo DoaPet">
     <form action="">
-      <input type="email" placeholder="usuário">
-      <input type="password" placeholder="senha">
+      <input type="email" placeholder="usuário" name="email" [(ngModel)]="email">
+      <input type="password" placeholder="senha" name="password" [(ngModel)]="password">
     </form>
     <app-dark-orange-button
     [btnDarkIcon]="darkBtnIcon"
     [btnDarkText]="darkBtnText"
     [buttonDarkStyle]="darkBtnStyle"
-    (click)="goToHome()"
+    (click)="login()"
     >
     </app-dark-orange-button>
     <app-light-orange-button

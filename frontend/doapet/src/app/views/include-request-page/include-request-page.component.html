@@ -19,7 +19,7 @@
         <form (ngSubmit)="onSubmit()" #myForm="ngForm">
           <div class="first-line">
             <label id="labelName" for="name">Nome</label>
-            <select id="name" [(ngModel)]="nameSelected" (ngModelChange)="selectedName()" [ngModelOptions]="{ standalone: true }">
+            <select id="name" name="name" [(ngModel)]="nameSelected" (ngModelChange)="selectedName()" [ngModelOptions]="{ standalone: true }">
               <option value="">Selecione uma opção</option>
               <option *ngFor="let name of listNames" [value]="name.id">{{ name.name }}</option>
             </select>
@@ -35,7 +35,7 @@
             </div>
             <div class="priority">
               <label for="priority" id="labelPriority">Prioridade</label>
-              <select name="priority" id="priority" [(ngModel)]="order.priority_level_status">
+              <select name="priority" name="priority" id="priority" [(ngModel)]="order.priority_level_status">
                 <option value="">Selecione uma opção</option>
                 <option value="Baixo">Baixa</option>
                 <option value="Medio">Média</option>

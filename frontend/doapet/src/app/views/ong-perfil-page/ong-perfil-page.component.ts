@@ -19,13 +19,18 @@ export class OngPerfilPageComponent implements OnInit {
   userType: string | null = '';
 
   ongId: any;
+  userToken: any;
 
   constructor(private ongService: OngService) { }
 
   ngOnInit() {
-    this.ongId = localStorage.getItem('savedOng')
-    this.getOng()
+    this.ongId = localStorage.getItem('userId')
     this.userType = localStorage.getItem('userType')
+    this.userToken = localStorage.getItem('token')
+    this.getOng()
+
+    console.log('ongID ', this.ongId)
+
   }
 
   onFileSelected(event:any): void {
@@ -58,7 +63,7 @@ export class OngPerfilPageComponent implements OnInit {
   }
 
   getOng() {
-    this.ongService.getOngById(this.ongId).subscribe(data => {
+    this.ongService.getOngById(this.userToken, this.ongId).subscribe(data => {
       this.ong = data;
       console.log('retorno api, ', this.ong)
     })
@@ -66,7 +71,8 @@ export class OngPerfilPageComponent implements OnInit {
 
   updateOng() {
     let url = `http://localhost:8080/doapet/v1/ongs/${this.ongId}`;
-    this.ongService.updateOng(url, this.ong).subscribe(
+    console.log('url ', url)
+    this.ongService.updateOng(url, this.ong, this.userToken).subscribe(
       response => {
         console.log(response)
       },

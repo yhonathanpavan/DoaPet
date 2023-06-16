@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { Assistance } from '../models/assistance';
 
@@ -14,8 +14,12 @@ export class AssistanceService {
     return this.http.get(`${this.baseUrl}/assistances/categories`)
   }
 
-  createAssistance(assistance: Assistance): Observable<any> {
-    return this.http.post<Assistance>(`${this.baseUrl}/assistances`, assistance).pipe(
+  createAssistance(token: string, assistance: Assistance): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<Assistance>(`${this.baseUrl}/assistances`, assistance, { headers: headers }).pipe(
       catchError(error => {
         console.log('ERROR: ', error);
         return of (null);
@@ -23,8 +27,12 @@ export class AssistanceService {
     )
   };
 
-  getAllAssistance(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/assistances`)
+  getAllAssistance(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.baseUrl}/assistances`, { headers: headers })
   }
 
 }

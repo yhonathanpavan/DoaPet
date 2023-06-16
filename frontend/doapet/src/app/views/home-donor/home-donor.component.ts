@@ -13,17 +13,22 @@ export class HomeDonorComponent implements OnInit {
   value: string = '';
   listOngs: [] = [];
 
+  userId: any;
+  userToken: any;
+
   constructor(
     private ongService: OngService,
     private router: Router,
   ) { }
 
   ngOnInit() {
+    this.userToken = localStorage.getItem('token');
     this.getOngs();
+    this.userId = localStorage.getItem('userId');
   }
 
   getOngs() {
-    this.ongService.getAllOng().subscribe(data => {
+    this.ongService.getAllOng(this.userToken).subscribe(data => {
       this.listOngs = data.content;
       console.log('data ', this.listOngs)
       this.teste();

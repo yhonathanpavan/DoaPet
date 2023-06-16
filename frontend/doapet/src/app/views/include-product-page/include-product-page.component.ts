@@ -21,12 +21,15 @@ export class IncludeProductPageComponent implements OnInit {
   };
 
   typedValue: any;
+  userToken: any;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
     this.catchCategories();
     this.catchMeasurements();
+    this.userToken = localStorage.getItem('token');
+    console.log(this.userToken)
   }
 
   catchCategories() {
@@ -61,7 +64,7 @@ export class IncludeProductPageComponent implements OnInit {
   onSubmit() {
     this.product.price = this.typedValue;
     console.log('product ', this.product);
-    this.productService.createProduct(this.product).subscribe(
+    this.productService.createProduct(this.userToken, this.product).subscribe(
       response => {
         console.log(response)
       },
@@ -69,5 +72,6 @@ export class IncludeProductPageComponent implements OnInit {
         console.log(error);
       }
     )
+    location.reload();
   };
 }

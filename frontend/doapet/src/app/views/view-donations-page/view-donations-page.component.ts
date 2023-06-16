@@ -27,6 +27,8 @@ export class ViewDonationsPageComponent implements OnInit {
   order: any;
   variavelCompartilhada: boolean = false;
 
+  userToken: any;
+
   constructor(
     private orderService: OrderService,
     private router: Router
@@ -34,12 +36,13 @@ export class ViewDonationsPageComponent implements OnInit {
 
   ngOnInit() {
     this.savedOngId = localStorage.getItem('savedOng');
+    this.userToken = localStorage.getItem('token');
     console.log('savedOng ', this.savedOngId);
     this.getOrders();
   }
 
   getOrders() {
-    this.orderService.getById(this.savedOngId).subscribe((data: any) => {
+    this.orderService.getById(this.userToken, this.savedOngId).subscribe((data: any) => {
       this.listDonationsRequest = data.content;
       console.log(this.listDonationsRequest)
     })

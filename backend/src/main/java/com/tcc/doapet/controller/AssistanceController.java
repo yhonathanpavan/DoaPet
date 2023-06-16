@@ -54,8 +54,6 @@ public class AssistanceController {
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetAssistanceCategories
     @GetMapping("/categories")
-    @PreAuthorize("hasRole('ROLE_ADMIN')" +
-            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<List<AssistanceCategory>> getAssistanceCategories(){
 
         return ResponseEntity.ok(assistanceService.getAssistanceCategories());

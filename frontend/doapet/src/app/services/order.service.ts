@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { Order } from '../models/order';
 
@@ -12,8 +12,12 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  createOrder(order: Order): Observable<any> {
-    return this.http.post<Order>(`${this.baseUrl}/ongs/1/orders`, order).pipe(
+  createOrder(token: string, order: Order, ongId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<Order>(`${this.baseUrl}/ongs/${ongId}/orders`, order, { headers: headers }).pipe(
       catchError(error => {
         console.log('ERROR: ', error);
         return of (null)
@@ -21,8 +25,12 @@ export class OrderService {
     )
   }
 
-  getById(ongId: number) {
-    return this.http.get(`${this.baseUrl}/ongs/${ongId}/orders`)
+  getById(token: string, ongId: number) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.baseUrl}/ongs/${ongId}/orders`, { headers: headers })
   }
 
 }

@@ -48,12 +48,15 @@ export class IncludeRequestPageComponent implements OnInit {
 
   order: Order = {
     product_id: 0,
-    assistance_id: 0,
+    assistance_id: null,
     quantity: 0,
     order_status: "Pendente",
     priority_level_status: "",
     total_price: 0
   }
+
+  userToken: any;
+  userId: any;
 
   constructor(
     private productService: ProductService,
@@ -62,6 +65,8 @@ export class IncludeRequestPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userToken = localStorage.getItem('token');
+    this.userId = localStorage.getItem('userId');
   }
 
   onSelected() {
@@ -76,7 +81,7 @@ export class IncludeRequestPageComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.getAllProducts().subscribe(
+    this.productService.getAllProducts(this.userToken).subscribe(
       response => {
         this.listNames = response.content;
         console.log('listNames ', this.listNames)
@@ -88,7 +93,7 @@ export class IncludeRequestPageComponent implements OnInit {
   }
 
   getAssistances() {
-    this.assistanceService.getAllAssistance().subscribe(
+    this.assistanceService.getAllAssistance(this.userToken).subscribe(
       response => {
         this.listNames = response.content;
         console.log('listNames ', this.listNames);
@@ -146,7 +151,7 @@ export class IncludeRequestPageComponent implements OnInit {
     }
     this.order.quantity = this.typedValue;
     console.log('order', this.order)
-    this.orderService.createOrder(this.order).subscribe(
+    this.orderService.createOrder(this.userToken, this.order, this.userId).subscribe(
       response => {
         console.log(response);
       },

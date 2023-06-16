@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -26,7 +27,13 @@ export class LoginPageComponent implements OnInit {
 
   userType: string | null = '';
 
-  constructor(private router: Router) { }
+  email: string = '';
+  password: string = '';
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.userType = localStorage.getItem('userType');
@@ -43,5 +50,31 @@ export class LoginPageComponent implements OnInit {
       this.router.navigate(['/home_ong'])
     }
   }
+
+  login() {
+    this.authService.login(this.email, this.password).subscribe(
+      (response) => {
+        console.log('Login bem-sucedido', response);
+        localStorage.setItem('userId', response.authenticatedUserId)
+        console.log('userID', localStorage.getItem('userId'));
+        localStorage.setItem('token', response.token)
+        this.goToHome();
+      },
+      (error) => {
+        console.log('Erro no login', error)
+      }
+    )
+  };
+
+  logout() {
+    this.authService.logout().subscribe(
+      (response) => {
+        console.log('Logout bem-sucedido', response);
+      },
+      (error) => {
+        console.log('Erro no logout', error);
+      }
+    )
+  };
 
 }

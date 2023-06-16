@@ -55,6 +55,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/ongs").permitAll()
                 .antMatchers(HttpMethod.POST, "/donors").permitAll()
+                .antMatchers(HttpMethod.GET, "/products/measures").permitAll()
+                .antMatchers(HttpMethod.GET, "/products/categories").permitAll()
+                .antMatchers(HttpMethod.GET, "/assistances/categories").permitAll()
                 .anyRequest().authenticated()
             .and().headers().frameOptions().sameOrigin()
             .and().csrf().disable()
@@ -67,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                     response.setStatus(HttpStatus.FORBIDDEN.value());
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                     response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
-                });
+                }).and().cors();
     }
 
     @Override

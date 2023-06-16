@@ -64,7 +64,8 @@ img {
   justify-content: space-between;
 }
 
-#name-group {
+#name-group,
+#cpf-group {
   width: 100%;
 
   display: flex;
@@ -75,12 +76,17 @@ img {
 }
 
 #email-group,
-#phone-group {
+#phone-group,
+#street-group,
+#neighborhood-group,
+#state-group {
   width: 60%;
 }
 
 #password-group,
-#born-group {
+#born-group,
+#number-group,
+#city-group {
   width: 40%;
 
   display: flex;
@@ -93,10 +99,16 @@ img {
 }
 
 #name_input,
+#cpf,
 #email,
 #password,
 #phone_number,
-#born_date {
+#born_date,
+#street,
+#number,
+#neighborhood,
+#city,
+#state {
   width: 100%;
 }
 
@@ -123,7 +135,8 @@ label, p {
 .button-area {
   width: 100%;
 
-  margin-top: 130px;
+  margin-top: 90px;
+  margin-bottom: 50px;
 
   display: flex;
   align-items: center;

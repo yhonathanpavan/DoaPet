@@ -69,8 +69,6 @@ public class ProductController {
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetProductCategories
     @GetMapping("/categories")
-    @PreAuthorize("hasRole('ROLE_ADMIN')" +
-            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<List<ProductCategory>> getProductCategories(){
 
         return ResponseEntity.ok(productService.getProductCategories());
@@ -79,8 +77,6 @@ public class ProductController {
     @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
     @GetProductMeasures
     @GetMapping("/measures")
-    @PreAuthorize("hasRole('ROLE_ADMIN')" +
-            "|| hasRole('ROLE_ONG')")
     public ResponseEntity<List<Measures>> getProductMeasures(){
 
         return ResponseEntity.ok(productService.getProductMeasures());

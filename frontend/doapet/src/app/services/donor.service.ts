@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 
 import { Donor } from '../models/donor';
@@ -10,8 +10,12 @@ export class DonorService {
 
   constructor(private http: HttpClient) { }
 
-  getOngById(ongId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/donors/${ongId}`)
+  getOngById(token: string, ongId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.baseUrl}/donors/${ongId}`, { headers: headers })
   }
 
   createDonor(donor: Donor): Observable<any> {
@@ -23,8 +27,10 @@ export class DonorService {
     )
   }
 
-  updateDonor(url: string, donor: Donor) {
-    return this.http.patch(url, donor)
+  updateDonor(url: string, donor: Donor, token: string) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.patch(url, donor, { headers })
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
@@ -12,12 +12,20 @@ export class OngService {
 
   constructor(private http: HttpClient) { }
 
-  getAllOng(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/ongs`);
+  getAllOng(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`${this.baseUrl}/ongs`, { headers: headers });
   };
 
-  getOngById(ongId: number): Observable<any>{
-    return this.http.get(`${this.baseUrl}/ongs/${ongId}`)
+  getOngById(token: string, ongId: number): Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.baseUrl}/ongs/${ongId}`, { headers: headers })
   };
 
   createOng(ong: Ong): Observable<any> {
@@ -29,7 +37,10 @@ export class OngService {
     )
   };
 
-  updateOng(url: string, ong: Ong) {
-    return this.http.patch(url, ong);
+  updateOng(url: string, ong: Ong, token: string,) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+
+    return this.http.patch(url, ong, { headers });
   }
 }
